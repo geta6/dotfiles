@@ -1,0 +1,21 @@
+.Files
+======
+
+* screen
+* top
+* vim
+* zsh
+
+VIM
+===
+
+* Plugins managed by Vundle
+* Solarized, VimShell, QuickRun, NeoComplCache ...
+
+ZSH
+===
+
+* AutoPath, Aliases, Functions ...
+* GitPrompt, DirPrompt ...
+
+
