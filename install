@@ -1,0 +1,10 @@
+#!/bin/zsh
+local PWD=`pwd`
+
+[[ ! -s ~/.screenrc ]] && ln -s $PWD/screenrc ~/.screenrc
+[[ ! -s ~/.toprc    ]] && ln -s $PWD/toprc    ~/.toprc
+[[ ! -s ~/.vim      ]] && ln -s $PWD/vim      ~/.vim
+[[ ! -s ~/.vimrc    ]] && ln -s $PWD/vimrc    ~/.vimrc
+[[ ! -s ~/.zsh      ]] && ln -s $PWD/zsh      ~/.zsh
+[[ ! -s ~/.zshrc    ]] && ln -s $PWD/zshrc    ~/.zshrc
+[[ ! -s ~/.zshenv   ]] && ln -s $PWD/zshenv   ~/.zshenv

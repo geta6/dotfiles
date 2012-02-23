@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/var/www/lib.geta6.net/web/media'
+let g:netrw_dirhist_2='/var/www/lib.geta6.net/web'
+let g:netrw_dirhist_3='/var/www/lib.geta6.net/web/lib'
+let g:netrw_dirhist_4='/var/www/geta6.net/web/lib'
+let g:netrw_dirhist_5='/var/www/geta6.net/.git'
+let g:netrw_dirhist_6='/usr/local/bin'
+let g:netrw_dirhist_7='/Users/geta/Sites/Silex-Kitchen-Edition/.git'
