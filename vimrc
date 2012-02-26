@@ -3,7 +3,7 @@ if filereadable("/etc/vim/vimrc")
   source /etc/vim/vimrc
 endif
 
-"Vundle
+"Vundle"
 set nocompatible
 filetype off
 set rtp+=~/.vim/vundle/
