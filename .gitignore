@@ -3,3 +3,4 @@
 vim/view/
 GUI/
 vim/.netrwhist*
+vim/bundle/*

@@ -9,13 +9,12 @@
 VIM
 ---
 
-* Plugins managed by Vundle
-* Solarized, VimShell, QuickRun, NeoComplCache ...
+* At first time, exec vundle install.
+  * :BundleInstall
 
 ZSH
 ---
 
-* AutoPath, Aliases, Functions ...
-* GitPrompt, DirPrompt ...
+* AutoPath, Aliases, Functions, GitPrompt, DirPrompt ...
 
 
