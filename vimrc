@@ -9,17 +9,14 @@ filetype off
 set rtp+=~/.vim/vundle/
 call vundle#rc()
 "http://vim-scripts.org/vim/scripts.html
-Bundle 'HTML5-Syntax-File'
-Bundle 'Jinja'
+Bundle 'css3'
 Bundle 'neco-look'
 Bundle 'neocomplcache'
 Bundle 'quickrun'
 Bundle 'vim-coffee-script'
-Bundle 'css3'
-Bundle 'sudo.vim'
-Bundle 'Shougo/vimproc'
-Bundle 'Shougo/vimshell'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'groenewege/vim-less'
+Bundle 'rdunklau/Jinja.vim'
 filetype plugin indent on
 
 "Global Configuration"
@@ -53,11 +50,11 @@ augroup cch
 augroup END
 
 "Vimproc"
-if has('unix') && match(system('uname'),'Darwin') != -1
-  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/procmac.so'
-elseif has('unix')
-  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/procunix.so'
-endif
+"if has('unix') && match(system('uname'),'Darwin') != -1
+"  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/procmac.so'
+"elseif has('unix')
+"  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/procunix.so'
+"endif
 
 "Auto Complete"
 let g:neocomplcache_enable_at_startup = 1
@@ -89,22 +86,6 @@ xnoremap j gj
 nnoremap k gk
 onoremap k gk
 xnoremap k gk
-
-"File handle"
-set fileencodings=utf-8,sjis,euc-jp
-set fileformats=unix,dos
-set encoding=utf-8
-set fileformat=unix
-filetype plugin on
-au BufNewFile,BufRead *.less set filetype=less
-"au BufNewFile,BufRead *.less set foldmethod=marker
-"au BufNewFile,BufRead *.less set foldmarker={,}
-"au BufNewFile,BufRead *.less set nocursorline
-au BufRead,BufNewFile /etc/nginx/* set ft=nginx
-au BufRead,BufNewFile /etc/nginx/conf.d/* set ft=nginx
-au BufNewFile,BufRead *.twig set filetype=htmljinja
-au BufNewFile,BufRead *.txt  set filetype=markdown
-au BufNewFile,BufRead *.snip set filetype=snippet
 
 "Special Keys"
 nnoremap ; :
@@ -170,6 +151,19 @@ augroup InvisibleIndicator
   autocmd!
   autocmd BufEnter * call ActivateInvisibleIndicator()
 augroup END
+
+"File handle"
+set fileencodings=utf-8,sjis,euc-jp
+set fileformats=unix,dos
+set encoding=utf-8
+set fileformat=unix
+filetype plugin on
+au BufRead,BufNewFile /etc/nginx/* set ft=nginx
+au BufRead,BufNewFile /etc/nginx/conf.d/* set ft=nginx
+au BufRead,BufNewFile *.twig set ft=jinja
+au BufRead,BufNewFile *.less set ft=less
+au BufRead,BufNewFile *.txt  set ft=markdown
+au BufRead,BufNewFile *.txt  set foldmethod=marker
 
 "Auto Fixer"
 autocmd BufWritePre * :%s/\s\+$//ge

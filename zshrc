@@ -1,4 +1,4 @@
-autoload -Uz compinit ; compinit
+autoload -Uz compinit ; compinit -u
 autoload -Uz colors ; colors
 autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
