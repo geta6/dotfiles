@@ -12,9 +12,3 @@ VIM
 * At first time, exec vundle install.
   * :BundleInstall
 
-ZSH
----
-
-* AutoPath, Aliases, Functions, GitPrompt, DirPrompt ...
-
-
