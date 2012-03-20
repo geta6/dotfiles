@@ -123,20 +123,13 @@ function count() {
 function psx() {
   ps aux | grep $1 | grep -v grep
 }
-function rcfresh() {
+function dotup() {
   local PWD=`pwd`
-  [[ -s $HOME/Library/Rcfiles ]] && local RCD=$HOME/Library/Rcfiles
-  [[ -s $HOME/lib/rc ]] && local RCD=$HOME/lib/rc
-  case $1 in
-    'pull' )
-      cd ${RCD} ; git pull & ; cd ${PWD}
-      ;;
-    'push' )
-      cd ${RCD} ; git commit -a -m 'auto commit' ; git push & ; cd ${PWD}
-      ;;
-    *)
-      echo pull or push
-  esac
+  if [ -s ${HOME}/Dropbox/Rcfiles ]; then
+    cd ${HOME}/Dropbox/Rcfiles && git commit -a -m 'auto commit by dotup' && git push && cd ${PWD}
+  else
+    echo "Do not find Rcfiles."
+  fi
 }
 function google() {
   if [ -x "`which w3m 2>/dev/null`" ]; then
@@ -191,6 +184,8 @@ alias ss="sudo su"
 alias co="ssh geta6.net"
 alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
+alias zrc="vi ~/.zshrc"
+alias vrc="vi ~/.vimrc"
 if [ ! ${WINDOW} ]; then
   alias sc="screen -D -RR"
 else
