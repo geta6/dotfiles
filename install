@@ -1,10 +1,25 @@
 #!/bin/zsh
 local PWD=`pwd`
 
-[[ ! -s ~/.screenrc ]] && ln -s $PWD/screenrc ~/.screenrc
-[[ ! -s ~/.toprc    ]] && ln -s $PWD/toprc    ~/.toprc
-[[ ! -s ~/.vim      ]] && ln -s $PWD/vim      ~/.vim
-[[ ! -s ~/.vimrc    ]] && ln -s $PWD/vimrc    ~/.vimrc
-[[ ! -s ~/.zsh      ]] && ln -s $PWD/zsh      ~/.zsh
-[[ ! -s ~/.zshrc    ]] && ln -s $PWD/zshrc    ~/.zshrc
-[[ ! -s ~/.zshenv   ]] && ln -s $PWD/zshenv   ~/.zshenv
+[[ ! -s ~/.screenrc ]] && ln -s $PWD/screenrc ~/.screenrc && echo 'o -> ~/.screenrc'
+[[   -s ~/.screenrc ]] && echo 'x ~/.screenrc'
+[[ ! -s ~/.toprc    ]] && ln -s $PWD/toprc    ~/.toprc    && echo 'o -> ~/.toprc'
+[[   -s ~/.toprc    ]] && echo 'x ~/.toprc'
+[[ ! -s ~/.vim      ]] && ln -s $PWD/vim      ~/.vim      && echo 'o -> ~/.vim/'
+[[   -s ~/.vim      ]] && echo 'x ~/.vim/'
+[[ ! -s ~/.vimrc    ]] && ln -s $PWD/vimrc    ~/.vimrc    && echo 'o -> ~/.vimrc'
+[[   -s ~/.vimrc    ]] && echo 'x ~/.vimrc'
+[[ ! -s ~/.zsh      ]] && ln -s $PWD/zsh      ~/.zsh      && echo 'o -> ~/.zsh/'
+[[   -s ~/.zsh      ]] && echo 'x ~/.zsh/'
+[[ ! -s ~/.zshrc    ]] && ln -s $PWD/zshrc    ~/.zshrc    && echo 'o -> ~/.zshrc'
+[[   -s ~/.zshrc    ]] && echo 'x ~/.zshrc'
+[[ ! -s ~/.zshenv   ]] && ln -s $PWD/zshenv   ~/.zshenv   && echo 'o -> ~/.zshenv'
+[[   -s ~/.zshenv   ]] && echo 'x ~/.zshenv'
+
+echo ''
+echo ' -> Update submodule...'
+git submodule init
+git submodule update
+echo ''
+echo ' -> Install Completed.'
+echo ' -> to install vim bundle, exec `vim` and type :BundleInstall'
