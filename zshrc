@@ -11,13 +11,8 @@ SAVEHIST=100000
 bindkey -v
 bindkey -a 'q' push-line
 bindkey -a 'h' run-help
-if [ $LAYOUT = dvorak ]; then
-  bindkey "" history-incremental-search-backward
-  bindkey "" history-incremental-search-forward
-else
-  bindkey "" history-incremental-search-backward
-  bindkey "" history-incremental-search-forward
-fi
+bindkey "" history-incremental-search-backward
+bindkey "" history-incremental-search-forward
 bindkey "[3~" delete-char
 
 
