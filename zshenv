@@ -25,3 +25,4 @@ export ZLS_COLORS=$LS_COLORS
 [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
 [[ -e /usr/local/Cellar/coreutils/8.12/aliases ]] && source /usr/local/Cellar/coreutils/8.12/aliases
 [[ -s /usr/local/share/pythonbrew ]] && . /usr/local/share/pythonbrew/etc/bashrc
+
