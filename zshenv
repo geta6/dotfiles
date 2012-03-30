@@ -9,6 +9,7 @@ export EDITOR
 
 FPATH=$HOME/.zsh/functions:$FPATH
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
+[[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 export FPATH PATH
 

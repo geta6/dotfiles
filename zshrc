@@ -156,13 +156,12 @@ function growl() {
 
 case "${OSTYPE}" in
   darwin* )
-    alias ls="ls -vF"
-    ;;
-  linux* )
-    alias ls="ls -vF --color"
-    alias dir="dir --color"
+    [[ ! -s `which brew` ]] && echo 'Install brew'
+    [[ ! -s `brew --prefix coreutils` ]] && echo 'Colorize console : brew install coreutils'
     ;;
 esac
+alias ls="ls -vF --color"
+alias dir="dir --color"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
