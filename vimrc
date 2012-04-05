@@ -9,6 +9,7 @@ filetype off
 set rtp+=~/.vim/vundle/
 call vundle#rc()
 "http://vim-scripts.org/vim/scripts.html
+Bundle 'JSON.vim'
 Bundle 'css3'
 Bundle 'neco-look'
 Bundle 'neocomplcache'
@@ -65,7 +66,7 @@ let g:neocomplcache_min_syntax_length = 4
 let g:neocomplcache_enable_ignore_case = 1
 let g:neocomplcache_enable_smart_case = 1
 "let g:neocomplcache_enable_auto_select = 1
-let g:neocomplcache_enable_cursor_hold_i = 2
+"let g:neocomplcache_enable_cursor_hold_i = 0
 let g:neocomplcache_enable_camel_case_completion = 0
 let g:neocomplcache_enable_underbar_completion = 0
 let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
@@ -162,6 +163,7 @@ au BufRead,BufNewFile /etc/nginx/* set ft=nginx
 au BufRead,BufNewFile /etc/nginx/conf.d/* set ft=nginx
 au BufRead,BufNewFile *.twig set ft=jinja
 au BufRead,BufNewFile *.less set ft=less
+au BufRead,BufNewFile *.json set ft=json
 au BufRead,BufNewFile *.txt  set ft=markdown
 au BufRead,BufNewFile *.txt  set foldmethod=marker
 

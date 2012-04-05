@@ -1,7 +1,8 @@
 LANG=C
+LANGUAGE=C
 LC_CTYPE=ja_JP.UTF-8
 LC_MESSAGES=en_US.UTF-8
-export LANG LC_CTYPE LC_MESSAGES
+export LANG LANGUAGE LC_CTYPE LC_MESSAGES
 
 EDITOR=/usr/bin/vi
 [[ -s /bin/vi ]] && EDITOR=/bin/vi
@@ -23,6 +24,7 @@ export ZLS_COLORS=$LS_COLORS
 [[ -s /usr/local/share/pythonbrew ]] && export PYTHONBREW_ROOT=/usr/local/share/pythonbrew
 [[ -s $HOME/.nvm ]] && . $HOME/.nvm/nvm.sh
 [[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
+[[ -s /usr/local/rvm/scripts/rvm ]] && . /usr/local/rvm/scripts/rvm
 [[ -e /usr/local/Cellar/coreutils/8.12/aliases ]] && source /usr/local/Cellar/coreutils/8.12/aliases
 [[ -s /usr/local/share/pythonbrew ]] && . /usr/local/share/pythonbrew/etc/bashrc
 
