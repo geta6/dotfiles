@@ -1,0 +1,18 @@
+#!/bin/zsh
+local PWD=`pwd`
+
+rm -f ~/.screenrc ; ln -s $PWD/screenrc ~/.screenrc && echo 'o -> ~/.screenrc'
+rm -f ~/.toprc    ; ln -s $PWD/toprc    ~/.toprc    && echo 'o -> ~/.toprc'
+rm -f ~/.vim      ; ln -s $PWD/vim      ~/.vim      && echo 'o -> ~/.vim/'
+rm -f ~/.vimrc    ; ln -s $PWD/vimrc    ~/.vimrc    && echo 'o -> ~/.vimrc'
+rm -f ~/.zsh      ; ln -s $PWD/zsh      ~/.zsh      && echo 'o -> ~/.zsh/'
+rm -f ~/.zshrc    ; ln -s $PWD/zshrc    ~/.zshrc    && echo 'o -> ~/.zshrc'
+rm -f ~/.zshenv   ; ln -s $PWD/zshenv   ~/.zshenv   && echo 'o -> ~/.zshenv'
+
+echo ''
+echo ' -> Update submodule...'
+git submodule init
+git submodule update
+echo ''
+echo ' -> Install Completed.'
+echo ' -> to install vim bundle, exec `vim` and type :BundleInstall'
