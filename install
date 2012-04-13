@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 local PWD=`pwd`
 
 rm -f ~/.screenrc ; ln -s $PWD/screenrc ~/.screenrc && echo 'o -> ~/.screenrc'
