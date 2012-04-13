@@ -162,7 +162,7 @@ set fileformat=unix
 filetype plugin on
 au BufRead,BufNewFile /etc/nginx/* set ft=nginx
 au BufRead,BufNewFile /etc/nginx/conf.d/* set ft=nginx
-au BufRead,BufNewFile *.twig set ft=jinja
+au BufRead,BufNewFile *.twig set ft=jinja.html
 au BufRead,BufNewFile *.less set ft=less
 au BufRead,BufNewFile *.json set ft=json
 au BufRead,BufNewFile *.txt  set ft=markdown
