@@ -11,6 +11,7 @@ call vundle#rc()
 "http://vim-scripts.org/vim/scripts.html
 Bundle 'JSON.vim'
 Bundle 'css3'
+Bundle 'jQuery'
 Bundle 'neco-look'
 Bundle 'neocomplcache'
 Bundle 'vim-coffee-script'
