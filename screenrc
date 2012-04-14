@@ -26,7 +26,6 @@ logfile "$HOME/.screen/screen-%Y%m%d-%n.log"
 log on
 
 idle 1200
-blankerprg fortune starwars
 
 windowlist title  '%{u .g}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
 windowlist string '%{.g}%3n %{.y}%f%09=%{dg} %t %='
