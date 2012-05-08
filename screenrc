@@ -39,6 +39,7 @@ hardstatus alwayslastline "%{= .y}%m/%d %02c:%s%{-} %L=%-w%45L>%{=u g.}%n %t%{-}
 
 bind ^k
 bind ^\
+bind | vert_split
 #bind L
 #bind \\ quit
 #bind K kill
