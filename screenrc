@@ -58,6 +58,10 @@ bind -c REGION 1 only
 bind -c REGION 0 remove
 bind -c REGION o focus
 bind -c REGION ^ resize
+bind r eval 'echo "Resize window"' 'command -c resize'
+bind -c resize ^] command
+bind -c resize j eval 'resize +1' 'command -c resize'
+bind -c resize k eval 'resize -1' 'command -c resize'
 bind x command -c REGION
 bind w windowlist -b
 

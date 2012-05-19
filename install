@@ -17,3 +17,4 @@ git submodule update
 echo ''
 echo ' -> Install Completed.'
 echo ' -> to install vim bundle, exec `vim` and type :BundleInstall'
+echo ':BundleInstall' | vim

@@ -12,6 +12,7 @@ FPATH=$HOME/.zsh/functions:$FPATH
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$HOME/Applications
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
+[[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export FPATH PATH
 
 LISTMAX=0
@@ -33,4 +34,3 @@ else
   [[ -s /usr/local/rvm ]] && . /usr/local/rvm/scripts/rvm
 fi
 
-[[ -e /usr/local/Cellar/coreutils/8.12/aliases ]] && source /usr/local/Cellar/coreutils/8.12/aliases
