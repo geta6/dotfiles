@@ -118,6 +118,9 @@ function count() {
 function psx() {
   ps aux | grep $1 | grep -v grep
 }
+function suddenly() {
+  echo ${#1} | wc
+}
 function dotup() {
   local PWD=`pwd`
   if [ -s ${HOME}/Dropbox/Rcfiles ]; then

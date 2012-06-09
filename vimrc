@@ -15,6 +15,8 @@ Bundle 'jQuery'
 Bundle 'neco-look'
 Bundle 'neocomplcache'
 Bundle 'vim-coffee-script'
+Bundle 'jade.vim'
+"Bundle 'scala.vim'
 Bundle 'thinca/vim-quickrun'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'groenewege/vim-less'
@@ -89,6 +91,8 @@ nnoremap k gk
 onoremap k gk
 xnoremap k gk
 
+"PlugIns Configuration"
+
 "Special Keys"
 nnoremap ; :
 set virtualedit=block
@@ -139,9 +143,27 @@ let g:indent_guides_start_level = 3
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkgrey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=grey
 
+"File handle"
+set fileencodings=utf-8,sjis,euc-jp
+set fileformats=unix,dos
+set encoding=utf-8
+set fileformat=unix
+filetype plugin on
+au BufRead,BufNewFile /etc/nginx/* set ft=nginx
+au BufRead,BufNewFile /etc/nginx/conf.d/* set ft=nginx
+au BufRead,BufNewFile *.twig  set ft=jinja.html
+au BufRead,BufNewFile *.less  set ft=less
+au BufRead,BufNewFile *.json  set ft=json
+au BufRead,BufNewFile *.txt   set ft=markdown
+au BufRead,BufNewFile *.txt   set foldmethod=marker
+au BufRead,BufNewFile *.scala set ft=java.scala
+
 "Color"
 syntax enable
 let g:solarized_termcolors=256
+let java_highlight_all=1
+let java_highlight_functions="style"
+let java_allow_cpp_keywords=1
 set background=dark
 colorscheme solarized
 function! ActivateInvisibleIndicator()
@@ -154,23 +176,9 @@ augroup InvisibleIndicator
   autocmd BufEnter * call ActivateInvisibleIndicator()
 augroup END
 
-"File handle"
-set fileencodings=utf-8,sjis,euc-jp
-set fileformats=unix,dos
-set encoding=utf-8
-set fileformat=unix
-filetype plugin on
-au BufRead,BufNewFile /etc/nginx/* set ft=nginx
-au BufRead,BufNewFile /etc/nginx/conf.d/* set ft=nginx
-au BufRead,BufNewFile *.twig set ft=jinja.html
-au BufRead,BufNewFile *.less set ft=less
-au BufRead,BufNewFile *.json set ft=json
-au BufRead,BufNewFile *.txt  set ft=markdown
-au BufRead,BufNewFile *.txt  set foldmethod=marker
-
 "Auto Fixer"
 autocmd BufWritePre * :%s/\s\+$//ge
 
-"Short cut"
+"Shortcut"
 nmap <silent> <leader>t <ESC><UP>0o<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<CR>
 set helpfile=$VIMRUNTIME/doc/help.txt
