@@ -7,6 +7,9 @@ HISTFILE=${HOME}/.zsh-history
 HISTSIZE=10000000
 SAVEHIST=100000
 
+if [[ ! -z `compaudit` ]]; then
+  compaudit | xargs chmod g-w
+fi
 
 bindkey -v
 bindkey -a 'q' push-line
