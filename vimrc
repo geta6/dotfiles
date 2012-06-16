@@ -16,6 +16,7 @@ Bundle 'neco-look'
 Bundle 'neocomplcache'
 Bundle 'vim-coffee-script'
 Bundle 'jade.vim'
+Bundle 'TwitVim'
 "Bundle 'scala.vim'
 Bundle 'thinca/vim-quickrun'
 Bundle 'altercation/vim-colors-solarized'
@@ -92,6 +93,17 @@ onoremap k gk
 xnoremap k gk
 
 "PlugIns Configuration"
+let twitvim_count = 40
+nnoremap ,tp :<C-u>PosttoTwitter<CR>
+nnoremap ,tf :<C-u>FriendsTwitter<CR><C-w>j
+nnoremap ,tu :<C-u>UserTwitter<CR><C-w>j
+nnoremap ,tr :<C-u>RepliesTwitter<CR><C-w>j
+nnoremap ,tn :<C-u>NextTwitter<CR>
+
+autocmd FileType twitvim call s:twitvim_my_settings()
+function! s:twitvim_my_settings()
+  set nowrap
+endfunction
 
 "Special Keys"
 nnoremap ; :
@@ -181,4 +193,7 @@ autocmd BufWritePre * :%s/\s\+$//ge
 
 "Shortcut"
 nmap <silent> <leader>t <ESC><UP>0o<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<CR>
+nmap <silent> <leader>y i<link rel='stylesheet' href='//yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css'>
+nmap <silent> <leader>j i<script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'>
 set helpfile=$VIMRUNTIME/doc/help.txt
+

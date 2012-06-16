@@ -33,3 +33,5 @@ else
   [[ -s /usr/local/rvm ]] && . /usr/local/rvm/scripts/rvm
 fi
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
