@@ -1,7 +1,16 @@
 #!/bin/zsh
 
 local PWD=`pwd`
+echo ''
+echo '#====================#'
+echo '# Rebase Repository  #'
+echo '#====================#'
+git pull --rebase
 
+echo ''
+echo '#====================#'
+echo '# Replace Rcfiles    #'
+echo '#====================#'
 rm -f ~/.screenrc ; ln -s $PWD/screenrc ~/.screenrc && echo 'o -> ~/.screenrc'
 rm -f ~/.toprc    ; ln -s $PWD/toprc    ~/.toprc    && echo 'o -> ~/.toprc'
 rm -f ~/.vim      ; ln -s $PWD/vim      ~/.vim      && echo 'o -> ~/.vim/'
@@ -11,10 +20,21 @@ rm -f ~/.zshrc    ; ln -s $PWD/zshrc    ~/.zshrc    && echo 'o -> ~/.zshrc'
 rm -f ~/.zshenv   ; ln -s $PWD/zshenv   ~/.zshenv   && echo 'o -> ~/.zshenv'
 
 echo ''
-echo ' -> Update submodule...'
+echo '#====================#'
+echo '# Update submodules  #'
+echo '#====================#'
 git submodule init
 git submodule update
+
 echo ''
-echo ' -> Install Completed.'
-echo ' -> to install vim bundle, exec `vim` and type :BundleInstall'
+echo '#=====================#'
+echo '# Install Vim Bundles #'
+echo '#=====================#'
 echo ':BundleInstall' | vim
+echo ':BundleClean'   | vim
+
+echo ''
+echo '#========================#'
+echo '# All Process Finished!! #'
+echo '#========================#'
+echo ''
