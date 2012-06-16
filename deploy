@@ -33,8 +33,10 @@ echo ''
 echo '#=====================#'
 echo '# Install Vim Bundles #'
 echo '#=====================#'
-echo ':BundleInstall' | vim 2>/dev/null
-echo ':BundleClean'   | vim 2>/dev/null
+echo 'Vundle: Installing bundles...'
+echo ':BundleInstall' | vim > /dev/null 2>&1
+echo 'Vundle: Cleaning bundles...'
+echo ':BundleClean'   | vim > /dev/null 2>&1
 
 echo ''
 echo '#=====================#'
