@@ -1,14 +1,27 @@
 .Files
 ======
 
-* screen
-* top
-* vim
 * zsh
+* vim
+* top
+* screen
 
-VIM
----
+Install
+-------
 
-* At first time, exec vundle install.
-  * :BundleInstall
+`cd ~ && git clone https://github.com/geta6/dotfiles && cd dotfiles && ./deploy`
+
+What is deploy
+--------------
+
+`deploy` is initializer and auto-updater.
+
+`cd dotfiles && ./deploy`
+
+No need to hit some keys, please be patient.
+
+* All submodules are update to origin-master.
+* Vundle components are add or clean, no need to touch `~/.vim/bundle`.
+  * By hand, :BundleInstall or :BundleClear is command for add/clear.
+* Local changes preserve from update with `git stash` and `git stash pop`.
 
