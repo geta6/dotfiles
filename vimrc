@@ -194,6 +194,6 @@ autocmd BufWritePre * :%s/\s\+$//ge
 "Shortcut"
 nmap <silent> <leader>t <ESC><UP>0o<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<CR>
 nmap <silent> <leader>y i<link rel='stylesheet' href='//yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css'>
-nmap <silent> <leader>j i<script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'>
+nmap <silent> <leader>j i<script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
 set helpfile=$VIMRUNTIME/doc/help.txt
 
