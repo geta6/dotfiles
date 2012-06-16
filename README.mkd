@@ -24,4 +24,3 @@ No need to hit some keys, please be patient.
 * Vundle components are add or clean, no need to touch `~/.vim/bundle`.
   * By hand, :BundleInstall or :BundleClear is command for add/clear.
 * Local changes preserve from update with `git stash` and `git stash pop`.
-
