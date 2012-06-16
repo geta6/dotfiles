@@ -5,6 +5,8 @@ echo ''
 echo '#====================#'
 echo '# Rebase Repository  #'
 echo '#====================#'
+git stash clear
+git stash
 git pull --rebase
 
 echo ''
@@ -31,8 +33,14 @@ echo ''
 echo '#=====================#'
 echo '# Install Vim Bundles #'
 echo '#=====================#'
-echo ':BundleInstall' | vim
-echo ':BundleClean'   | vim
+echo ':BundleInstall' | vim 2>/dev/null
+echo ':BundleClean'   | vim 2>/dev/null
+
+echo ''
+echo '#=====================#'
+echo '# Retouch Alters      #'
+echo '#=====================#'
+git stash pop
 
 echo ''
 echo '#========================#'
