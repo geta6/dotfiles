@@ -25,12 +25,14 @@ if [[ -s $HOME/.nvm ]]; then
   . $HOME/.nvm/nvm.sh
 else
   [[ -s /usr/local/nvm ]] && . /usr/local/nvm/nvm.sh
+  [[ -s /usr/local/share/nvm ]] && . /usr/local/share/nvm/nvm.sh
 fi
 
 if [[ -s $HOME/.rvm ]]; then
   . $HOME/.rvm/scripts/rvm
 else
   [[ -s /usr/local/rvm ]] && . /usr/local/rvm/scripts/rvm
+  [[ -s /usr/local/share/rvm ]] && . /usr/local/share/rvm/scripts/rvm
 fi
 
 
