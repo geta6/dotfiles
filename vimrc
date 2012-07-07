@@ -162,7 +162,7 @@ let java_highlight_all=1
 let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 set background=dark
-colorscheme monokai
+colorscheme Monokai
 function! ActivateInvisibleIndicator()
   hi SpecialKey cterm=NONE ctermfg=darkgray guifg=darkgray
   hi ZenkakuSpace cterm=underline ctermfg=red gui=underline guifg=#FF0000
