@@ -18,7 +18,7 @@ Bundle 'vim-coffee-script'
 Bundle 'jade.vim'
 "Bundle 'scala.vim'
 Bundle 'thinca/vim-quickrun'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'sickill/vim-monokai'
 Bundle 'groenewege/vim-less'
 Bundle 'rdunklau/Jinja.vim'
 filetype plugin indent on
@@ -158,12 +158,11 @@ au BufRead,BufNewFile *.scala set ft=java.scala
 
 "Color"
 syntax enable
-let g:solarized_termcolors=256
 let java_highlight_all=1
 let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 set background=dark
-colorscheme solarized
+colorscheme monokai
 function! ActivateInvisibleIndicator()
   hi SpecialKey cterm=NONE ctermfg=darkgray guifg=darkgray
   hi ZenkakuSpace cterm=underline ctermfg=red gui=underline guifg=#FF0000
