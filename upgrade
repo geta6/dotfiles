@@ -71,7 +71,7 @@ if [ $OSTYPE[0,6] = 'darwin' ]; then
   echo '#====================#'
   if [ ! -s `which brew` ]; then
     echo 'Install homebrew.'
-    ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)
+    ruby < `curl -fsSkL raw.github.com/mxcl/homebrew/go`
     sudo chown $USER -R /usr/local
     brew doctor
     echo 'Install coreutils, htop.'
