@@ -12,7 +12,7 @@ echo '/ /_/ / /_/ / /_/ __/ / /  __(__  )'
 echo '\__,_/\____/\__/_/ /_/_/\___/____/'
 echo ''
 
-if [ ! -n `ls .git 2>/dev/null` ]; then
+if [ ! -n "`ls .git 2>/dev/null`" ]; then
   echo "'`pwd`' isnt working directory."
   exit 2
 fi
