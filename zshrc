@@ -188,6 +188,7 @@ alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias zrc="vi ~/.zshrc"
 alias vrc="vi ~/.vimrc"
 [[ ! -s `which tailf` ]] && alias tailf="tail -f"
+[[ -s `which htop` ]] && alias top="htop"
 if [ ! ${WINDOW} ]; then
   alias sc="screen -D -RR"
 else

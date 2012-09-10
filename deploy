@@ -21,6 +21,21 @@ rm -f ~/.zsh      ; ln -s $PWD/zsh      ~/.zsh      && echo 'o -> ~/.zsh/'
 rm -f ~/.zshrc    ; ln -s $PWD/zshrc    ~/.zshrc    && echo 'o -> ~/.zshrc'
 rm -f ~/.zshenv   ; ln -s $PWD/zshenv   ~/.zshenv   && echo 'o -> ~/.zshenv'
 
+if [ $OSTYPE[0,6] = 'darwin' ]; then
+  echo ''
+  echo '#====================#'
+  echo '# Check Brew         #'
+  echo '#====================#'
+  if [ ! -s `which brew` ]; then
+    echo 'Install HomeBrew'
+    ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)
+    brew doctor
+  else
+    echo 'HomeBrewed'
+  fi
+fi
+
+
 echo ''
 echo '#====================#'
 echo '# Update submodules  #'
