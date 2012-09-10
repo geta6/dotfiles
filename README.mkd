@@ -1,26 +1,46 @@
-.Files
-======
+       __      __  _____ __
+  ____/ /___  / /_/ __(_) /__  _____
+ / __  / __ \/ __/ /_/ / / _ \/ ___/
+/ /_/ / /_/ / /_/ __/ / /  __(__  )
+\__,_/\____/\__/_/ /_/_/\___/____/
 
-* zsh
+  My dotfiles for `zsh`, `vim`, `screen`.
+
+  Be compatible with `debian` and `darwin`.
+
+## Requirement
+
+  * git
+
+## Notice
+
+  * `upgrade` uses `$HOME` value.
+  * `upgrade` force to replace your dotfiles, please backup before upgrade.
+  * Dependency resolver install components without confirmation.
+
+## Quick Start
+
+  Install:
+
+    $ git clone https://github.com/geta6/dotfiles
+    $ cd dotfiles
+    $ ./upgrade
+
+  Upgrade:
+
+    $ cd dotfiles
+    $ ./upgrade
+
+
+## Targets
+
 * vim
-* top
+  * [gmarik/vundle](https://github.com/gmarik/vundle)
+* zsh
 * screen
 
-Install
--------
+## Features
 
-`cd ~ && git clone https://github.com/geta6/dotfiles && cd dotfiles && ./deploy`
-
-What is deploy
---------------
-
-`deploy` is initializer and auto-updater.
-
-`cd dotfiles && ./deploy`
-
-No need to hit some keys, please be patient.
-
-* All submodules are update to origin-master.
-* Vundle components are add or clean, no need to touch `~/.vim/bundle`.
-  * By hand, :BundleInstall or :BundleClear is command for add/clear.
-* Local changes preserve from update with `git stash` and `git stash pop`.
+* Upgrader includes dependency resolver.
+* Upgrader saved local changes safely.
+  * `git stash && git pull --rebase && git stash pop`

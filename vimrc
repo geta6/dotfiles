@@ -1,22 +1,23 @@
-"Default Setting
+"
+" Default setting
+"
 if filereadable("/etc/vim/vimrc")
   source /etc/vim/vimrc
 endif
 
-"Vundle"
+
+"
+" Vundle
+"
 set nocompatible
 filetype off
 set rtp+=~/.vim/vundle/
 call vundle#rc()
-"http://vim-scripts.org/vim/scripts.html
 Bundle 'JSON.vim'
 Bundle 'css3'
 Bundle 'jQuery'
-Bundle 'neco-look'
-Bundle 'neocomplcache'
 Bundle 'vim-coffee-script'
 Bundle 'jade.vim'
-Bundle 'dmd'
 Bundle 'scala.vim'
 Bundle 'thinca/vim-quickrun'
 Bundle 'sickill/vim-monokai'
@@ -24,7 +25,9 @@ Bundle 'groenewege/vim-less'
 Bundle 'rdunklau/Jinja.vim'
 filetype plugin indent on
 
-"Global Configuration"
+"
+" Global configuration
+"
 set laststatus=2
 set showcmd
 set showmatch
@@ -54,45 +57,10 @@ augroup cch
   autocmd WinEnter,BufRead * set cursorline
 augroup END
 
-"Vimproc"
-"if has('unix') && match(system('uname'),'Darwin') != -1
-"  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/procmac.so'
-"elseif has('unix')
-"  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/procunix.so'
-"endif
 
-"Auto Complete"
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_auto_completion_start_length = 2
-let g:neocomplcache_manual_completion_start_length = 3
-let g:neocomplcache_min_keyword_length = 4
-let g:neocomplcache_min_syntax_length = 4
-let g:neocomplcache_enable_ignore_case = 1
-let g:neocomplcache_enable_smart_case = 1
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_enable_cursor_hold_i = 0
-let g:neocomplcache_enable_camel_case_completion = 0
-let g:neocomplcache_enable_underbar_completion = 0
-let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
-let g:neocomplcache_temporary_dir = '/tmp/.neocon'
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
-inoremap <expr><Up> neocomplcache#smart_close_popup()."\<Up>"
-inoremap <expr><Down> neocomplcache#smart_close_popup()."\<Down>"
-inoremap <expr><Return> pumvisible() ? neocomplcache#close_popup() : "\<Return>"
-imap <silent> <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <silent> <C-k> <Plug>(neocomplcache_snippets_expand)
-nnoremap j gj
-onoremap j gj
-xnoremap j gj
-nnoremap k gk
-onoremap k gk
-xnoremap k gk
-
-"Special Keys"
+"
+" Key remap
+"
 nnoremap ; :
 set virtualedit=block
 set backspace=indent,eol,start
@@ -107,7 +75,10 @@ if has('syntax')
   augroup END
 endif
 
-"Status Highlight"
+
+"
+" Status highlight
+"
 let g:hi_insert = 'highlight StatusLine ctermfg=white ctermbg=magenta cterm=none'
 function! s:StatusLine(mode)
   if a:mode == 'Enter'
@@ -127,11 +98,17 @@ function! s:GetHighlight(hi)
   return hl
 endfunction
 
-"Move Cursor"
+
+"
+" Moveto last edited line
+"
 au BufWritePost * mkview
 autocmd BufReadPost * loadview
 
-"Indent"
+
+"
+" Indentation
+"
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -142,7 +119,10 @@ let g:indent_guides_start_level = 3
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkgrey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=grey
 
-"File handle"
+
+"
+" File handling
+"
 set fileencodings=utf-8,sjis,euc-jp
 set fileformats=unix,dos
 set encoding=utf-8
@@ -157,7 +137,9 @@ au BufRead,BufNewFile *.txt   set ft=markdown
 au BufRead,BufNewFile *.txt   set foldmethod=marker
 au BufRead,BufNewFile *.scala set ft=java.scala
 
-"Color"
+"
+" Coloring
+"
 syntax enable
 let java_highlight_all=1
 let java_highlight_functions="style"
@@ -174,12 +156,8 @@ augroup InvisibleIndicator
   autocmd BufEnter * call ActivateInvisibleIndicator()
 augroup END
 
-"Auto Fixer"
+
+"
+" Remove trail
+"
 autocmd BufWritePre * :%s/\s\+$//ge
-
-"Shortcut"
-nmap <silent> <leader>t <ESC><UP>0o<C-R>=strftime("%Y/%m/%d (%a) %H:%M")<CR>
-nmap <silent> <leader>y i<link rel='stylesheet' href='//yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css'>
-nmap <silent> <leader>j i<script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-set helpfile=$VIMRUNTIME/doc/help.txt
-

@@ -30,10 +30,9 @@ fi
 
 if [[ -s $HOME/.rvm ]]; then
   . $HOME/.rvm/scripts/rvm
+  PATH=$PATH:$HOME/.rvm/bin
+  export PATH
 else
   [[ -s /usr/local/rvm ]] && . /usr/local/rvm/scripts/rvm
   [[ -s /usr/local/share/rvm ]] && . /usr/local/share/rvm/scripts/rvm
 fi
-
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

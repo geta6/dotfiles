@@ -1,3 +1,6 @@
+#
+# History and Completeion
+#
 autoload -Uz compinit ; compinit -u
 autoload -Uz colors ; colors
 autoload -Uz history-search-end
@@ -17,36 +20,6 @@ bindkey -a 'h' run-help
 bindkey "" history-incremental-search-backward
 bindkey "" history-incremental-search-forward
 bindkey "[3~" delete-char
-
-
-limit coredumpsize 102400
-#unsetopt promptcr
-setopt prompt_subst
-setopt nobeep
-setopt long_list_jobs
-setopt list_types
-setopt auto_resume
-setopt auto_list
-setopt hist_ignore_dups
-setopt autopushd
-setopt pushd_ignore_dups
-setopt extended_glob
-setopt auto_menu
-setopt extended_history
-setopt equals
-setopt magic_equal_subst
-setopt hist_verify
-setopt numeric_glob_sort
-setopt print_eight_bit
-setopt share_history
-setopt auto_cd
-setopt auto_param_keys
-setopt auto_param_slash
-setopt correct
-setopt noautoremoveslash
-setopt complete_aliases
-#setopt no_autolist
-setopt glob_complete
 
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' accept-exact '*(N)'
@@ -78,6 +51,40 @@ zstyle ':completion:::::' completer _complete _approximate
 zmodload zsh/complist
 
 
+#
+# Configuration
+#
+limit coredumpsize 102400
+setopt prompt_subst
+setopt nobeep
+setopt long_list_jobs
+setopt list_types
+setopt auto_resume
+setopt auto_list
+setopt hist_ignore_dups
+setopt autopushd
+setopt pushd_ignore_dups
+setopt extended_glob
+setopt auto_menu
+setopt extended_history
+setopt equals
+setopt magic_equal_subst
+setopt hist_verify
+setopt numeric_glob_sort
+setopt print_eight_bit
+setopt share_history
+setopt auto_cd
+setopt auto_param_keys
+setopt auto_param_slash
+setopt correct
+setopt noautoremoveslash
+setopt complete_aliases
+setopt glob_complete
+
+
+#
+# Prompt
+#
 case ${UID} in
   0)
     zstyle ':completion:*' command-path $HOME/bin /usr/local/sbin /usr/local/bin /usr/X11/bin /usr/sbin /usr/bin /sbin /bin
@@ -99,7 +106,6 @@ esac
 PROMPT2="%B%{${fg[magenta]}%}%_#%{${reset_color}%}%b "
 SPROMPT="%B%{${fg[magenta]}%}%r is correct? [n,y,a,e] :%{${reset_color}%}%b "
 
-
 case "${TERM}" in
   kterm*|xterm)
     precmd() {
@@ -109,63 +115,9 @@ case "${TERM}" in
 esac
 
 
-function search() {
-  DIR=$1
-  KEY=$2
-  [[ ! -d $1 && ! -f $1 && $1 != '.' ]] && KEY=$DIR && DIR='.'
-  grep --color -n -r -i "$KEY" "$DIR"
-}
-function count() {
-  echo $(( `ls -l | wc -l`-1 )) `du -sh`
-}
-function psx() {
-  ps aux | grep $1 | grep -v grep
-}
-function suddenly() {
-  echo ${#1} | wc
-}
-function dotup() {
-  local PWD=`pwd`
-  if [ -s ${HOME}/Dropbox/Rcfiles ]; then
-    cd ${HOME}/Dropbox/Rcfiles && git commit -a -m 'auto commit by dotup' && git push && cd ${PWD}
-  else
-    echo "Do not find Rcfiles."
-  fi
-}
-function google() {
-  if [ -x "`which w3m 2>/dev/null`" ]; then
-    local str opt
-    if [ $# != 0 ]; then
-      for i in $*; do
-        str="$str+$i"
-      done
-      str=`echo $str | sed 's/^\+//'`
-      opt="search?num=50&hl=ja&lr=lang_ja&q=${str}"
-    fi
-    w3m http://www.google.co.jp/$opt
-  else
-    echo cannot find w3m
-  fi
-}
-function growl() {
-  if [ -x "`which growlnotify 2>/dev/null`" ]; then
-    local str
-    if [ $# != 0 ]; then
-      for i in $*; do
-        str="$str $i"
-      done
-    fi
-    growlnotify -n "$str" -m "${str}, done."
-  fi
-}
-
-
-case "${OSTYPE}" in
-  darwin* )
-    [[ ! -s `which brew` ]] && echo 'Install brew'
-    [[ ! -s `brew --prefix coreutils` ]] && echo 'Colorize console : brew install coreutils'
-    ;;
-esac
+#
+# Aliases and Functions
+#
 alias ls="ls -vF --color"
 alias dir="dir --color"
 alias cp="cp -iv"
@@ -182,7 +134,6 @@ alias lla="ld"
 alias li="ls -i"
 alias ss="sudo su"
 alias co="ssh geta6.net"
-alias socks="ssh -N -f -c 3des -D localhost:2929"
 alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias zrc="vi ~/.zshrc"
@@ -194,14 +145,33 @@ if [ ! ${WINDOW} ]; then
 else
   alias sc="screen -d"
 fi
-
-
+function socks() {
+  PORT=$1
+  HOST=$2
+  ssh -N -f -c 3des -D localhost:$PORT $HOST
+}
+function search() {
+  DIR=$1
+  KEY=$2
+  [[ ! -d $1 && ! -f $1 && $1 != '.' ]] && KEY=$DIR && DIR='.'
+  grep --color -n -r -i "$KEY" "$DIR"
+}
+function count() {
+  echo $(( `ls -l | wc -l`-1 )) `du -sh`
+}
+function psx() {
+  ps aux | grep $1 | grep -v grep
+}
 preexec () {
   if [ ${WINDOW} ]; then
     echo -ne "\ek${1%% *}\e\\"
   fi
 }
 
+
+#
+# Git Prompt
+#
 __git_files() { _files }
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info

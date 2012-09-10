@@ -1,7 +1,6 @@
-# ------------------------------------------------------------------------------
+#
 # SCREEN SETTINGS
-# ------------------------------------------------------------------------------
-
+#
 startup_message off
 nethack on
 
@@ -25,18 +24,16 @@ shell -$SHELL
 logfile "$HOME/.screen/screen-%Y%m%d-%n.log"
 log on
 
-idle 1200
-
 windowlist title  '%{u .g}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
 windowlist string '%{.g}%3n %{.y}%f%09=%{dg} %t %='
 caption always '%?%F%{= gW}%:%{= Kk}%?%2n%f%07=%t%='
 hardstatus on
 hardstatus alwayslastline "%{= .y}%m/%d %02c:%s%{-} %L=%-w%45L>%{=u g.}%n %t%{-}%+w %-17<%=%{= .g}$USER@%H%{-} %{= .y}(%l)"
 
-# ------------------------------------------------------------------------------
-# SCREEN KEYBINDINGS
-# ------------------------------------------------------------------------------
 
+#
+# SCREEN KEYBINDINGS
+#
 bind ^k
 bind ^\
 bind | vert_split
@@ -65,9 +62,9 @@ bind -c resize k eval 'resize -1' 'command -c resize'
 bind x command -c REGION
 bind w windowlist -b
 
-# ------------------------------------------------------------------------------
+#
 # TERMINAL SETTINGS
-# ------------------------------------------------------------------------------
+#
 term xterm-256color
 termcapinfo vt100 dl=5\E[M
 termcapinfo xterm*|rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
@@ -76,14 +73,12 @@ termcapinfo xterm* 'Co#256:pa#32767:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
 termcapinfo kterm* 'Co#256:pa#32767:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
 defnonblock 5
 
-# ------------------------------------------------------------------------------
+#
 # STARTUP SCREENS
-# ------------------------------------------------------------------------------
-
+#
 windowlist title  '%{u .g}Num Flags Title%=[0-9] select the number [movement] j,C-n:Down k,C-p:Up (C-)f:PageDown (C-)b:PageUp'
 windowlist string '%{.g}%3n %{.y}%f%09=%{dg} %t %='
 caption always '%?%F%{= gW}%:%{= Kk}%?%2n%f%07=%t%='
 hardstatus on
 #hardstatus alwayslastline "%{= yW}[%m/%d %02c:%s] %{yW} %-w%{= wk}%n %t%{-}%+w %=%{mk}$USER@$HOST[$LANG] (%l)"
 hardstatus alwayslastline "%{= .y}%m/%d %02c:%s%{-} %L=%-w%45L>%{=u g.}%n %t%{-}%+w %-17<%=%{= .g}$USER@%H%{-} %{= .y}(%l)"
-
