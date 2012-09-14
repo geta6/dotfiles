@@ -79,13 +79,15 @@ if [ ${OSTYPE:0:6} = 'darwin' ]; then
     echo ''
     exit 2
   else
-    echo 'Change owner.'
-    sudo chown $USER -R /usr/local
     echo 'Doctor homebrew.'
+    echo '>>>>>'
     brew doctor
-    echo 'brew status is OK? [y/n]'
+    echo '<<<<<'
+    echo 'if brew says "Your system is raring to brew", status is OK.'
+    echo -n 'brew status is OK? [y/n]'
     read brewok
-    if [ $brewok != 'y']; then
+    if [ $brewok != 'y' ]; then
+      echo 'exit.'
       exit 2
     fi
     echo 'Update homebrew.'
