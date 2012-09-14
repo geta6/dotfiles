@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 echo '                                    __'
 echo '  __  ______  ____ __________ _____/ /__'
 echo ' / / / / __ \/ __ `/ ___/ __ `/ __  / _ \'
@@ -32,9 +33,9 @@ echo ''
 echo '#====================#'
 echo '# Rebase Repository  #'
 echo '#====================#'
-git stash clear
-git stash
-git pull --rebase
+#git stash clear
+#git stash
+#git pull --rebase
 
 echo ''
 echo '#====================#'
@@ -64,7 +65,7 @@ echo ':BundleInstall' | vim > /dev/null 2>&1
 echo 'Vundle: Cleaning bundles...'
 echo ':BundleClean'   | vim > /dev/null 2>&1
 
-if [ $OSTYPE[0,6] = 'darwin' ]; then
+if [ ${OSTYPE:0:6} = 'darwin' ]; then
   echo ''
   echo '#====================#'
   echo '# Check Brew         #'
