@@ -33,9 +33,9 @@ echo ''
 echo '#====================#'
 echo '# Rebase Repository  #'
 echo '#====================#'
-#git stash clear
-#git stash
-#git pull --rebase
+git stash clear
+git stash
+git pull --rebase
 
 echo ''
 echo '#====================#'
