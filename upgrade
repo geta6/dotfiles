@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 
 echo '                                    __'
@@ -68,7 +68,7 @@ echo ':BundleClean'   | vim > /dev/null 2>&1
 if [ ${OSTYPE:0:6} = 'darwin' ]; then
   echo ''
   echo '#====================#'
-  echo '# Check Brew         #'
+  echo '# Check HomeBrew         #'
   echo '#====================#'
   if [ ! -s `which brew` ]; then
     echo 'Please install homebrew.'
@@ -83,17 +83,16 @@ if [ ${OSTYPE:0:6} = 'darwin' ]; then
     echo '>>>>>'
     brew doctor
     echo '<<<<<'
-    echo 'if brew says "Your system is raring to brew", status is OK.'
-    echo -n 'brew status is OK? [y/n]'
-    read brewok
-    if [ $brewok != 'y' ]; then
-      echo 'exit.'
-      exit 2
-    fi
     echo 'Update homebrew.'
     brew update
-    echo 'Install coreutils, htop.'
-    brew install coreutils htop 2>&1 >/dev/null
+    if [ ! -e /usr/local/Cellar/coreutils ]; then
+      echo 'Install coreutils.'
+      brew install coreutils 2>&1 > /dev/null
+    fi
+    if [ ! -e /usr/local/Cellar/htop-osx ]; then
+      echo 'Install htop.'
+      brew install htop-osx 2>&1 >/dev/null
+    fi
   fi
 else
   if [ ! -s `which htop` ]; then
