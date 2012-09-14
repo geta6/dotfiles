@@ -71,15 +71,27 @@ if [ ${OSTYPE:0:6} = 'darwin' ]; then
   echo '# Check Brew         #'
   echo '#====================#'
   if [ ! -s `which brew` ]; then
-    echo 'Install homebrew.'
-    ruby < `curl -fsSkL raw.github.com/mxcl/homebrew/go`
-    sudo chown $USER -R /usr/local
-    brew doctor
-    echo 'Install coreutils, htop.'
-    brew install coreutils htop 2>&1 >/dev/null
+    echo 'Please install homebrew.'
+    echo ''
+    echo '  ruby < `curl -fsSkL raw.github.com/mxcl/homebrew/go`'
+    echo ''
+    echo 'After install, re-run upgrade.'
+    echo ''
+    exit 2
   else
+    echo 'Change owner.'
+    sudo chown $USER -R /usr/local
+    echo 'Doctor homebrew.'
+    brew doctor
+    echo 'brew status is OK? [y/n]'
+    read brewok
+    if [ $brewok != 'y']; then
+      exit 2
+    fi
     echo 'Update homebrew.'
     brew update
+    echo 'Install coreutils, htop.'
+    brew install coreutils htop 2>&1 >/dev/null
   fi
 else
   if [ ! -s `which htop` ]; then
