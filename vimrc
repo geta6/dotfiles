@@ -15,7 +15,7 @@ set rtp+=~/.vim/vundle/
 call vundle#rc()
 Bundle 'JSON.vim'
 Bundle 'css3'
-Bundle 'jQuery'
+Bundle 'vim-stylus'
 Bundle 'vim-coffee-script'
 Bundle 'jade.vim'
 Bundle 'scala.vim'

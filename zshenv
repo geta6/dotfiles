@@ -12,6 +12,7 @@ FPATH=$HOME/.zsh/functions:$FPATH
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin:$HOME/Applications
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
+[[ -s /usr/local/share/npm/bin ]] && PATH=$PATH:/usr/local/share/npm/bin
 export FPATH PATH
 
 LISTMAX=0
@@ -27,6 +28,8 @@ else
   [[ -s /usr/local/nvm ]] && . /usr/local/nvm/nvm.sh
   [[ -s /usr/local/share/nvm ]] && . /usr/local/share/nvm/nvm.sh
 fi
+
+[[ -s /usr/local/lib/node_modules ]] && NODE_PATH=/usr/local/lib/node_modules && export NODE_PATH
 
 if [[ -s $HOME/.rvm ]]; then
   . $HOME/.rvm/scripts/rvm
