@@ -140,6 +140,7 @@ alias zrc="vi ~/.zshrc"
 alias vrc="vi ~/.vimrc"
 [[ ! -s `which tailf` ]] && alias tailf="tail -f"
 [[ -s `which htop` ]] && alias top="htop"
+[[ -s `which hub` ]] && alias git="hub"
 if [ ! ${WINDOW} ]; then
   alias sc="screen -D -RR"
 else
@@ -196,3 +197,6 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+[[ -s "${HOME}/.pythonbrew/etc/bashrc" ]] && source $HOME/.pythonbrew/etc/bashrc
