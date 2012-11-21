@@ -18,8 +18,12 @@ PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 [[ -s /usr/local/SPTK ]] && PATH=$PATH:/usr/local/SPTK/bin
 export FPATH PATH
 
-[[ -s /usr/local/share/python/virtualenvwrapper.sh ]] && source /usr/local/share/python/virtualenvwrapper.sh
 [[ -s "${HOME}/.pythonbrew/etc/bashrc" ]] && source $HOME/.pythonbrew/etc/bashrc
+if [ -s `which virtualenvwrapper.sh` ]; then
+  source `which virtualenvwrapper.sh`
+elif [ -s /usr/local/share/python/virtualenvwrapper.sh ]; then
+  source /usr/local/share/python/virtualenvwrapper.sh
+fi
 
 LISTMAX=0
 CLICOLOR=1
