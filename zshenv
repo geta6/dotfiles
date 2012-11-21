@@ -16,8 +16,10 @@ PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 [[ -s /usr/local/heroku/bin ]] && PATH=$PATH:/usr/local/heroku/bin
 [[ -s /usr/local/share/npm/bin ]] && PATH=$PATH:/usr/local/share/npm/bin
 [[ -s /usr/local/SPTK ]] && PATH=$PATH:/usr/local/SPTK/bin
-[[ -s /usr/local/share/python/virtualenvwrapper.sh ]] && source /usr/local/share/python/virtualenvwrapper.sh
 export FPATH PATH
+
+[[ -s /usr/local/share/python/virtualenvwrapper.sh ]] && source /usr/local/share/python/virtualenvwrapper.sh
+[[ -s "${HOME}/.pythonbrew/etc/bashrc" ]] && source $HOME/.pythonbrew/etc/bashrc
 
 LISTMAX=0
 CLICOLOR=1

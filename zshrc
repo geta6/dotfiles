@@ -197,6 +197,10 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-[[ -s "${HOME}/.pythonbrew/etc/bashrc" ]] && source $HOME/.pythonbrew/etc/bashrc
+
+if [ -s `which tmux` ]; then
+  if [ $SHLVL = 1 ]; then
+    tmux attach || tmux -f $HOME/.tmux.conf
+  fi
+fi
+
