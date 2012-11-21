@@ -199,8 +199,5 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
 
 if [ -s `which tmux` ]; then
-  if [ $SHLVL = 1 ]; then
-    tmux attach || tmux -f $HOME/.tmux.conf
-  fi
+  if [ $SHLVL = 1 ]; then; tmux attach 2&>/dev/null; fi
 fi
-
