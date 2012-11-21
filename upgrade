@@ -41,12 +41,13 @@ echo ''
 echo '#====================#'
 echo '# Replace Rcfiles    #'
 echo '#====================#'
-rm -f ~/.screenrc && ln -s `pwd`/screenrc ~/.screenrc && echo 'o -> ~/.screenrc'
-rm -f ~/.vim      && ln -s `pwd`/vim      ~/.vim      && echo 'o -> ~/.vim/'
-rm -f ~/.vimrc    && ln -s `pwd`/vimrc    ~/.vimrc    && echo 'o -> ~/.vimrc'
-rm -f ~/.zsh      && ln -s `pwd`/zsh      ~/.zsh      && echo 'o -> ~/.zsh/'
-rm -f ~/.zshrc    && ln -s `pwd`/zshrc    ~/.zshrc    && echo 'o -> ~/.zshrc'
-rm -f ~/.zshenv   && ln -s `pwd`/zshenv   ~/.zshenv   && echo 'o -> ~/.zshenv'
+rm -f ~/.screenrc  && ln -s `pwd`/screenrc  ~/.screenrc  && echo 'o -> ~/.screenrc'
+rm -f ~/.tmux.conf && ln -s `pwd`/tmux.conf ~/.tmux.conf && echo 'o -> ~/.tmux.conf'
+rm -f ~/.vim       && ln -s `pwd`/vim       ~/.vim       && echo 'o -> ~/.vim/'
+rm -f ~/.vimrc     && ln -s `pwd`/vimrc     ~/.vimrc     && echo 'o -> ~/.vimrc'
+rm -f ~/.zsh       && ln -s `pwd`/zsh       ~/.zsh       && echo 'o -> ~/.zsh/'
+rm -f ~/.zshrc     && ln -s `pwd`/zshrc     ~/.zshrc     && echo 'o -> ~/.zshrc'
+rm -f ~/.zshenv    && ln -s `pwd`/zshenv    ~/.zshenv    && echo 'o -> ~/.zshenv'
 
 echo ''
 echo '#====================#'
@@ -60,10 +61,10 @@ echo ''
 echo '#=====================#'
 echo '# Install Vim Bundles #'
 echo '#=====================#'
-echo 'Vundle: Installing bundles...'
-echo ':BundleInstall' | vim > /dev/null 2>&1
-echo 'Vundle: Cleaning bundles...'
-echo ':BundleClean'   | vim > /dev/null 2>&1
+echo 'NeoBundle: Installing bundles...'
+echo ':NeoBundleInstall' | vim > /dev/null 2>&1
+echo 'NeoBundle: Cleaning bundles...'
+echo ':NeoBundleClean'   | vim > /dev/null 2>&1
 
 if [ ${OSTYPE:0:6} = 'darwin' ]; then
   echo ''
