@@ -59,7 +59,6 @@ endif
 "
 " Module configuration
 "
-set guifont=azuki_font\ for\ Powerline
 let g:Powerline_symbols = 'fancy'
 augroup MyXML
   autocmd!
