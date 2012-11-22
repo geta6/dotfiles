@@ -141,11 +141,7 @@ alias vrc="vi ~/.vimrc"
 [[ ! -s `which tailf` ]] && alias tailf="tail -f"
 [[ -s `which htop` ]] && alias top="htop"
 [[ -s `which hub` ]] && alias git="hub"
-if [ ! ${WINDOW} ]; then
-  alias sc="screen -D -RR"
-else
-  alias sc="screen -d"
-fi
+alias ta="tmux a||tmux new-session -s default"
 function socks() {
   PORT=$1
   HOST=$2
