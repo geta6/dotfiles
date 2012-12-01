@@ -17,31 +17,21 @@ if has('vim_starting')
 endif
 "set rtp+=~/.vim/vundle/
 "#call vundle#rc()
-" Completion
-NeoBundle 'm2ym/rsense'
-NeoBundle 'taichouchou2/vim-rsense'
 " Program
 NeoBundle 'thinca/vim-quickrun'
 " Utility
 NeoBundle 'Lokaltog/vim-powerline'
 "Color
-NeoBundle 'sickill/vim-monokai'
+NeoBundle 'tomasr/molokai'
 NeoBundle 'banyan/recognize_charcode.vim'
-" Unite
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'tsukkee/unite-help'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'basyura/unite-rails'
-NeoBundle 'thinca/vim-unite-history'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'choplin/unite-vim_hacks'
 " Syntax
 NeoBundle 'haml.zip'
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'jQuery'
 NeoBundle 'nginx.vim'
 NeoBundle 'tpope/vim-markdown'
-NeoBundle 'vim-coffee-script'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'leshill/vim-json'
 NeoBundle 'yuroyoro/vim-python'
 NeoBundle 'yuroyoro/vim-scala'
 NeoBundle 'scrooloose/syntastic'
@@ -112,7 +102,6 @@ augroup END
 " Key remap
 "
 nnoremap ; :
-inoremap , ,<Space>
 set virtualedit=block
 set backspace=indent,eol,start
 set t_kD=[3~
@@ -196,7 +185,7 @@ let java_highlight_all=1
 let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 set background=dark
-colorscheme Monokai
+colorscheme molokai
 function! ActivateInvisibleIndicator()
   hi SpecialKey cterm=NONE ctermfg=darkgray guifg=darkgray
   hi ZenkakuSpace cterm=underline ctermfg=red gui=underline guifg=#FF0000
