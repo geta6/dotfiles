@@ -22,8 +22,6 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'AnsiEsc.vim'
 " Utility
 NeoBundle 'Lokaltog/vim-powerline'
-"Color
-NeoBundle 'tomasr/molokai'
 NeoBundle 'banyan/recognize_charcode.vim'
 " Syntax
 NeoBundle 'haml.zip'
@@ -186,7 +184,7 @@ let java_highlight_all=1
 let java_highlight_functions="style"
 let java_allow_cpp_keywords=1
 set background=dark
-colorscheme molokai
+colorscheme smyck
 function! ActivateInvisibleIndicator()
   hi SpecialKey cterm=NONE ctermfg=darkgray guifg=darkgray
   hi ZenkakuSpace cterm=underline ctermfg=red gui=underline guifg=#FF0000
