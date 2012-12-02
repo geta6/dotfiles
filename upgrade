@@ -1,5 +1,19 @@
 #!/bin/zsh
 
+function error () {
+  echo '#====================#'
+  echo '# Something Error    #'
+  echo '#====================#'
+  echo ''
+  echo $1
+  echo ''
+  echo '#=====================#'
+  echo '# Retouch Archives    #'
+  echo '#=====================#'
+  git stash pop
+  echo ''
+  exit 1
+}
 
 echo '                                    __'
 echo '  __  ______  ____ __________ _____/ /__'
@@ -14,19 +28,11 @@ echo '\__,_/\____/\__/_/ /_/_/\___/____/'
 echo ''
 
 if [ ! -n "`ls .git 2>/dev/null`" ]; then
-  echo "'`pwd`' isnt working directory."
-  exit 2
+  error "'`pwd`' isnt working directory."
 fi
 
 if [ ! -s `which git` ]; then
-  echo 'Your system lack of git.'
-  if [ ! -s `which git`]; then
-    echo 'Xcode.app -> Preference -> Install "Command Line Tools"'
-    exit 2
-  else
-    echo 'Install git.'
-    sudo apt-get install git
-  fi
+  error 'Your system lack of git.'
 fi
 
 echo ''
@@ -67,53 +73,29 @@ echo ':NeoBundleClean'   | vim > /dev/null 2>&1
 
 if [ ${OSTYPE:0:6} = 'darwin' ]; then
   echo ''
-  echo '#====================#'
-  echo '# Check HomeBrew         #'
-  echo '#====================#'
+  echo '#=====================#'
+  echo '# Check HomeBrew      #'
+  echo '#=====================#'
   if [ ! -s `which brew` ]; then
-    echo 'Please install homebrew.'
-    echo ''
-    echo '  ruby < `curl -fsSkL raw.github.com/mxcl/homebrew/go`'
-    echo ''
-    echo 'After install, re-run upgrade.'
-    echo ''
-    exit 2
+    error 'brew not installed: ruby < `curl -fsSkL raw.github.com/mxcl/homebrew/go`'
   else
-    echo 'Doctor homebrew.'
-    echo '>>>>>'
-    brew doctor
-    echo '<<<<<'
-    echo 'Update homebrew.'
-    brew update
-    if [ ! -e /usr/local/Cellar/coreutils ]; then
-      echo 'Install coreutils.'
+    echo 'Update HomeBrew...'
+    brew update > /dev/null
+    if [ ! -d /usr/local/Cellar/coreutils ]; then
+      echo 'Install coreutils...'
       brew install coreutils 2>&1 > /dev/null
     fi
-    if [ ! -e /usr/local/Cellar/osx-cpu-temp ]; then
-      echo 'Install osx-cpu-temp.'
-      brew tap geta6/utility
-      brew install osx-cpu-temp 2>&1 > /dev/null
-    fi
-    if [ ! -e /usr/local/Cellar/htop-osx ]; then
-      echo 'Install htop.'
-      brew install htop-osx 2>&1 >/dev/null
-    fi
-  fi
-else
-  if [ ! -s `which htop` ]; then
-    echo 'Install htop.'
-    sudo apt-get install htop
   fi
 fi
 
 echo ''
 echo '#=====================#'
-echo '# Retouch Alters      #'
+echo '# Retouch Archives    #'
 echo '#=====================#'
 git stash pop
 
 echo ''
 echo '#=====================#'
-echo '# Upgrade Done        #'
+echo '# All Upgrade Done    #'
 echo '#=====================#'
 echo ''
