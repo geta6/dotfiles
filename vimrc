@@ -19,6 +19,7 @@ endif
 "#call vundle#rc()
 " Program
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'AnsiEsc.vim'
 " Utility
 NeoBundle 'Lokaltog/vim-powerline'
 "Color
@@ -163,13 +164,13 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=grey
 "
 " File handling
 "
-set fileencodings=utf-8,sjis,euc-jp
+set fileencodings=utf-8
 set fileformats=unix,dos
 set encoding=utf-8
 set fileformat=unix
 filetype plugin on
 au BufRead,BufNewFile /etc/nginx/* set ft=nginx
-au BufRead,BufNewFile /etc/nginx/conf.d/* set ft=nginx
+au BufRead,BufNewFile /etc/nginx/*/* set ft=nginx
 au BufRead,BufNewFile *.twig  set ft=jinja.html
 au BufRead,BufNewFile *.less  set ft=less
 au BufRead,BufNewFile *.json  set ft=json
@@ -201,3 +202,8 @@ augroup END
 " Remove trail
 "
 autocmd BufWritePre * :%s/\s\+$//ge
+
+"
+" Auto Commands
+"
+autocmd FileType quickrun AnsiEsc
