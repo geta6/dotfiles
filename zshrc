@@ -129,19 +129,24 @@ alias l="ls"
 alias q="exit"
 alias la="ls -A"
 alias ll="ls -l"
-alias ld="ls -lA"
-alias lla="ld"
-alias li="ls -i"
+alias lla="ls -lA"
 alias ss="sudo su"
-alias co="ssh geta6.net"
 alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
-alias zrc="vi ~/.zshrc"
-alias vrc="vi ~/.vimrc"
+function chkey() {
+  if [ -z $1 ]; then
+    tmux set-option prefix C-a
+    tmux bind C-a last-window
+    tmux bind a last-window
+  else
+    tmux set-option prefix C-$1
+    tmux bind C-$1 last-window
+    tmux bind $1 last-window
+  fi
+}
 [[ ! -s `which tailf` ]] && alias tailf="tail -f"
 [[ -s `which htop` ]] && alias top="htop"
 [[ -s `which hub` ]] && alias git="hub"
-alias ta="tmux a||tmux new-session -s default"
 function socks() {
   PORT=$1
   HOST=$2
