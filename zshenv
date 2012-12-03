@@ -1,3 +1,5 @@
+[[ -f /usr/share/zsh/zshenv ]] && source /usr/share/zsh/zshenv
+
 LANG=C
 LANGUAGE=C
 LC_CTYPE=ja_JP.UTF-8
