@@ -37,7 +37,6 @@
 ## Targets
 
 * vim
-  * [gmarik/vundle](https://github.com/gmarik/vundle)
 * zsh
 * screen
 
