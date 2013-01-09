@@ -1,4 +1,5 @@
 [[ -f /usr/share/zsh/zshenv ]] && source /usr/share/zsh/zshenv
+typeset -U PATH CDPATH FPATH MANPATH
 
 LANG=C
 LANGUAGE=C
@@ -10,8 +11,9 @@ EDITOR=/usr/bin/vi
 [[ -s /bin/vi ]] && EDITOR=/bin/vi
 export EDITOR
 
-FPATH=$HOME/.zsh/functions:$FPATH
-PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+FPATH=$HOME/.zsh/functions/Completion:/usr/local/share/zsh/site-functions:$FPATH
+fpath=(/usr/local/share/zsh-completions $fpath)
+PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 [[ -s /usr/local/share/python ]] && PATH=/usr/local/share/python:$PATH
@@ -47,4 +49,11 @@ if [[ -s $HOME/.rvm ]]; then
 else
   [[ -s /usr/local/rvm ]] && . /usr/local/rvm/scripts/rvm
   [[ -s /usr/local/share/rvm ]] && . /usr/local/share/rvm/scripts/rvm
+fi
+
+if type brew >/dev/null 2>&1; then
+  BREW_PREFIX=$(brew --prefix)
+  if [ -e $BREW_PREFIX/Library/Contributions/brew_zsh_completion.sh ]; then
+    source $BREW_PREFIX/Library/Contributions/brew_zsh_completion.sh >/dev/null 2>&1
+  fi
 fi

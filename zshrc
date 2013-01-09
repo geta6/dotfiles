@@ -1,9 +1,11 @@
 #
 # History and Completeion
 #
-autoload -Uz compinit ; compinit -u
+autoload -U compinit
+compinit -u
 autoload -Uz colors ; colors
 autoload -Uz history-search-end
+
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 HISTFILE=${HOME}/.zsh-history
@@ -48,7 +50,13 @@ zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
 zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
 zstyle ':completion:::::' completer _complete _approximate
+
+autoload -U zmv
+alias zmv='noglob zmv'
+autoload -U zfinit
 zmodload zsh/complist
+zmodload zsh/zftp
+
 
 
 #
