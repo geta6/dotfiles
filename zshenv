@@ -17,8 +17,8 @@ PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PAT
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 [[ -s /usr/local/share/python ]] && PATH=/usr/local/share/python:$PATH
-[[ -s /usr/local/heroku/bin ]] && PATH=$PATH:/usr/local/heroku/bin
 [[ -s /usr/local/share/npm/bin ]] && PATH=$PATH:/usr/local/share/npm/bin
+[[ -s /usr/local/heroku/bin ]] && PATH=$PATH:/usr/local/heroku/bin
 [[ -s /usr/local/SPTK ]] && PATH=$PATH:/usr/local/SPTK/bin
 export FPATH PATH
 
