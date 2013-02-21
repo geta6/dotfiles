@@ -209,10 +209,12 @@ RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
 
 if [ ! -z "`which tmux`" ]; then
   if [ $SHLVL = 1 ]; then
-    echo -n 'Attach tmux session? [Y/n]'
-    read YN
-    [[ $YN = '' ]] && YN=y
-    [[ $YN = y ]] && tmux attach
+    if [ $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) != 0 ]; then
+      echo -n 'Attach tmux session? [Y/n]'
+      read YN
+      [[ $YN = '' ]] && YN=y
+      [[ $YN = y ]] && tmux attach
+    fi
   fi
 fi
 
