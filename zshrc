@@ -207,7 +207,12 @@ add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
 
-if [ -s `which tmux` ]; then
-  if [ $SHLVL = 1 ]; then; tmux attach 2&>/dev/null; fi
+if [ ! -z "`which tmux`" ]; then
+  if [ $SHLVL = 1 ]; then
+    echo -n 'Attach tmux session? [Y/n]'
+    read YN
+    [[ $YN = '' ]] && YN=y
+    [[ $YN = y ]] && tmux attach
+  fi
 fi
 

@@ -40,6 +40,11 @@ else
   [[ -s /usr/local/share/nvm ]] && . /usr/local/share/nvm/nvm.sh
 fi
 
+export PERL_CPANM_OPT='--local-lib=/usr/local/share/perl'
+export PERL5LIB='/usr/local/share/perl/lib/perl5'
+
+[[ -f $HOME/perl5/perlbrew/etc/bashrc ]] && source $HOME/perl5/perlbrew/etc/bashrc
+
 [[ -s /usr/local/lib/node_modules ]] && NODE_PATH=/usr/local/lib/node_modules && export NODE_PATH
 
 if [[ -s $HOME/.rvm ]]; then
