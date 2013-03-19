@@ -1,8 +1,11 @@
 [[ -f /usr/share/zsh/zshenv ]] && source /usr/share/zsh/zshenv
 typeset -U PATH CDPATH FPATH MANPATH
 
-LANG=C
 LANGUAGE=C
+case $TERM in
+  linux) LANG=C ;;
+  *)     LANG=ja_JP.UTF-8 ;;
+esac
 LC_CTYPE=ja_JP.UTF-8
 LC_MESSAGES=en_US.UTF-8
 export LANG LANGUAGE LC_CTYPE LC_MESSAGES
@@ -10,6 +13,9 @@ export LANG LANGUAGE LC_CTYPE LC_MESSAGES
 EDITOR=/usr/bin/vi
 [[ -s /bin/vi ]] && EDITOR=/bin/vi
 export EDITOR
+
+TERM=xterm-256color
+export TERM
 
 FPATH=$HOME/.zsh/functions/Completion:/usr/local/share/zsh/site-functions:$FPATH
 fpath=(/usr/local/share/zsh-completions $fpath)

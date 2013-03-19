@@ -36,7 +36,7 @@ NeoBundle 'yuroyoro/vim-python'
 NeoBundle 'yuroyoro/vim-scala'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'vim-stylus'
-NeoBundle 'jade.vim'
+NeoBundle 'digitaltoad/vim-jade'
 filetype plugin indent on
 
 if neobundle#exists_not_installed_bundles()
@@ -170,20 +170,6 @@ autocmd BufReadPost * loadview
 
 
 "
-" Indentation
-"
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set autoindent
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_start_level = 3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkgrey
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=grey
-
-
-"
 " File handling
 "
 set fileencodings=utf-8
@@ -191,14 +177,14 @@ set fileformats=unix,dos
 set encoding=utf-8
 set fileformat=unix
 filetype plugin on
-au BufRead,BufNewFile /etc/nginx/* set ft=nginx
-au BufRead,BufNewFile /etc/nginx/*/* set ft=nginx
 au BufRead,BufNewFile *.twig  set ft=jinja.html
 au BufRead,BufNewFile *.less  set ft=less
 au BufRead,BufNewFile *.json  set ft=json
 au BufRead,BufNewFile *.txt   set ft=markdown
 au BufRead,BufNewFile *.txt   set foldmethod=marker
 au BufRead,BufNewFile *.scala set ft=java.scala
+au BufRead,BufNewFile /etc/nginx/* set ft=nginx
+au BufRead,BufNewFile /etc/nginx/configs/* set ft=nginx
 
 "
 " Coloring
@@ -218,6 +204,20 @@ augroup InvisibleIndicator
   autocmd!
   autocmd BufEnter * call ActivateInvisibleIndicator()
 augroup END
+
+
+"
+" Indentation
+"
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set autoindent
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=darkgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=grey
 
 
 "
