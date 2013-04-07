@@ -68,3 +68,5 @@ if type brew >/dev/null 2>&1; then
     source $BREW_PREFIX/Library/Contributions/brew_zsh_completion.sh >/dev/null 2>&1
   fi
 fi
+
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
