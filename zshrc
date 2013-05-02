@@ -173,11 +173,16 @@ function psx() {
   ps aux | grep $1 | grep -v grep
 }
 preexec () {
-  if [ ${WINDOW} ]; then
-    echo -ne "\ek${1%% *}\e\\"
+  #echo ">> which ${1%% *} 2 > /dev/null"
+  #echo ">> `which ${1%% *} 2 > /dev/null`"
+  cmd=${1%% *}
+  if [ -z "`whence ${cmd}`" ]; then
+    if [ $cmd = 'yabai' ]; then
+      arg=${1##* }
+      echo "$arg is YABAI"
+    fi
   fi
 }
-
 
 #
 # Git Prompt
@@ -207,6 +212,8 @@ add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
 
+[[ 3 < `who | wc -l` ]] && exit
+
 if [ ! -z "`which tmux`" ]; then
   if [ $SHLVL = 1 ]; then
     if [ $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) != 0 ]; then
@@ -216,5 +223,10 @@ if [ ! -z "`which tmux`" ]; then
       [[ $YN = y ]] && tmux attach
     fi
   fi
+fi
+
+if [[ "$TMUX" != "" ]] then
+  alias pbcopy="ssh 127.0.0.1 pbcopy"
+  alias pbpaste="ssh 127.0.0.1 pbpaste"
 fi
 
