@@ -2,13 +2,11 @@
 typeset -U PATH CDPATH FPATH MANPATH
 
 LANGUAGE=C
-case $TERM in
-  linux) LANG=C ;;
-  *)     LANG=ja_JP.UTF-8 ;;
-esac
+LC_ALL=C
 LC_CTYPE=ja_JP.UTF-8
 LC_MESSAGES=en_US.UTF-8
-export LANG LANGUAGE LC_CTYPE LC_MESSAGES
+LANG=en_US.UTF-8
+export LANGUAGE LC_ALL LC_CTYPE LC_MESSAGES LANG
 
 EDITOR=/usr/bin/vi
 [[ -s /bin/vi ]] && EDITOR=/bin/vi

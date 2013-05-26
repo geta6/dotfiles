@@ -99,7 +99,7 @@ case ${UID} in
     PROMPT="%{${fg[magenta]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}#%{${reset_color}%} "
     ;;
   *)
-    zstyle ':completion:*' command-path $HOME/bin /usr/local/bin /usr/X11/bin /usr/bin /bin
+    zstyle ':completion:*' command-path $HOME/bin /usr/local/bin /usr/X11/bin /usr/bin /bin $PATH
     zstyle ':completion:*:sudo:*' command-path $HOME/bin /usr/local/sbin /usr/local/bin /usr/X11/bin /usr/sbin /usr/bin /sbin /bin
     case ${OSTYPE} in
       darwin* )
@@ -141,6 +141,8 @@ alias lla="ls -lA"
 alias ss="sudo su"
 alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
+alias twitter="tw -st"
+alias twit="yes|tw $1 2>&1 > /dev/null"
 function chkey() {
   if [ -z $1 ]; then
     tmux set-option prefix C-a
@@ -180,6 +182,7 @@ preexec () {
     if [ $cmd = 'yabai' ]; then
       arg=${1##* }
       echo "$arg is YABAI"
+      kill -s INT $PPID
     fi
   fi
 }
@@ -211,8 +214,6 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
-
-[[ 3 < `who | wc -l` ]] && exit
 
 if [ ! -z "`which tmux`" ]; then
   if [ $SHLVL = 1 ]; then
