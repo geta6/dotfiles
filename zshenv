@@ -1,13 +1,6 @@
 [[ -f /usr/share/zsh/zshenv ]] && source /usr/share/zsh/zshenv
 typeset -U PATH CDPATH FPATH MANPATH
 
-LANGUAGE=C
-LC_ALL=C
-LC_CTYPE=ja_JP.UTF-8
-LC_MESSAGES=en_US.UTF-8
-LANG=en_US.UTF-8
-export LANGUAGE LC_ALL LC_CTYPE LC_MESSAGES LANG
-
 EDITOR=/usr/bin/vi
 [[ -s /bin/vi ]] && EDITOR=/bin/vi
 export EDITOR
