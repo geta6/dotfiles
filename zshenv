@@ -61,3 +61,5 @@ if type brew >/dev/null 2>&1; then
 fi
 
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
