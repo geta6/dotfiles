@@ -106,7 +106,7 @@ case ${UID} in
         PROMPT="%{${fg[cyan]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
         ;;
       linux*)
-        case ${HOSTNAME} in
+        case ${HOST} in
           p*)
             PROMPT="%{${fg[green]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
             ;;
