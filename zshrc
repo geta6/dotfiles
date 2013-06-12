@@ -102,11 +102,18 @@ case ${UID} in
     zstyle ':completion:*' command-path $HOME/bin /usr/local/bin /usr/X11/bin /usr/bin /bin $PATH
     zstyle ':completion:*:sudo:*' command-path $HOME/bin /usr/local/sbin /usr/local/bin /usr/X11/bin /usr/sbin /usr/bin /sbin /bin
     case ${OSTYPE} in
-      darwin* )
+      darwin*)
         PROMPT="%{${fg[cyan]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
         ;;
-      linux* )
-        PROMPT="%{${fg[yellow]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+      linux*)
+        case ${HOST} in
+          p*)
+            PROMPT="%{${fg[green]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+            ;;
+          *)
+            PROMPT="%{${fg[yellow]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+            ;;
+        esac
         ;;
     esac
     ;;
