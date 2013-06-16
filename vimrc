@@ -129,7 +129,7 @@ set virtualedit=block
 set backspace=indent,eol,start
 set t_kD=[3~
 set list
-set listchars=
+set listchars=tab:›\ ,eol:\ ,trail:~
 if has('syntax')
   augroup InsertHook
   autocmd!

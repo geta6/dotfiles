@@ -5,11 +5,9 @@ EDITOR=/usr/bin/vi
 [[ -s /bin/vi ]] && EDITOR=/bin/vi
 export EDITOR
 
-TERM=xterm-256color
-export TERM
+export TERM=xterm-256color
 
 FPATH=$HOME/.zsh/functions/Completion:/usr/local/share/zsh/site-functions:$FPATH
-fpath=(/usr/local/share/zsh-completions $fpath)
 PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
@@ -17,6 +15,7 @@ PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PAT
 [[ -s /usr/local/share/npm/bin ]] && PATH=$PATH:/usr/local/share/npm/bin
 [[ -s /usr/local/heroku/bin ]] && PATH=$PATH:/usr/local/heroku/bin
 [[ -s /usr/local/SPTK ]] && PATH=$PATH:/usr/local/SPTK/bin
+[[ -s /usr/local/opt/rbenv ]] && PATH=$PATH:/usr/local/opt/rbenv/bin
 export FPATH PATH
 
 [[ -s "${HOME}/.pythonbrew/etc/bashrc" ]] && source $HOME/.pythonbrew/etc/bashrc
@@ -44,14 +43,7 @@ export PERL5LIB='/usr/local/share/perl/lib/perl5'
 
 [[ -s /usr/local/lib/node_modules ]] && NODE_PATH=/usr/local/lib/node_modules && export NODE_PATH
 
-if [[ -s $HOME/.rvm ]]; then
-  . $HOME/.rvm/scripts/rvm
-  PATH=$PATH:$HOME/.rvm/bin
-  export PATH
-else
-  [[ -s /usr/local/rvm ]] && . /usr/local/rvm/scripts/rvm
-  [[ -s /usr/local/share/rvm ]] && . /usr/local/share/rvm/scripts/rvm
-fi
+[[ -s $HOME/.rbenv/shims ]] && eval "$(rbenv init -)"
 
 if type brew >/dev/null 2>&1; then
   BREW_PREFIX=$(brew --prefix)
