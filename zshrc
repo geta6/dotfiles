@@ -216,7 +216,7 @@ if is-at-least 4.3.10; then
 fi
 function _update_vcs_info_msg() {
   psvar=()
-  LANG=en_US.UTF-8 vcs_info
+  LANG=C vcs_info
   [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 add-zsh-hook precmd _update_vcs_info_msg
