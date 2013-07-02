@@ -150,6 +150,7 @@ alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias twitter="tw -st"
 alias twit="yes|tw $1 2>&1 > /dev/null"
+alias cat="catimg"
 function chkey() {
   if [ -z $1 ]; then
     tmux set-option prefix C-a

@@ -43,7 +43,7 @@ export PERL5LIB='/usr/local/share/perl/lib/perl5'
 
 [[ -s /usr/local/lib/node_modules ]] && NODE_PATH=/usr/local/lib/node_modules && export NODE_PATH
 
-[[ -s $HOME/.rbenv/shims ]] && eval "$(rbenv init -)"
+[[ -d $HOME/.rbenv/shims ]] && eval "$(rbenv init -)"
 
 if type brew >/dev/null 2>&1; then
   BREW_PREFIX=$(brew --prefix)
@@ -54,4 +54,4 @@ fi
 
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8
+export LC_ALL=en_US.UTF-8
