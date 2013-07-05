@@ -24,6 +24,8 @@ NeoBundle 'AnsiEsc.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'gregsexton/gitv'
 " Syntax
 NeoBundle 'haml.zip'
 NeoBundle 'JavaScript-syntax'
