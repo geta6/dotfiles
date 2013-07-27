@@ -29,6 +29,7 @@ NeoBundle 'yuroyoro/vim-python'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'vim-stylus'
 NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'slim-template/vim-slim'
 NeoBundle 'Indent-Guides'
 " Extend
 NeoBundle 'slindberg/vim-colors-smyck'
