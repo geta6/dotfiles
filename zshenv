@@ -16,6 +16,8 @@ PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PAT
 [[ -s /usr/local/heroku/bin ]] && PATH=$PATH:/usr/local/heroku/bin
 [[ -s /usr/local/SPTK ]] && PATH=$PATH:/usr/local/SPTK/bin
 [[ -s /usr/local/opt/rbenv ]] && PATH=$PATH:/usr/local/opt/rbenv/bin
+[[ -s /usr/local/share/rbenv ]] && PATH=$PATH:/usr/local/share/rbenv/bin
+[[ -d $HOME/Dropbox/Apps ]] && PATH=$PATH:$HOME/Dropbox/Apps
 export FPATH PATH
 
 [[ -s "${HOME}/.pythonbrew/etc/bashrc" ]] && source $HOME/.pythonbrew/etc/bashrc
@@ -40,9 +42,7 @@ export PERL_CPANM_OPT='--local-lib=/usr/local/share/perl'
 export PERL5LIB='/usr/local/share/perl/lib/perl5'
 
 [[ -f $HOME/perl5/perlbrew/etc/bashrc ]] && source $HOME/perl5/perlbrew/etc/bashrc
-
 [[ -s /usr/local/lib/node_modules ]] && NODE_PATH=/usr/local/lib/node_modules && export NODE_PATH
-
 [[ -d $HOME/.rbenv/shims ]] && eval "$(rbenv init -)"
 
 if type brew >/dev/null 2>&1; then
@@ -55,3 +55,4 @@ fi
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 export LANG="ja_JP.UTF-8"
 export LC_ALL="ja_JP.UTF-8"
+export GIT_EDITOR=/usr/bin/vim

@@ -46,6 +46,7 @@ zstyle ':completion:*:history-words' menu yes
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
 zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
@@ -93,14 +94,25 @@ setopt glob_complete
 #
 # Prompt
 #
+COMPPATH=''
+SUDOPATH=''
+for it in `echo $PATH | sed -e 's/:/ /g'`; do
+  if [[ sbin = `basename $it` ]]; then
+    SUDOPATH="$SUDOPATH $it"
+  else
+    SUDOPATH="$SUDOPATH $it"
+    COMPPATH="$COMPPATH $it"
+  fi
+done
+
 case ${UID} in
   0)
-    zstyle ':completion:*' command-path $HOME/bin /usr/local/sbin /usr/local/bin /usr/X11/bin /usr/sbin /usr/bin /sbin /bin
+    zstyle ':completion:*' command-path `echo $SUDOPATH`
     PROMPT="%{${fg[magenta]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}#%{${reset_color}%} "
     ;;
   *)
-    zstyle ':completion:*' command-path $HOME/bin /usr/local/bin /usr/X11/bin /usr/bin /bin $PATH
-    zstyle ':completion:*:sudo:*' command-path $HOME/bin /usr/local/sbin /usr/local/bin /usr/X11/bin /usr/sbin /usr/bin /sbin /bin
+    zstyle ':completion:*' command-path `echo $COMPPATH`
+    zstyle ':completion:*:sudo:*' command-path `echo $SUDOPATH`
     case ${OSTYPE} in
       darwin*)
         PROMPT="%{${fg[cyan]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
