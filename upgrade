@@ -63,6 +63,15 @@ git submodule update
 git submodule foreach 'git pull origin master'
 
 echo ''
+echo '#====================#'
+echo '# Update gitconfig   #'
+echo '#====================#'
+user=`cat ~/.gitconfig | grep -E '(\[user\]|name.*=|email.*=)'`
+conf=`cat gitconfig`
+echo $user $conf > ~/.gitconfig
+cat gitignore > ~/.gitignore
+
+echo ''
 echo '#=====================#'
 echo '# Install Vim Bundles #'
 echo '#=====================#'
