@@ -195,7 +195,7 @@ function count() {
 function psx() {
   ps aux | grep $1 | grep -v grep
 }
-preexec () {
+function preexec () {
   #echo ">> which ${1%% *} 2 > /dev/null"
   #echo ">> `which ${1%% *} 2 > /dev/null`"
   cmd=${1%% *}
@@ -207,7 +207,9 @@ preexec () {
     fi
   fi
 }
-
+function chpwd() {
+  ls
+}
 #
 # Git Prompt
 #

@@ -20,6 +20,7 @@ NeoBundle 'AnsiEsc.vim'
 " Utility
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'The-NERD-tree'
 " Syntax
 NeoBundle 'nginx.vim'
 NeoBundle 'tpope/vim-markdown'
@@ -83,6 +84,19 @@ inoremap <expr><Down> neocomplcache#close_popup()."\<Down>"
 inoremap <expr><Left> neocomplcache#close_popup()."\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup()."\<Right>"
 
+nmap <silent> <C-e>      :NERDTreeToggle<CR>
+vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+omap <silent> <C-e>      :NERDTreeToggle<CR>
+imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
+autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowHidden=1
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeDirArrows=0
+let g:NERDTreeMouseMode=2
+
 "
 " Global configuration
 "
@@ -142,6 +156,7 @@ set fileformats=unix,dos
 set encoding=utf-8
 set fileformat=unix
 filetype plugin on
+au BufRead,BufNewFile *.ru    set ft=ruby
 au BufRead,BufNewFile *.twig  set ft=jinja.html
 au BufRead,BufNewFile *.less  set ft=less
 au BufRead,BufNewFile *.json  set ft=json
