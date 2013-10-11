@@ -68,8 +68,10 @@ echo '# Update gitconfig   #'
 echo '#====================#'
 user=`cat ~/.gitconfig | grep -E '(\[user\]|name.*=|email.*=)'`
 conf=`cat gitconfig`
-echo $user $conf > ~/.gitconfig
+echo "$user\n$conf" > ~/.gitconfig
 cat gitignore > ~/.gitignore
+echo 'o -> ~/.gitconfig'
+echo 'o -> ~/.gitignore'
 
 echo ''
 echo '#=====================#'
