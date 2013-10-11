@@ -10,7 +10,7 @@ export LSCOLORS=exfxbxdxcxhegedabagahcdx
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=32:bd=34:cd=34:su=42:sg=46:tw=42:ow=34;42:or=40;31'
 export ZLS_COLORS=$LS_COLORS
 
-FPATH=$HOME/.zsh:/usr/local/share/zsh-completions:/usr/local/share/zsh/site-functions:$FPATH
+FPATH=$HOME/.zsh/site-functions:/usr/local/share/zsh-completions:/usr/local/share/zsh/site-functions:$FPATH
 PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
