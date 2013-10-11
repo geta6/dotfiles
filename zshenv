@@ -1,11 +1,14 @@
-[[ -f /usr/share/zsh/zshenv ]] && source /usr/share/zsh/zshenv
 typeset -U PATH CDPATH FPATH MANPATH
 
 EDITOR=/usr/bin/vi
-[[ -s /bin/vi ]] && EDITOR=/bin/vi
+[[ -f /bin/vi ]] && EDITOR=/bin/vi
 export EDITOR
-
 export TERM=xterm-256color
+export LISTMAX=0
+export CLICOLOR=1
+export LSCOLORS=exfxbxdxcxhegedabagahcdx
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=32:bd=34:cd=34:su=42:sg=46:tw=42:ow=34;42:or=40;31'
+export ZLS_COLORS=$LS_COLORS
 
 FPATH=$HOME/.zsh/functions/Completion:/usr/local/share/zsh/site-functions:$FPATH
 PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
@@ -13,16 +16,9 @@ PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PAT
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 export FPATH PATH
 
-export RBENV_ROOT=/usr/local/rbenv
-export PATH=/usr/local/rbenv/bin:$PATH
-eval "$(rbenv init -)"
-
-LISTMAX=0
-CLICOLOR=1
-LSCOLORS=exfxbxdxcxhegedabagahcdx
-LS_COLORS='di=34:ln=35:so=32:pi=33:ex=32:bd=34:cd=34:su=42:sg=46:tw=42:ow=34;42:or=40;31'
-export LISTMAX CLICOLOR LSCOLORS LS_COLORS
-export ZLS_COLORS=$LS_COLORS
+[[ -d /usr/local/rbenv ]] && export RBENV_ROOT=/usr/local/rbenv
+[[ -d /usr/local/opt/rbenv ]] && export RBENV_ROOT=/usr/local/opt/rbenv
+[[ -s $RBENV_ROOT ]] && export PATH=$RBENV_ROOT/bin:$PATH && eval "$(rbenv init -)"
 
 if type brew >/dev/null 2>&1; then
   BREW_PREFIX=$(brew --prefix)
