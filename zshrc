@@ -190,14 +190,19 @@ function search() {
   grep --color -n -r -i "$KEY" "$DIR"
 }
 function count() {
-  echo $(( `ls -l | wc -l`-1 )) `du -sh`
+  echo $(( `ls -l | wc -l`-1 )) `du -s $@`
 }
 function psx() {
   ps aux | grep $1 | grep -v grep
 }
+function pskill() {
+  list=''
+  for p in `psx $1 | sed -E 's/  */ /g' | cut -d' ' -f2`; do
+    list="$list `echo $p | tr '\n' ' '`"
+  done
+  kill `echo $list | sed -E 's/  */ /g'`
+}
 function preexec () {
-  #echo ">> which ${1%% *} 2 > /dev/null"
-  #echo ">> `which ${1%% *} 2 > /dev/null`"
   cmd=${1%% *}
   if [ -z "`whence ${cmd}`" ]; then
     if [ $cmd = 'yabai' ]; then
@@ -254,3 +259,56 @@ if [[ "$TMUX" != "" ]] then
   alias pbpaste="ssh 127.0.0.1 pbpaste"
 fi
 
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
