@@ -47,7 +47,6 @@ rm -rf ~/.zsh
 mkdir ~/.zsh
 chmod 755 ~/.zsh
 ln -s `pwd`/zsh/site-functions ~/.zsh/site-functions     && echo 'o -> ~/.zsh/site-functions'
-ln -s `pwd`/zsh/powerline.zsh ~/.zsh/powerline.zsh       && echo 'o -> ~/.zsh/powerline.zsh'
 rm -f ~/.zshrc     && ln -s `pwd`/zshrc     ~/.zshrc     && echo 'o -> ~/.zshrc'
 rm -f ~/.zshenv    && ln -s `pwd`/zshenv    ~/.zshenv    && echo 'o -> ~/.zshenv'
 rm -f ~/.tmux.conf && ln -s `pwd`/tmux.conf ~/.tmux.conf && echo 'o -> ~/.tmux.conf'
@@ -81,17 +80,6 @@ echo 'NeoBundle: Installing bundles...'
 echo ':NeoBundleInstall' | vim > /dev/null 2>&1
 echo 'NeoBundle: Cleaning bundles...'
 echo ':NeoBundleClean'   | vim > /dev/null 2>&1
-
-PWD=`pwd`
-if [[ ! -f `which powerline` ]]; then
-  echo ''
-  echo '#=====================#'
-  echo '# Install Powerline   #'
-  echo '#=====================#'
-  cd `pwd`/powerline
-  ./setup.py install
-  cd $PWD
-fi
 
 if [[ ${OSTYPE:0:6} = 'darwin' ]]; then
   echo ''
