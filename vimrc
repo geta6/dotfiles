@@ -104,10 +104,14 @@ let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '✓'
 let g:gitgutter_sign_removed = '✘'
 
+let g:lightline = {
+      \ 'colorscheme': 'powerline'
+      \ }
 
 "
 " Global configuration
 "
+set ambiwidth=double
 set laststatus=2
 set showcmd
 set showmatch
