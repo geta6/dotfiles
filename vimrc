@@ -22,7 +22,6 @@ NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'The-NERD-tree'
-NeoBundle 'itchyny/lightline.vim'
 " Syntax
 NeoBundle 'nginx.vim'
 NeoBundle 'tpope/vim-markdown'
@@ -104,12 +103,6 @@ let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '✓'
 let g:gitgutter_sign_removed = '✘'
 
-let g:lightline = {
-  \ 'colorscheme': 'powerline',
-  \ 'component': {
-  \   'readonly': '%{&readonly?"⭤":""}',
-  \ }
-  \ }
 
 "
 " Global configuration
