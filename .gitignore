@@ -5,3 +5,4 @@ vim/view/
 GUI/
 vim/.netrwhist*
 vim/bundle/*
+Powerline.egg-info
