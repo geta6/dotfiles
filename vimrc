@@ -22,6 +22,7 @@ NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'The-NERD-tree'
+NeoBundle 'itchyny/lightline.vim'
 " Syntax
 NeoBundle 'nginx.vim'
 NeoBundle 'tpope/vim-markdown'
