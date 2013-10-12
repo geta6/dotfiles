@@ -28,5 +28,4 @@ if type brew >/dev/null 2>&1; then
 fi
 
 export GIT_EDITOR=/usr/bin/vim
-. ~/.zsh/powerline.zsh
 
