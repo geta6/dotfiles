@@ -27,6 +27,6 @@ if type brew >/dev/null 2>&1; then
   fi
 fi
 
-export LANG="ja_JP.UTF-8"
-export LC_ALL="ja_JP.UTF-8"
+#export LANG="ja_JP.UTF-8"
+#export LC_ALL="ja_JP.UTF-8"
 export GIT_EDITOR=/usr/bin/vim
