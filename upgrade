@@ -87,7 +87,7 @@ echo 'NeoBundle: Cleaning bundles...'
 echo ':NeoBundleClean'   | vim > /dev/null 2>&1
 
 PWD=`pwd`
-if [[ -f `which powerline` ]]; then
+if [[ ! -f `which powerline` ]]; then
   echo ''
   echo '#=====================#'
   echo '# Install Powerline   #'
