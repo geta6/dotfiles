@@ -58,14 +58,6 @@ rm -f ~/.vimrc     && ln -s `pwd`/vimrc     ~/.vimrc     && echo 'o -> ~/.vimrc'
 
 echo ''
 echo '#====================#'
-echo '# Update submodules  #'
-echo '#====================#'
-git submodule init
-git submodule update
-git submodule foreach 'git pull origin master'
-
-echo ''
-echo '#====================#'
 echo '# Update gitconfig   #'
 echo '#====================#'
 user=`cat ~/.gitconfig | grep -E '(\[user\]|name.*=|email.*=)'`
@@ -74,6 +66,14 @@ echo "$user\n$conf" > ~/.gitconfig
 cat gitignore > ~/.gitignore
 echo 'o -> ~/.gitconfig'
 echo 'o -> ~/.gitignore'
+
+echo ''
+echo '#====================#'
+echo '# Update submodules  #'
+echo '#====================#'
+git submodule init
+git submodule update
+git submodule foreach 'git pull origin master'
 
 echo ''
 echo '#=====================#'
