@@ -104,9 +104,7 @@ let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '✓'
 let g:gitgutter_sign_removed = '✘'
 
-let g:lightline = {
-      \ 'colorscheme': 'powerline'
-      \ }
+let g:lightline = { 'colorscheme': 'powerline', 'mode_map': {'c': 'NORMAL'} }
 
 "
 " Global configuration
