@@ -27,5 +27,5 @@ if type brew >/dev/null 2>&1; then
   fi
 fi
 
-export GIT_EDITOR=/usr/bin/vim
+export GIT_EDITOR=`which vim`
 

@@ -162,6 +162,7 @@ alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias twitter="tw -st"
 alias twit="yes|tw $1 2>&1 > /dev/null"
+alias less="`which vim`/../../share/vim/*/macros/less.sh"
 [[ -s `which catimg` ]] && alias cat="catimg"
 
 function chkey() {
@@ -203,13 +204,9 @@ function pskill() {
   kill `echo $list | sed -E 's/  */ /g'`
 }
 function preexec () {
-  cmd=${1%% *}
-  if [ -z "`whence ${cmd}`" ]; then
-    if [ $cmd = 'yabai' ]; then
-      arg=${1##* }
-      echo "$arg is YABAI"
-      kill -s INT $PPID
-    fi
+  local CMD=${1%% *}
+  if [[ $CMD = 'wine' ]]; then
+    export LC_ALL=ja_JP.UTF-8
   fi
 }
 function chpwd() {

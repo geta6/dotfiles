@@ -21,7 +21,6 @@ NeoBundle 'AnsiEsc.vim'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'The-NERD-tree'
 NeoBundle 'itchyny/lightline.vim'
 " Syntax
 NeoBundle 'nginx.vim'
@@ -86,19 +85,6 @@ inoremap <expr><Up> neocomplcache#close_popup()."\<Up>"
 inoremap <expr><Down> neocomplcache#close_popup()."\<Down>"
 inoremap <expr><Left> neocomplcache#close_popup()."\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup()."\<Right>"
-
-nmap <silent> <C-e>      :NERDTreeToggle<CR>
-vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
-omap <silent> <C-e>      :NERDTreeToggle<CR>
-imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
-cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
-autocmd vimenter * if !argc() | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowHidden=1
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeDirArrows=0
-let g:NERDTreeMouseMode=2
 
 let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '✓'
