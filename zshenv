@@ -29,3 +29,20 @@ fi
 
 export GIT_EDITOR=`which vim`
 
+local JA=ja_JP.UTF-8
+local EN=en_US.UTF-8
+
+export LANG=$JA
+export LC_CTYPE=$EN
+export LC_NUMERIC=$EN
+export LC_TIME=$EN
+export LC_COLLATE=$JA
+export LC_MONETARY=$JA
+export LC_MESSAGES=$EN
+export LC_PAPER=$EN
+export LC_NAME=$JA
+export LC_ADDRESS=$JA
+export LC_TELEPHONE=$JA
+export LC_MEASUREMENT=$JA
+export LC_IDENTIFICATION=$JA
+export LC_ALL=

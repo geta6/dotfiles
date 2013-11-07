@@ -203,12 +203,6 @@ function pskill() {
   done
   kill `echo $list | sed -E 's/  */ /g'`
 }
-function preexec () {
-  local CMD=${1%% *}
-  if [[ $CMD = 'wine' ]]; then
-    export LC_ALL=ja_JP.UTF-8
-  fi
-}
 function chpwd() {
   ls
 }
