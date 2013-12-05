@@ -34,6 +34,7 @@ NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'slim-template/vim-slim'
 " Extend
 NeoBundle 'slindberg/vim-colors-smyck'
+
 filetype plugin indent on
 
 if neobundle#exists_not_installed_bundles()
@@ -179,7 +180,6 @@ let g:gitgutter_sign_removed = '✘'
 let g:lightline = { 'colorscheme': 'powerline', 'mode_map': {'c': 'NORMAL'} }
 
 autocmd FileType quickrun AnsiEsc
-
 
 "
 " Coloring

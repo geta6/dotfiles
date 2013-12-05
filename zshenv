@@ -2,6 +2,7 @@ typeset -U PATH CDPATH FPATH MANPATH
 
 # ENV
 export EDITOR=`which vim`
+export BROWSER=`which w3m`
 [[ -f /usr/local/bin/vim ]] && export EDITOR=/usr/local/bin/vim
 export TERM=xterm-256color
 export LISTMAX=0
