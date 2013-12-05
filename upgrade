@@ -52,7 +52,7 @@ rm -f ~/.zshenv    && ln -s `pwd`/zshenv    ~/.zshenv    && echo 'o -> ~/.zshenv
 rm -f ~/.tmux.conf && ln -s `pwd`/tmux.conf ~/.tmux.conf && echo 'o -> ~/.tmux.conf'
 rm -f ~/.vim       && ln -s `pwd`/vim       ~/.vim       && echo 'o -> ~/.vim/'
 rm -f ~/.vimrc     && ln -s `pwd`/vimrc     ~/.vimrc     && echo 'o -> ~/.vimrc'
-SUBL='~/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings'
+SUBL="$HOME/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
 rm -f $SUBL        && ln -s `pwd`/Preferences.sublime-settings $SUBL && echo "o -> $SUBL"
 
 echo ''
