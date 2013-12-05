@@ -2,6 +2,7 @@ typeset -U PATH CDPATH FPATH MANPATH
 
 # ENV
 export EDITOR=`which vim`
+[[ -f /usr/local/bin/vim ]] && export EDITOR=/usr/local/bin/vim
 export TERM=xterm-256color
 export LISTMAX=0
 export CLICOLOR=1
@@ -43,9 +44,10 @@ export GIT_EDITOR=$EDITOR
 
 # BREW
 if type brew >/dev/null 2>&1; then
-  BREW_PREFIX=$(brew --prefix)
-  if [ -e $BREW_PREFIX/Library/Contributions/brew_zsh_completion.sh ]; then
-    source $BREW_PREFIX/Library/Contributions/brew_zsh_completion.sh >/dev/null 2>&1
+  if [[ -f `brew --prefix`/Library/Contributions/brew_zsh_completion.sh ]]; then
+    source `brew --prefix`/Library/Contributions/brew_zsh_completion.sh >/dev/null 2>&1
+  fi
+  if [[ -f `brew --prefix`/etc/profile.d/z.sh ]]; then
+    . `brew --prefix`/etc/profile.d/z.sh
   fi
 fi
-

@@ -1,3 +1,4 @@
+
 #
 # History and Completeion
 #
@@ -29,7 +30,8 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
+#_oldlist _complete _match _approximate
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %P Lines: %m
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -162,7 +164,6 @@ alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias twitter="tw -st"
 alias twit="yes|tw $1 2>&1 > /dev/null"
-alias less="`which vim`/../../share/vim/*/macros/less.sh"
 [[ -s `which catimg` ]] && alias cat="catimg"
 
 function chkey() {
@@ -250,6 +251,66 @@ if [[ "$TMUX" != "" ]] then
   alias pbpaste="ssh 127.0.0.1 pbpaste"
 fi
 
+# buf stacker
+
+show_buffer_stack() {
+  POSTDISPLAY="
+  stack: $LBUFFER"
+  zle push-line-or-edit
+}
+zle -N show_buffer_stack
+setopt noflowcontrol
+bindkey '^Q' show_buffer_stack
+
+# auto-fu
+
+#source ~/.zsh/auto-fu.zsh
+#zle-line-init () {
+#  auto-fu-init
+#}
+#zle -N zle-line-init
+#
+#function () {
+#  local code
+#  code=${functions[auto-fu-init]/'\n-azfu-'/''}
+#  eval "function auto-fu-init () { $code }"
+#  code=${functions[auto-fu]/fg=black,bold/fg=white}
+#  eval "function auto-fu () { $code }"
+#}
+#
+#function afu+cancel () {
+#  afu-clearing-maybe
+#  ((afu_in_p == 1)) && { afu_in_p=0; BUFFER="$buffer_cur" }
+#}
+#
+#function bindkey-advice-before () {
+#  local key="$1"
+#  local advice="$2"
+#  local widget="$3"
+#  [[ -z "$widget" ]] && {
+#    local -a bind
+#    bind=(`bindkey -M main "$key"`)
+#    widget=$bind[2]
+#  }
+#  local fun="$advice"
+#  if [[ "$widget" != "undefined-key" ]]; then
+#    local code=${"$(<=(cat <<"EOT"
+#      function $advice-$widget () {
+#        zle $advice
+#        zle $widget
+#      }
+#      fun="$advice-$widget"
+#EOT
+#    ))"}
+#    eval "${${${code//\$widget/$widget}//\$key/$key}//\$advice/$advice}"
+#  fi
+#  zle -N "$fun"
+#  bindkey -M afu "$key" "$fun"
+#}
+#bindkey-advice-before "^G" afu+cancel
+#bindkey-advice-before "^[" afu+cancel
+#bindkey-advice-before "^J" afu+cancel afu+accept-line
+
 ###-begin-npm-completion-###
 #
 # npm command completion script
@@ -303,3 +364,4 @@ elif type compctl &>/dev/null; then
   compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
+
