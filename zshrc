@@ -151,7 +151,6 @@ alias ls="ls -vF --color"
 alias dir="dir --color"
 alias cp="cp -iv"
 alias mv="mv -iv"
-alias rm="rm -v"
 alias c="cd"
 alias v="vi"
 alias l="ls"
@@ -187,10 +186,9 @@ function socks() {
   ssh -N -f -c 3des -D localhost:$PORT $HOST
 }
 function search() {
-  DIR=$1
-  KEY=$2
-  [[ ! -d $1 && ! -f $1 && $1 != '.' ]] && KEY=$DIR && DIR='.'
-  grep --color -n -r -i "$KEY" "$DIR"
+  TARGET=$1
+  STRING=$2
+  find . -type f -name $TARGET -exec grep --color -IHnibe $STRING {} \;
 }
 function count() {
   echo $(( `ls -l | wc -l`-1 )) `du -s $@`

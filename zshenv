@@ -2,7 +2,7 @@ typeset -U PATH CDPATH FPATH MANPATH
 
 # ENV
 export EDITOR=`which vim`
-export BROWSER=`which w3m`
+#export BROWSER=`which w3m`
 [[ -f /usr/local/bin/vim ]] && export EDITOR=/usr/local/bin/vim
 export TERM=xterm-256color
 export LISTMAX=0
@@ -33,6 +33,7 @@ export LC_ALL=
 FPATH=$HOME/.zsh/site-functions:/usr/local/share/zsh-completions:/usr/local/share/zsh/site-functions:$FPATH
 PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+[[ -d /usr/local/share/python ]] && PATH="$PATH:/usr/local/share/python"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 export FPATH PATH
 
@@ -42,6 +43,15 @@ export GIT_EDITOR=$EDITOR
 # RUBY
 [[ -d /usr/local/opt/rbenv ]] && export RBENV_ROOT=/usr/local/opt/rbenv
 [[ -s $RBENV_ROOT ]] && export PATH=$RBENV_ROOT/bin:$PATH && eval "$(rbenv init -)"
+NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
+
+# PYTHON
+[[ -d /usr/local/lib/python2.7 ]] && PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+export PYTHONPATH
+
+# NODE
+[[ -d $HOME/.nvm ]] && source $HOME/.nvm/nvm.sh
+[[ -d /usr/local/opt/nvm/ ]] && source /usr/local/opt/nvm/nvm.sh
 
 # BREW
 if type brew >/dev/null 2>&1; then
@@ -52,3 +62,4 @@ if type brew >/dev/null 2>&1; then
     . `brew --prefix`/etc/profile.d/z.sh
   fi
 fi
+

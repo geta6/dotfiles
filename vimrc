@@ -33,7 +33,9 @@ NeoBundle 'vim-stylus'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'slim-template/vim-slim'
 " Extend
+NeoBundle 'LeafCage/foldCC'
 NeoBundle 'slindberg/vim-colors-smyck'
+NeoBundle 'tmsanrinsha/yaml.vim'
 
 filetype plugin indent on
 
@@ -42,6 +44,13 @@ if neobundle#exists_not_installed_bundles()
         \ string(neobundle#get_not_installed_bundle_names())
   echomsg 'Please execute ":NeoBundleInstall" command.'
 endif
+
+set foldtext=foldCC#foldtext()
+set fillchars=vert:\|
+let g:foldCCtext_head = ''
+let g:foldCCtext_tail = 'printf(" %4d lines Lv%-2d", v:foldend-v:foldstart+1, v:foldlevel)'
+
+nnoremap <Leader><C-g> :echo foldCC#navi()<CR>
 
 "
 " Global configuration
@@ -122,14 +131,16 @@ set fileformats=unix,dos
 set encoding=utf-8
 set fileformat=unix
 filetype plugin on
-au BufRead,BufNewFile *.ru    set ft=ruby
-au BufRead,BufNewFile *.twig  set ft=jinja.html
-au BufRead,BufNewFile *.less  set ft=less
-au BufRead,BufNewFile *.slim  set ft=slim
-au BufRead,BufNewFile *.json  set ft=json
-au BufRead,BufNewFile *.txt   set ft=markdown
-au BufRead,BufNewFile *.txt   set foldmethod=marker
-au BufRead,BufNewFile *.scala set ft=java.scala
+au BufRead,BufNewFile *.ru      set ft=ruby
+au BufRead,BufNewFile *.twig    set ft=jinja.html
+au BufRead,BufNewFile *.less    set ft=less
+au BufRead,BufNewFile *.slim    set ft=slim
+au BufRead,BufNewFile *.json    set ft=json
+au BufRead,BufNewFile *.bowerrc set ft=json
+au BufRead,BufNewFile *.txt     set ft=markdown
+au BufRead,BufNewFile *.txt     set foldmethod=marker
+au BufRead,BufNewFile *.scala   set ft=java.scala
+au BufRead,BufNewFile *.yml     set foldmethod=syntax
 au BufRead,BufNewFile /etc/nginx/* set ft=nginx
 au BufRead,BufNewFile /etc/nginx/configs/* set ft=nginx
 au BufRead,BufNewFile Procfile set ft=ruby
