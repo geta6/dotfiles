@@ -47,7 +47,8 @@ NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
 
 # PYTHON
 [[ -d /usr/local/lib/python2.7 ]] && PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
-export PYTHONPATH
+[[ -d /usr/local/share/python ]] && PATH="/usr/local/share/python:$PATH"
+export PYTHONPATH PATH
 
 # NODE
 [[ -d $HOME/.nvm ]] && source $HOME/.nvm/nvm.sh

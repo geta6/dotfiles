@@ -46,14 +46,17 @@ echo '#====================#'
 rm -rf ~/.zsh
 mkdir ~/.zsh
 chmod 755 ~/.zsh
-ln -s `pwd`/zsh/site-functions ~/.zsh/site-functions     && echo 'o -> ~/.zsh/site-functions'
-rm -f ~/.zshrc     && ln -s `pwd`/zshrc     ~/.zshrc     && echo 'o -> ~/.zshrc'
-rm -f ~/.zshenv    && ln -s `pwd`/zshenv    ~/.zshenv    && echo 'o -> ~/.zshenv'
-rm -f ~/.tmux.conf && ln -s `pwd`/tmux.conf ~/.tmux.conf && echo 'o -> ~/.tmux.conf'
-rm -f ~/.vim       && ln -s `pwd`/vim       ~/.vim       && echo 'o -> ~/.vim/'
-rm -f ~/.vimrc     && ln -s `pwd`/vimrc     ~/.vimrc     && echo 'o -> ~/.vimrc'
+ln -s `pwd`/zsh/site-functions ~/.zsh/site-functions     && echo 'zsh/site-functions -> ~/.zsh/site-functions'
+rm -f ~/.zshrc     && ln -s `pwd`/zshrc     ~/.zshrc     && echo 'zshrc -> ~/.zshrc'
+rm -f ~/.zshenv    && ln -s `pwd`/zshenv    ~/.zshenv    && echo 'zshenv -> ~/.zshenv'
+rm -f ~/.tmux.conf && ln -s `pwd`/tmux.conf ~/.tmux.conf && echo 'tmux.conf -> ~/.tmux.conf'
+rm -f ~/.vim       && ln -s `pwd`/vim       ~/.vim       && echo 'vim -> ~/.vim/'
+rm -f ~/.vimrc     && ln -s `pwd`/vimrc     ~/.vimrc     && echo 'vimrc -> ~/.vimrc'
+rm -f ~/.agignore  && ln -s `pwd`/agignore  ~/.agignore  && echo 'agignore -> ~/.agignore'
 SUBL="$HOME/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
-rm -f $SUBL        && ln -s `pwd`/Preferences.sublime-settings $SUBL && echo "o -> $SUBL"
+if [[ -f $SUBL ]]; then
+  rm -f $SUBL        && ln -s `pwd`/Preferences.sublime-settings $SUBL && echo "Preferences.sublime-settings -> $SUBL"
+fi
 
 echo ''
 echo '#====================#'
