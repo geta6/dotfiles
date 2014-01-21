@@ -20,7 +20,6 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'AnsiEsc.vim'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'itchyny/lightline.vim'
 " Syntax
 NeoBundle 'scrooloose/syntastic'
@@ -32,10 +31,9 @@ NeoBundle 'yuroyoro/vim-python'
 NeoBundle 'vim-stylus'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'slim-template/vim-slim'
-" Extend
-NeoBundle 'LeafCage/foldCC'
-NeoBundle 'slindberg/vim-colors-smyck'
 NeoBundle 'tmsanrinsha/yaml.vim'
+" Extend
+NeoBundle 'slindberg/vim-colors-smyck'
 
 filetype plugin indent on
 
@@ -45,12 +43,6 @@ if neobundle#exists_not_installed_bundles()
   echomsg 'Please execute ":NeoBundleInstall" command.'
 endif
 
-set foldtext=foldCC#foldtext()
-set fillchars=vert:\|
-let g:foldCCtext_head = ''
-let g:foldCCtext_tail = 'printf(" %4d lines Lv%-2d", v:foldend-v:foldstart+1, v:foldlevel)'
-
-nnoremap <Leader><C-g> :echo foldCC#navi()<CR>
 
 "
 " Global configuration
@@ -183,10 +175,6 @@ inoremap <expr><Up> neocomplcache#close_popup()."\<Up>"
 inoremap <expr><Down> neocomplcache#close_popup()."\<Down>"
 inoremap <expr><Left> neocomplcache#close_popup()."\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup()."\<Right>"
-
-let g:gitgutter_sign_added = '✚'
-let g:gitgutter_sign_modified = '✓'
-let g:gitgutter_sign_removed = '✘'
 
 let g:lightline = { 'colorscheme': 'powerline', 'mode_map': {'c': 'NORMAL'} }
 
