@@ -45,14 +45,14 @@ export GIT_EDITOR=$EDITOR
 [[ -s $RBENV_ROOT ]] && export PATH=$RBENV_ROOT/bin:$PATH && eval "$(rbenv init -)"
 NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
 
+# NODE
+[[ -d /usr/local/opt/nvm ]] && export NVM_DIR=/usr/local/opt/nvm
+[[ -s $NVM_DIR ]] && source $NVM_DIR/nvm.sh
+
 # PYTHON
 [[ -d /usr/local/lib/python2.7 ]] && PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 [[ -d /usr/local/share/python ]] && PATH="/usr/local/share/python:$PATH"
 export PYTHONPATH PATH
-
-# NODE
-[[ -d $HOME/.nvm ]] && source $HOME/.nvm/nvm.sh
-[[ -d /usr/local/opt/nvm/ ]] && source /usr/local/opt/nvm/nvm.sh
 
 # BREW
 if type brew >/dev/null 2>&1; then
