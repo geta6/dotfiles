@@ -22,22 +22,13 @@ NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+"NeoBundle 'nathanaelkane/vim-indent-guides'
 " Syntax
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sheerun/vim-polyglot'
 " Extend
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'slindberg/vim-colors-smyck'
-
-filetype plugin indent on
-
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-        \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-endif
-
 
 "
 " Global configuration
@@ -66,10 +57,12 @@ set wildchar=<tab>
 set wildmode=list:full
 set wildignorecase
 set complete+=k
-set undofile
-set undodir=./.vimundo,~/.vim/undo
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
+set lazyredraw
+set ttyfast
 set cursorline
+set undodir=~/.vim/undo
+set undofile
+nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 augroup cch
   autocmd! cch
   autocmd WinLeave * set nocursorline
@@ -159,10 +152,10 @@ inoremap <expr><Down> neocomplcache#close_popup()."\<Down>"
 inoremap <expr><Left> neocomplcache#close_popup()."\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup()."\<Right>"
 
-set ts=2 sw=2 et
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+"set ts=2 sw=2 et
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_start_level = 2
+"let g:indent_guides_guide_size = 1
 
 let g:lightline = { 'colorscheme': 'powerline', 'mode_map': {'c': 'NORMAL'} }
 
@@ -184,3 +177,5 @@ augroup InvisibleIndicator
   autocmd BufEnter * call ActivateInvisibleIndicator()
 augroup END
 
+filetype plugin indent on
+NeoBundleCheck

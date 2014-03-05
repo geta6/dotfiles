@@ -1,8 +1,6 @@
-.dropbox
 .DS_Store
 .Apple*
-vim/view/
-GUI/
+vim/view
+vim/undo
 vim/.netrwhist*
 vim/bundle/*
-Powerline.egg-info
