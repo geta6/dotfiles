@@ -20,19 +20,14 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'AnsiEsc.vim'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 " Syntax
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'nginx.vim'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'leshill/vim-json'
-NeoBundle 'yuroyoro/vim-python'
-NeoBundle 'vim-stylus'
-NeoBundle 'digitaltoad/vim-jade'
-NeoBundle 'slim-template/vim-slim'
-NeoBundle 'tmsanrinsha/yaml.vim'
+NeoBundle 'sheerun/vim-polyglot'
 " Extend
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'slindberg/vim-colors-smyck'
 
 filetype plugin indent on
@@ -71,7 +66,8 @@ set wildchar=<tab>
 set wildmode=list:full
 set wildignorecase
 set complete+=k
-
+set undofile
+set undodir=./.vimundo,~/.vim/undo
 nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 set cursorline
 augroup cch
@@ -88,13 +84,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set autoindent
-let g:indent_guides_start_level=2
-let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=0
-let g:indent_guides_color_change_percent=20
-let g:indent_guides_guide_size=1
-let g:indent_guides_space_guides=1
-hi IndentGuidesOdd  ctermbg=235
 
 
 "
@@ -142,12 +131,6 @@ autocmd BufWritePre * :%s/\s\+$//ge
 "
 " Module configuration
 "
-augroup MyXML
-  autocmd!
-  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
-augroup END
-command! Pt :set paste!
-
 cnoremap <C-p> <Up>
 cnoremap <Up>  <C-p>
 cnoremap <C-n> <Down>
@@ -175,6 +158,11 @@ inoremap <expr><Up> neocomplcache#close_popup()."\<Up>"
 inoremap <expr><Down> neocomplcache#close_popup()."\<Down>"
 inoremap <expr><Left> neocomplcache#close_popup()."\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup()."\<Right>"
+
+set ts=2 sw=2 et
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 let g:lightline = { 'colorscheme': 'powerline', 'mode_map': {'c': 'NORMAL'} }
 
