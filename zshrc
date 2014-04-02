@@ -73,7 +73,8 @@ setopt list_types
 setopt auto_resume
 setopt auto_list
 setopt hist_ignore_dups
-setopt autopushd
+setopt auto_pushd
+setopt pushd_to_home
 setopt pushd_ignore_dups
 setopt extended_glob
 setopt auto_menu
@@ -151,6 +152,7 @@ alias ls="ls -vF --color"
 alias dir="dir --color"
 alias cp="cp -iv"
 alias mv="mv -iv"
+alias ln="ln -v"
 alias c="cd"
 alias v="vi"
 alias l="ls"

@@ -59,6 +59,7 @@ set wildignorecase
 set complete+=k
 set lazyredraw
 set ttyfast
+set ttyscroll=3
 set cursorline
 set undodir=~/.vim/undo
 set undofile
@@ -118,6 +119,7 @@ au BufRead,BufNewFile *.yml     set foldmethod=syntax
 au BufRead,BufNewFile /etc/nginx/* set ft=nginx
 au BufRead,BufNewFile /etc/nginx/configs/* set ft=nginx
 au BufRead,BufNewFile Procfile set ft=ruby
+au BufRead,BufNewFile Emafile set ft=javascript
 autocmd BufWritePre * :%s/\s\+$//ge
 
 

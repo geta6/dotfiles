@@ -33,7 +33,6 @@ export LC_ALL=
 FPATH=$HOME/.zsh/site-functions:/usr/local/share/zsh-completions:/usr/local/share/zsh/site-functions:$FPATH
 PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 [[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-[[ -d /usr/local/share/python ]] && PATH="$PATH:/usr/local/share/python"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 export FPATH PATH
 
@@ -51,7 +50,7 @@ NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
 
 # PYTHON
 [[ -d /usr/local/lib/python2.7 ]] && PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
-[[ -d /usr/local/share/python ]] && PATH="/usr/local/share/python:$PATH"
+#[[ -d /usr/local/share/python ]] && PATH="/usr/local/share/python:$PATH"
 export PYTHONPATH PATH
 
 # BREW
