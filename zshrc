@@ -55,7 +55,6 @@ zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-va
 zstyle ':completion:::::' completer _complete _approximate
 
 autoload -U zmv
-alias zmv='noglob zmv'
 autoload -U zfinit
 zmodload zsh/complist
 zmodload zsh/zftp
@@ -163,10 +162,23 @@ alias lla="ls -lA"
 alias ss="sudo su"
 alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
-alias gip="curl ifconfig.me"
-alias twitter="tw -st"
-alias twit="yes|tw $1 2>&1 > /dev/null"
-[[ -s `which catimg` ]] && alias cat="catimg"
+alias ip="curl ifconfig.me"
+alias zmv='noglob zmv'
+[[ -f `which dcfldd` ]]  && alias dd="dcfldd"
+[[ -f `which catimg` ]]  && alias cat="catimg"
+[[ ! -f `which tailf` ]] && alias tailf="tail -f"
+[[ -f `which htop` ]]    && alias top="htop"
+[[ -f `which hub` ]]     && alias git="hub"
+
+function copy() {
+  IN=$1
+  OUT=$2
+  if [ -f `which pv` ]; then
+    pv $IN > $OUT
+  else
+    cp -iv $IN $OUT
+  fi
+}
 
 function chkey() {
   if [ -z $1 ]; then
@@ -179,9 +191,6 @@ function chkey() {
     tmux bind $1 last-window
   fi
 }
-[[ ! -s `which tailf` ]] && alias tailf="tail -f"
-[[ -s `which htop` ]] && alias top="htop"
-[[ -s `which hub` ]] && alias git="hub"
 function socks() {
   PORT=$1
   HOST=$2
@@ -208,9 +217,11 @@ function pskill() {
 function chpwd() {
   ls
 }
+
 #
 # Git Prompt
 #
+
 __git_files() { _files }
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
@@ -252,7 +263,9 @@ if [[ "$TMUX" != "" ]] then
   alias pbpaste="ssh 127.0.0.1 pbpaste"
 fi
 
+#
 # buf stacker
+#
 
 show_buffer_stack() {
   POSTDISPLAY="
@@ -262,107 +275,4 @@ show_buffer_stack() {
 zle -N show_buffer_stack
 setopt noflowcontrol
 bindkey '^Q' show_buffer_stack
-
-# auto-fu
-
-#source ~/.zsh/auto-fu.zsh
-#zle-line-init () {
-#  auto-fu-init
-#}
-#zle -N zle-line-init
-#
-#function () {
-#  local code
-#  code=${functions[auto-fu-init]/'\n-azfu-'/''}
-#  eval "function auto-fu-init () { $code }"
-#  code=${functions[auto-fu]/fg=black,bold/fg=white}
-#  eval "function auto-fu () { $code }"
-#}
-#
-#function afu+cancel () {
-#  afu-clearing-maybe
-#  ((afu_in_p == 1)) && { afu_in_p=0; BUFFER="$buffer_cur" }
-#}
-#
-#function bindkey-advice-before () {
-#  local key="$1"
-#  local advice="$2"
-#  local widget="$3"
-#  [[ -z "$widget" ]] && {
-#    local -a bind
-#    bind=(`bindkey -M main "$key"`)
-#    widget=$bind[2]
-#  }
-#  local fun="$advice"
-#  if [[ "$widget" != "undefined-key" ]]; then
-#    local code=${"$(<=(cat <<"EOT"
-#      function $advice-$widget () {
-#        zle $advice
-#        zle $widget
-#      }
-#      fun="$advice-$widget"
-#EOT
-#    ))"}
-#    eval "${${${code//\$widget/$widget}//\$key/$key}//\$advice/$advice}"
-#  fi
-#  zle -N "$fun"
-#  bindkey -M afu "$key" "$fun"
-#}
-#bindkey-advice-before "^G" afu+cancel
-#bindkey-advice-before "^[" afu+cancel
-#bindkey-advice-before "^J" afu+cancel afu+accept-line
-
-###-begin-npm-completion-###
-#
-# npm command completion script
-#
-# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
-# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
-#
-
-COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
-COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
-export COMP_WORDBREAKS
-
-if type complete &>/dev/null; then
-  _npm_completion () {
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           npm completion -- "${COMP_WORDS[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -F _npm_completion npm
-elif type compdef &>/dev/null; then
-  _npm_completion() {
-    si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 COMP_LINE=$BUFFER \
-                 COMP_POINT=0 \
-                 npm completion -- "${words[@]}" \
-                 2>/dev/null)
-    IFS=$si
-  }
-  compdef _npm_completion npm
-elif type compctl &>/dev/null; then
-  _npm_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       npm completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _npm_completion npm
-fi
-###-end-npm-completion-###
 

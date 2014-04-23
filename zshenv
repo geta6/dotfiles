@@ -36,6 +36,20 @@ PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PAT
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 export FPATH PATH
 
+# BREW
+if type brew >/dev/null 2>&1; then
+  if [[ -f `brew --prefix`/Library/Contributions/brew_zsh_completion.sh ]]; then
+    source `brew --prefix`/Library/Contributions/brew_zsh_completion.sh >/dev/null 2>&1
+  fi
+  if [[ -f `brew --prefix`/etc/profile.d/z.sh ]]; then
+    . `brew --prefix`/etc/profile.d/z.sh
+  fi
+fi
+
+# PYTHON
+[[ -d /usr/local/lib/python2.7 ]] && PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+export PYTHONPATH
+
 # GIT
 export GIT_EDITOR=$EDITOR
 
@@ -47,19 +61,5 @@ NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
 # NODE
 [[ -d /usr/local/opt/nvm ]] && export NVM_DIR=/usr/local/opt/nvm
 [[ -s $NVM_DIR ]] && source $NVM_DIR/nvm.sh
-
-# PYTHON
-[[ -d /usr/local/lib/python2.7 ]] && PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
-#[[ -d /usr/local/share/python ]] && PATH="/usr/local/share/python:$PATH"
-export PYTHONPATH PATH
-
-# BREW
-if type brew >/dev/null 2>&1; then
-  if [[ -f `brew --prefix`/Library/Contributions/brew_zsh_completion.sh ]]; then
-    source `brew --prefix`/Library/Contributions/brew_zsh_completion.sh >/dev/null 2>&1
-  fi
-  if [[ -f `brew --prefix`/etc/profile.d/z.sh ]]; then
-    . `brew --prefix`/etc/profile.d/z.sh
-  fi
-fi
+[[ -s `which npm` ]] && eval "$(npm completion)"
 
