@@ -9,9 +9,9 @@
 	"hot_exit": true,
 	"ignored_packages":
 	[
+		"Vintage",
 		"SyncedSideBar",
-		"SublimeLinter",
-		"Vintage"
+		"SublimeLinter"
 	],
 	"rulers":
 	[
