@@ -16,6 +16,7 @@ if has('vim_starting')
 endif
 " Program
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'bling/vim-airline'
 " Utility
 NeoBundle 'AnsiEsc.vim'
 NeoBundle 'banyan/recognize_charcode.vim'
@@ -125,6 +126,23 @@ autocmd BufWritePre * :%s/\s\+$//ge
 
 
 "
+" Coloring
+"
+syntax enable
+set background=dark
+colorscheme smyck
+function! ActivateInvisibleIndicator()
+  hi SpecialKey cterm=NONE ctermfg=darkgray guifg=darkgray
+  hi ZenkakuSpace cterm=underline ctermfg=red gui=underline guifg=#FF0000
+  match ZenkakuSpace /　/
+endfunction
+augroup InvisibleIndicator
+  autocmd!
+  autocmd BufEnter * call ActivateInvisibleIndicator()
+augroup END
+
+
+"
 " Module configuration
 "
 cnoremap <C-p> <Up>
@@ -155,30 +173,17 @@ inoremap <expr><Down> neocomplcache#close_popup()."\<Down>"
 inoremap <expr><Left> neocomplcache#close_popup()."\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup()."\<Right>"
 
-"set ts=2 sw=2 et
-"let g:indent_guides_enable_on_vim_startup = 1
-"let g:indent_guides_start_level = 2
-"let g:indent_guides_guide_size = 1
+let g:airline#extensions#tabline#enabled = 1
 
-let g:lightline = { 'colorscheme': 'powerline', 'mode_map': {'c': 'NORMAL'} }
+set ts=2 sw=2 et
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 autocmd FileType quickrun AnsiEsc
 
 "
-" Coloring
+" Finalize
 "
-syntax enable
-set background=dark
-colorscheme smyck
-function! ActivateInvisibleIndicator()
-  hi SpecialKey cterm=NONE ctermfg=darkgray guifg=darkgray
-  hi ZenkakuSpace cterm=underline ctermfg=red gui=underline guifg=#FF0000
-  match ZenkakuSpace /　/
-endfunction
-augroup InvisibleIndicator
-  autocmd!
-  autocmd BufEnter * call ActivateInvisibleIndicator()
-augroup END
-
 filetype plugin indent on
 NeoBundleCheck
