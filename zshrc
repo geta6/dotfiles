@@ -1,4 +1,3 @@
-
 #
 # History and Completeion
 #
@@ -31,7 +30,6 @@ zstyle ':completion:*' verbose yes
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
-#_oldlist _complete _match _approximate
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %P Lines: %m
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -51,7 +49,6 @@ zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
-zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
 zstyle ':completion:::::' completer _complete _approximate
 
 autoload -U zmv
@@ -247,22 +244,6 @@ add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
 
-if [ ! -z "`which tmux`" ]; then
-  if [ $SHLVL = 1 ]; then
-    if [ $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) != 0 ]; then
-      echo -n 'Attach tmux session? [Y/n]'
-      read YN
-      [[ $YN = '' ]] && YN=y
-      [[ $YN = y ]] && tmux attach
-    fi
-  fi
-fi
-
-if [[ "$TMUX" != "" ]] then
-  alias pbcopy="ssh 127.0.0.1 pbcopy"
-  alias pbpaste="ssh 127.0.0.1 pbpaste"
-fi
-
 #
 # buf stacker
 #
@@ -275,4 +256,19 @@ show_buffer_stack() {
 zle -N show_buffer_stack
 setopt noflowcontrol
 bindkey '^Q' show_buffer_stack
+
+#
+# tmux
+#
+
+if [ ! -z "`which tmux`" ]; then
+  if [ $SHLVL = 1 ]; then
+    if [ $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) != 0 ]; then
+      echo "There is $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) tmux session."
+    fi
+  else
+    [[ -f `which pbcopy` ]] && alias pbcopy="ssh 127.0.0.1 `which pbcopy`"
+    [[ -f `which pbpaste` ]] && alias pbpaste="ssh 127.0.0.1 `which pbpaste`"
+  fi
+fi
 

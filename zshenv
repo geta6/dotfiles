@@ -32,7 +32,8 @@ export LC_ALL=
 # PATH
 FPATH=$HOME/.zsh/site-functions:/usr/local/share/zsh-completions:/usr/local/share/zsh/site-functions:$FPATH
 PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
-[[ -s `which brew` ]] && [[ -s `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+[[ -f `which brew` ]] && [[ -d `brew --prefix coreutils` ]] && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+[[ -f `which brew` ]] && [[ -d `brew --prefix gnu-tar` ]] && PATH="$(brew --prefix gnu-tar)/libexec/gnubin:$PATH"
 [[ -s /usr/X11 ]] && PATH=$PATH:/usr/X11/bin
 export FPATH PATH
 
@@ -61,5 +62,5 @@ NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
 # NODE
 [[ -d /usr/local/opt/nvm ]] && export NVM_DIR=/usr/local/opt/nvm
 [[ -s $NVM_DIR ]] && source $NVM_DIR/nvm.sh
-[[ -s `which npm` ]] && eval "$(npm completion)"
+[[ -f `which npm` ]] && eval "$(npm completion)"
 

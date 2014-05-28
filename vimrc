@@ -26,6 +26,7 @@ NeoBundle 'airblade/vim-gitgutter'
 " Syntax
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'GutenYe/json5.vim'
 " Extend
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'slindberg/vim-colors-smyck'
