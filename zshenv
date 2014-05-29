@@ -61,6 +61,6 @@ NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
 
 # NODE
 [[ -d /usr/local/opt/nvm ]] && export NVM_DIR=/usr/local/opt/nvm
-[[ -s $NVM_DIR ]] && source $NVM_DIR/nvm.sh
+[[ -d $NVM_DIR ]] && source $NVM_DIR/nvm.sh
 [[ -f `which npm` ]] && eval "$(npm completion)"
 

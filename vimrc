@@ -117,6 +117,7 @@ au BufRead,BufNewFile *.txt     set ft=markdown
 au BufRead,BufNewFile *.txt     set foldmethod=marker
 au BufRead,BufNewFile *.scala   set ft=java.scala
 au BufRead,BufNewFile *.yml     set foldmethod=syntax
+au BufRead,BufNewFile *.coffee  set colorcolumn=79
 au BufRead,BufNewFile /etc/nginx/* set ft=nginx
 au BufRead,BufNewFile /etc/nginx/configs/* set ft=nginx
 au BufRead,BufNewFile Procfile set ft=ruby

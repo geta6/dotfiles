@@ -218,31 +218,73 @@ function chpwd() {
 #
 # Git Prompt
 #
-
-__git_files() { _files }
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn hg bzr
-zstyle ':vcs_info:*' formats '(%s)-[%b]'
-zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
-zstyle ':vcs_info:bzr:*' use-simple true
 autoload -Uz is-at-least
+zstyle ':vcs_info:*' max-exports 3
+zstyle ':vcs_info:*' enable git
 if is-at-least 4.3.10; then
+  zstyle ':vcs_info:git:*' formats '[%r](%b%c%u)' '%m'
+  zstyle ':vcs_info:git:*' actionformats '[%r](%b%c%u)' '%m' '<!%a>'
   zstyle ':vcs_info:git:*' check-for-changes true
   zstyle ':vcs_info:git:*' stagedstr "^"
   zstyle ':vcs_info:git:*' unstagedstr "*"
-  zstyle ':vcs_info:git:*' formats '[%s](%b) %c%u'
-  zstyle ':vcs_info:git:*' actionformats '[%s](%b|%a) %c%u'
 fi
+if is-at-least 4.3.11; then
+  zstyle ':vcs_info:git+set-message:*' hooks git-hook-begin git-untracked git-push-status git-nomerge-branch git-stash-count
+  function +vi-git-hook-begin() {
+    [[ $(command git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]] && return 1
+    return 0
+  }
+  function +vi-git-untracked() {
+    [[ "$1" != "1" ]] && return 0
+    if command git status --porcelain 2> /dev/null | awk '{print $1}' | command grep -F '??' > /dev/null 2>&1 ; then
+      hook_com[unstaged]+='?'
+    fi
+    return 0
+  }
+  function +vi-git-push-status() {
+    [[ "$1" != "1" ]] && return 0
+    local ahead
+    ahead=$(command git rev-list origin/${hook_com[branch]}..${hook_com[branch]} 2>/dev/null | wc -l | tr -d ' ')
+    [[ $ahead -gt 0 ]] && hook_com[misc]+=":P${ahead}"
+    return 0
+  }
+  function +vi-git-nomerge-branch() {
+    [[ "$1" != "1" ]] && return 0
+    [[ "${hook_com[branch]}" == "master" ]] && return 0
+    local nomerged
+    nomerged=$(command git rev-list master..${hook_com[branch]} 2>/dev/null | wc -l | tr -d ' ')
+    [[ "$nomerged" -gt 0 ]] && hook_com[misc]+=":M${nomerged}"
+    return 0
+  }
+  function +vi-git-stash-count() {
+    [[ "$1" != "1" ]] && return 0
+    local stash
+    stash=$(command git stash list 2>/dev/null | wc -l | tr -d ' ')
+    [[ "${stash}" -gt 0 ]] && hook_com[misc]+=":S${stash}"
+    return 0
+  }
+fi
+
 function _update_vcs_info_msg() {
-  psvar=()
+  local -a messages
+  local prompt
   LANG=C vcs_info
-  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+  if [[ -z ${vcs_info_msg_0_} ]]; then
+    prompt=""
+  else
+    [[ -n "$vcs_info_msg_0_" ]] && messages+=("%F{green}${vcs_info_msg_0_}%f")
+    [[ -n "$vcs_info_msg_1_" ]] && messages+=("%F{yellow}${vcs_info_msg_1_}%f")
+    [[ -n "$vcs_info_msg_2_" ]] && messages+=("%F{red}${vcs_info_msg_2_}%f")
+    prompt="${(j: :)messages}"
+  fi
+  RPROMPT="$prompt %{${fg[blue]}%}[`pwd | sed "s:$HOME:~:"`]%{${reset_color}%}"
 }
 add-zsh-hook precmd _update_vcs_info_msg
-RPROMPT="%1(v|%F{green}%1v%f|)"
-RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
+
+#RPROMPT="%1(v|%F{green}%1v%f|)"
+#RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
 
 #
 # buf stacker
