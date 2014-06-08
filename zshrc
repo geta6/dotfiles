@@ -107,28 +107,28 @@ done
 case ${UID} in
   0)
     zstyle ':completion:*' command-path `echo $SUDOPATH`
-    PROMPT="%{${fg[magenta]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}#%{${reset_color}%} "
+    PROMPT="%{${fg[red]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}#%{${reset_color}%} "
     ;;
   *)
     zstyle ':completion:*' command-path `echo $COMPPATH`
     zstyle ':completion:*:sudo:*' command-path `echo $SUDOPATH`
-    case ${OSTYPE} in
-      darwin*)
+    case ${HOST} in
+      miku)
         PROMPT="%{${fg[cyan]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
         ;;
-      linux*)
-        case ${HOST} in
-          p*)
-            PROMPT="%{${fg[green]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
-            ;;
-          *)
-            PROMPT="%{${fg[yellow]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
-            ;;
-        esac
+      ruka)
+        PROMPT="%{${fg[magenta]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+        ;;
+      rin|len)
+        PROMPT="%{${fg[yellow]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+        ;;
+      *)
+        PROMPT="%{${fg[green]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
         ;;
     esac
     ;;
 esac
+
 PROMPT2="%B%{${fg[magenta]}%}%_#%{${reset_color}%}%b "
 SPROMPT="%B%{${fg[magenta]}%}%r is correct? [n,y,a,e] :%{${reset_color}%}%b "
 
@@ -162,7 +162,6 @@ alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias ip="curl ifconfig.me"
 alias zmv='noglob zmv'
 [[ -f `which dcfldd` ]]  && alias dd="dcfldd"
-[[ -f `which catimg` ]]  && alias cat="catimg"
 [[ ! -f `which tailf` ]] && alias tailf="tail -f"
 [[ -f `which htop` ]]    && alias top="htop"
 [[ -f `which hub` ]]     && alias git="hub"

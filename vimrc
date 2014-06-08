@@ -28,8 +28,9 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'GutenYe/json5.vim'
+NeoBundle 'kchmck/vim-coffee-script'
 " Extend
-NeoBundle 'slindberg/vim-colors-smyck'
+NeoBundle 'altercation/vim-colors-solarized'
 
 "
 " Global configuration
@@ -130,7 +131,9 @@ autocmd BufWritePre * :%s/\s\+$//ge
 "
 syntax enable
 set background=dark
-colorscheme smyck
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 function! ActivateInvisibleIndicator()
   hi SpecialKey cterm=NONE ctermfg=darkgray guifg=darkgray
   hi ZenkakuSpace cterm=underline ctermfg=red gui=underline guifg=#FF0000

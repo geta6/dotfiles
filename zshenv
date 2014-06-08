@@ -64,3 +64,6 @@ NOKOGIRI_USE_SYSTEM_LIBRARIES=YES
 [[ -d $NVM_DIR ]] && source $NVM_DIR/nvm.sh
 [[ -f `which npm` ]] && eval "$(npm completion)"
 
+# PKGCONFIG
+[[ -d /opt/X11/lib/pkgconfig ]] && PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
+
