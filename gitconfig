@@ -19,7 +19,5 @@
   diff   = auto
   branch = auto
   ui     = auto
-[push]
-  default = simple
 [http]
   postBuffer = 104857600
