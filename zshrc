@@ -305,7 +305,7 @@ bindkey '^Q' show_buffer_stack
 if [ ! -z "`which tmux`" ]; then
   if [ $SHLVL = 1 ]; then
     if [ $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) != 0 ]; then
-      echo "There is $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) tmux session."
+      echo "There is $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` - 1 )) tmux session."
     fi
   else
     [[ -f `which pbcopy` ]] && alias pbcopy="ssh 127.0.0.1 `which pbcopy`"

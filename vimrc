@@ -17,18 +17,25 @@ endif
 " Program
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'bling/vim-airline'
+" Shell
+NeoBundle 'Shougo/vimproc', {'build':{
+      \ 'mac': 'make -f make_mac.mak',
+      \ 'unix': 'make -f make_unix.mak'
+      \ }}
+NeoBundle 'Shougo/vimshell'
 " Utility
 NeoBundle 'AnsiEsc.vim'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'Shougo/unite.vim'
 " Syntax
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'GutenYe/json5.vim'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'digitaltoad/vim-jade'
 " Extend
 NeoBundle 'altercation/vim-colors-solarized'
 
@@ -65,6 +72,7 @@ set ttyscroll=3
 set cursorline
 set undodir=~/.vim/undo
 set undofile
+set colorcolumn=79
 nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 augroup cch
   autocmd! cch
@@ -108,6 +116,7 @@ set fileformats=unix,dos
 set encoding=utf-8
 set fileformat=unix
 filetype plugin on
+au BufRead,BufNewFile *.coffee  set ft=coffee
 au BufRead,BufNewFile *.ru      set ft=ruby
 au BufRead,BufNewFile *.twig    set ft=jinja.html
 au BufRead,BufNewFile *.less    set ft=less
@@ -118,7 +127,6 @@ au BufRead,BufNewFile *.txt     set ft=markdown
 au BufRead,BufNewFile *.txt     set foldmethod=marker
 au BufRead,BufNewFile *.scala   set ft=java.scala
 au BufRead,BufNewFile *.yml     set foldmethod=syntax
-au BufRead,BufNewFile *.coffee  set colorcolumn=79
 au BufRead,BufNewFile /etc/nginx/* set ft=nginx
 au BufRead,BufNewFile /etc/nginx/configs/* set ft=nginx
 au BufRead,BufNewFile Procfile set ft=ruby
@@ -153,11 +161,48 @@ cnoremap <Up>  <C-p>
 cnoremap <C-n> <Down>
 cnoremap <Down>  <C-n>
 
+nnoremap <silent> ,is :VimShell<CR>
+
+let g:unite_enable_start_insert = 1
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+noremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+autocmd FileType quickrun AnsiEsc
+
+let g:airline_enable_branch = 0
+let g:airline_section_b = "%t %M"
+let g:airline_section_c = ''
+let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
+let g:airline_section_x =
+      \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
+      \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
+      \ "%{strlen(&filetype)?&filetype:'no ft'}"
+let g:airline_section_y = '%3p%%'
+let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+
+filetype plugin indent on
+
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_min_syntax_length = 2
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+let g:neocomplcache_dictionary_filetype_lists = {
+      \ 'default' : '',
+      \ 'coffee' : $HOME.'~/.vim/dict/javascript.dict'
+      \ }
 
 imap <C-k> <Plug>(neocomplcache_snippets_expand)
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
@@ -176,23 +221,7 @@ inoremap <expr><Down> neocomplcache#close_popup()."\<Down>"
 inoremap <expr><Left> neocomplcache#close_popup()."\<Left>"
 inoremap <expr><Right> neocomplcache#close_popup()."\<Right>"
 
-autocmd FileType quickrun AnsiEsc
-
-let g:airline_enable_branch = 0
-let g:airline_section_b = "%t %M"
-let g:airline_section_c = ''
-let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
-let g:airline_section_x =
-      \ "%{strlen(&fileformat)?&fileformat:''}".s:sep.
-      \ "%{strlen(&fenc)?&fenc:&enc}".s:sep.
-      \ "%{strlen(&filetype)?&filetype:'no ft'}"
-let g:airline_section_y = '%3p%%'
-let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-
 "
 " Finalize
 "
-filetype plugin indent on
 NeoBundleCheck
