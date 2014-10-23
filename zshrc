@@ -161,20 +161,11 @@ alias ce="crontab -e"
 alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias ip="curl ifconfig.me"
 alias zmv='noglob zmv'
-[[ -f `which dcfldd` ]]  && alias dd="dcfldd"
-[[ ! -f `which tailf` ]] && alias tailf="tail -f"
-[[ -f `which htop` ]]    && alias top="htop"
-[[ -f `which hub` ]]     && alias git="hub"
 
-function copy() {
-  IN=$1
-  OUT=$2
-  if [ -f `which pv` ]; then
-    pv $IN > $OUT
-  else
-    cp -iv $IN $OUT
-  fi
-}
+[[ -x `which dcfldd` ]] && alias dd="dcfldd"
+[[ -x `which tailf` ]]  || alias tailf="tail -f"
+[[ -x `which htop` ]]   && alias top="htop"
+[[ -x `which hub` ]]    && alias git="hub"
 
 function chkey() {
   if [ -z $1 ]; then
@@ -187,31 +178,35 @@ function chkey() {
     tmux bind $1 last-window
   fi
 }
+
 function socks() {
   PORT=$1
   HOST=$2
   ssh -N -f -c 3des -D localhost:$PORT $HOST
 }
+
 function search() {
-  TARGET=$1
-  STRING=$2
-  find . -type f -name $TARGET -exec grep --color -IHnibe $STRING {} \;
+  if [ -x `which ag` ]; then
+    ag $@
+  else
+    GREP_COLOR='43;30' grep -irGEn --color=auto $@ *
+  fi
 }
+
 function count() {
-  echo $(( `ls -l | wc -l`-1 )) `du -s $@`
+  echo $(( `ls -l | wc -l`-1 )) `du -sh $@`
 }
+
 function psx() {
   ps aux | grep $1 | grep -v grep
 }
+
 function pskill() {
   list=''
   for p in `psx $1 | sed -E 's/  */ /g' | cut -d' ' -f2`; do
     list="$list `echo $p | tr '\n' ' '`"
   done
   kill `echo $list | sed -E 's/  */ /g'`
-}
-function chpwd() {
-  ls
 }
 
 #
@@ -304,12 +299,13 @@ bindkey '^Q' show_buffer_stack
 
 if [ ! -z "`which tmux`" ]; then
   if [ $SHLVL = 1 ]; then
-    if [ $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` )) != 0 ]; then
-      echo "There is $(( `ps aux | grep tmux | grep $USER | grep -v grep | wc -l` - 1 )) tmux session."
+    local SESSION_COUNT=$(( `ps au | grep tmux | grep $USER | grep -v grep | wc -l` ))
+    if [ $SESSION_COUNT != 0 ]; then
+      echo "There is $SESSION_COUNT tmux session."
     fi
   else
-    [[ -f `which pbcopy` ]] && alias pbcopy="ssh 127.0.0.1 `which pbcopy`"
-    [[ -f `which pbpaste` ]] && alias pbpaste="ssh 127.0.0.1 `which pbpaste`"
+    [[ -x `which pbcopy` ]] && alias pbcopy="ssh 127.0.0.1 `which pbcopy`"
+    [[ -x `which pbpaste` ]] && alias pbpaste="ssh 127.0.0.1 `which pbpaste`"
   fi
 fi
 

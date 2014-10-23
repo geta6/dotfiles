@@ -32,7 +32,7 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'Shougo/unite.vim'
 " Syntax
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'sheerun/vim-polyglot'
+"NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'GutenYe/json5.vim'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'digitaltoad/vim-jade'
