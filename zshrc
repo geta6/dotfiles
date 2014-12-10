@@ -255,7 +255,7 @@ case ${OSTYPE} in
     IPADDR=`ifconfig en0 | grep 'inet ' -m 1 | cut -d ' ' -f 2`
     ;;
   linux*)
-    IPADDR=`ifconfig en0 | grep 'inet ' -m 1 | sed -e 's/^  *//g' | cut -d ' ' -f 2 | sed -e 's/addr://g'`
+    IPADDR=`ifconfig eth0 | grep 'inet ' -m 1 | sed -e 's/^  *//g' | cut -d ' ' -f 2 | sed -e 's/addr://g'`
     ;;
 esac
 
