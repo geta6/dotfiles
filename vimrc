@@ -77,8 +77,7 @@ if neobundle#is_installed('neocomplete')
   let g:neocomplete#force_overwrite_completefunc=1
   inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-elseif
-  neobundle#is_installed('neocomplcache')
+elseif neobundle#is_installed('neocomplcache')
   let g:neocomplcache_enable_at_startup = 1
   let g:neocomplcache_enable_ignore_case = 1
   let g:neocomplcache_enable_smart_case = 1
