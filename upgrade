@@ -3,7 +3,7 @@
 CWD=$(cd "$(dirname "$0")"; pwd)
 
 echo "\n===> stash and sync changes."
-git stash clear && git stash && git pull --rebase
+git stash clear && git stash && git pull --rebase && git submodule update --init
 
 echo "\n===> replace rcfiles."
 for FILE in agignore gemrc gitconfig gitignore tmux.conf vim vimrc zsh zshenv zshrc; do
