@@ -209,6 +209,10 @@ function pskill() {
   kill `echo $list | sed -E 's/  */ /g'`
 }
 
+function chpwd(){
+  ls
+}
+
 #
 # Git Prompt
 #
