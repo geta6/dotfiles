@@ -111,5 +111,6 @@ filetype plugin indent on
 
 au BufWritePost * mkview
 autocmd BufReadPost * loadview
+autocmd BufWritePre * :%s/\s\+$//ge
 
 NeoBundleCheck
