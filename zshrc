@@ -1,6 +1,3 @@
-#
-# History and Completeion
-#
 autoload -U compinit
 compinit -u
 autoload -Uz colors ; colors
@@ -12,9 +9,8 @@ HISTFILE=${HOME}/.zsh-history
 HISTSIZE=10000000
 SAVEHIST=100000
 
-if [[ ! -z `compaudit` ]]; then
-  compaudit | xargs chmod g-w
-fi
+[[ ! -z `compaudit` ]] && compaudit | xargs chmod g-w
+
 
 bindkey -v
 bindkey -a 'q' push-line
@@ -22,6 +18,7 @@ bindkey -a 'h' run-help
 bindkey "" history-incremental-search-backward
 bindkey "" history-incremental-search-forward
 bindkey "[3~" delete-char
+
 
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' accept-exact '*(N)'
@@ -51,16 +48,13 @@ zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
 zstyle ':completion:::::' completer _complete _approximate
 
+
 autoload -U zmv
 autoload -U zfinit
 zmodload zsh/complist
 zmodload zsh/zftp
 
 
-
-#
-# Configuration
-#
 limit coredumpsize 102400
 setopt prompt_subst
 setopt nobeep
@@ -90,9 +84,6 @@ setopt complete_aliases
 setopt glob_complete
 
 
-#
-# Prompt
-#
 COMPPATH=''
 SUDOPATH=''
 for it in `echo $PATH | sed -e 's/:/ /g'`; do
@@ -104,6 +95,7 @@ for it in `echo $PATH | sed -e 's/:/ /g'`; do
   fi
 done
 
+
 case ${UID} in
   0)
     zstyle ':completion:*' command-path `echo $SUDOPATH`
@@ -114,23 +106,34 @@ case ${UID} in
     zstyle ':completion:*:sudo:*' command-path `echo $SUDOPATH`
     case ${HOST} in
       miku)
-        PROMPT="%{${fg[cyan]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+        PCOLOR=$'\x1b[38;5;44m'
+        ;;
+      haku)
+        PCOLOR=$'\x1b[38;5;60m'
+        ;;
+      neru)
+        PCOLOR=$'\x1b[38;5;214m'
+        ;;
+      teto)
+        PCOLOR=$'\x1b[38;5;162m'
         ;;
       ruka)
-        PROMPT="%{${fg[magenta]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+        PCOLOR=$'\x1b[38;5;182m'
         ;;
-      rin|len)
-        PROMPT="%{${fg[yellow]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+      ia)
+        PCOLOR=$'\x1b[38;5;224m'
         ;;
       *)
-        PROMPT="%{${fg[green]}%}%n@%m%{${reset_color}%} %{${fg[blue]}%}$%{${reset_color}%} "
+        PCOLOR=${fg[green]}
         ;;
     esac
+    PROMPT="%{$PCOLOR%}%n@%m $ %{${reset_color}%}"
     ;;
 esac
 
 PROMPT2="%B%{${fg[magenta]}%}%_#%{${reset_color}%}%b "
 SPROMPT="%B%{${fg[magenta]}%}%r is correct? [n,y,a,e] :%{${reset_color}%}%b "
+
 
 case "${TERM}" in
   kterm*|xterm)
@@ -141,9 +144,6 @@ case "${TERM}" in
 esac
 
 
-#
-# Aliases and Functions
-#
 alias ls="ls -vF --color"
 alias dir="dir --color"
 alias cp="cp -iv"
@@ -162,10 +162,13 @@ alias cv="convmv -f utf-8 --nfd -t utf-8 --nfc -r ."
 alias ip="curl ifconfig.me"
 alias zmv='noglob zmv'
 
+
 [[ -x `which dcfldd` ]] && alias dd="dcfldd"
 [[ -x `which tailf` ]]  || alias tailf="tail -f"
 [[ -x `which htop` ]]   && alias top="htop"
 [[ -x `which hub` ]]    && alias git="hub"
+[[ -x `which ag` ]]     || alias ag="GREP_COLOR='43;30' grep -irGEn --color=auto $@ *"
+
 
 function chkey() {
   if [ -z $1 ]; then
@@ -185,14 +188,6 @@ function socks() {
   ssh -N -f -c 3des -D localhost:$PORT $HOST
 }
 
-function search() {
-  if [ -x `which ag` ]; then
-    ag $@
-  else
-    GREP_COLOR='43;30' grep -irGEn --color=auto $@ *
-  fi
-}
-
 function count() {
   echo $(( `ls -l | wc -l`-1 )) `du -sh $@`
 }
@@ -201,21 +196,11 @@ function psx() {
   ps aux | grep $1 | grep -v grep
 }
 
-function pskill() {
-  list=''
-  for p in `psx $1 | sed -E 's/  */ /g' | cut -d' ' -f2`; do
-    list="$list `echo $p | tr '\n' ' '`"
-  done
-  kill `echo $list | sed -E 's/  */ /g'`
-}
-
 function chpwd(){
   ls
 }
 
-#
-# Git Prompt
-#
+
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
 autoload -Uz is-at-least
@@ -281,12 +266,6 @@ function _update_vcs_info_msg() {
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
-#RPROMPT="%1(v|%F{green}%1v%f|)"
-#RPROMPT="$RPROMPT %{${fg[blue]}%}[%/]%{${reset_color}%}"
-
-#
-# buf stacker
-#
 
 show_buffer_stack() {
   POSTDISPLAY="
@@ -297,9 +276,6 @@ zle -N show_buffer_stack
 setopt noflowcontrol
 bindkey '^Q' show_buffer_stack
 
-#
-# tmux
-#
 
 if [ ! -z "`which tmux`" ]; then
   if [ $SHLVL = 1 ]; then
@@ -308,8 +284,7 @@ if [ ! -z "`which tmux`" ]; then
       echo "There is $SESSION_COUNT tmux session."
     fi
   else
-    [[ -x `which pbcopy` ]] && alias pbcopy="ssh 127.0.0.1 `which pbcopy`"
+    [[ -x `which pbcopy` ]]  && alias pbcopy="ssh 127.0.0.1 `which pbcopy`"
     [[ -x `which pbpaste` ]] && alias pbpaste="ssh 127.0.0.1 `which pbpaste`"
   fi
 fi
-
