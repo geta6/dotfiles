@@ -1,101 +1,17 @@
-#!/bin/zsh
+#!/bin/sh
 
-function error () {
-  echo '#====================#'
-  echo '# Something Error    #'
-  echo '#====================#'
-  echo ''
-  echo $1
-  echo ''
-  echo '#=====================#'
-  echo '# Retouch Archives    #'
-  echo '#=====================#'
-  git stash pop
-  echo ''
-  exit 1
-}
+CWD=$(cd "$(dirname "$0")"; pwd)
 
-echo ''
-echo '        __      __  _____ __'
-echo '   ____/ /___  / /_/ __(_) /__  _____'
-echo '  / __  / __ \/ __/ /_/ / / _ \/ ___/'
-echo ' / /_/ / /_/ / /_/ __/ / /  __(__  )'
-echo ' \__,_/\____/\__/_/ /_/_/\___/____/'
-echo ''
+echo "\n===> stash and sync changes."
+git stash clear && git stash && git pull --rebase
 
-if [ ! -n "`ls .git 2>/dev/null`" ]; then
-  error "'`pwd`' isnt working directory."
-fi
+echo "\n===> replace rcfiles."
+for FILE in agignore gitconfig gitignore tmux.conf vim vimrc zsh zshenv zshrc; do
+  rm -rf ~/.$FILE
+  ln -sfv $CWD/$FILE ~/.$FILE
+done
 
-if [ ! -s `which git` ]; then
-  error 'Your system lack of git.'
-fi
-
-echo ''
-echo '#====================#'
-echo '# Rebase Repository  #'
-echo '#====================#'
-git stash clear
-git stash
-git pull --rebase
-
-echo ''
-echo '#====================#'
-echo '# Replace Rcfiles    #'
-echo '#====================#'
-rm -rf ~/.zsh
-mkdir ~/.zsh
-chmod 755 ~/.zsh
-ln -s `pwd`/zsh/site-functions ~/.zsh/site-functions     && echo 'zsh/site-functions -> ~/.zsh/site-functions'
-rm -f ~/.zshrc     && ln -s `pwd`/zshrc     ~/.zshrc     && echo 'zshrc -> ~/.zshrc'
-rm -f ~/.zshenv    && ln -s `pwd`/zshenv    ~/.zshenv    && echo 'zshenv -> ~/.zshenv'
-rm -f ~/.tmux.conf && ln -s `pwd`/tmux.conf ~/.tmux.conf && echo 'tmux.conf -> ~/.tmux.conf'
-rm -f ~/.vim       && ln -s `pwd`/vim       ~/.vim       && echo 'vim -> ~/.vim/'
-rm -f ~/.vimrc     && ln -s `pwd`/vimrc     ~/.vimrc     && echo 'vimrc -> ~/.vimrc'
-rm -f ~/.agignore  && ln -s `pwd`/agignore  ~/.agignore  && echo 'agignore -> ~/.agignore'
-SUBL="$HOME/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
-if [[ -f $SUBL ]]; then
-  rm -f $SUBL        && ln -s `pwd`/Preferences.sublime-settings $SUBL && echo "Preferences.sublime-settings -> $SUBL"
-fi
-
-echo ''
-echo '#====================#'
-echo '# Update gitconfig   #'
-echo '#====================#'
-user=`cat ~/.gitconfig | grep -E '(\[user\]|name.*=|email.*=)'`
-conf=`cat gitconfig`
-echo "$user\n$conf" > ~/.gitconfig
-cat gitignore > ~/.gitignore
-echo 'o -> ~/.gitconfig'
-echo 'o -> ~/.gitignore'
-
-echo ''
-echo '#====================#'
-echo '# Update submodules  #'
-echo '#====================#'
-git submodule init
-git submodule update
-git submodule foreach 'git pull origin master'
-
-echo ''
-echo '#=====================#'
-echo '# Install Vim Bundles #'
-echo '#=====================#'
-echo 'NeoBundle: Installing bundles...'
-echo ':NeoBundleInstall' | vim > /dev/null 2>&1
-echo 'NeoBundle: Cleaning bundles...'
-echo ':NeoBundleClean'   | vim > /dev/null 2>&1
-
-echo ''
-echo '#=====================#'
-echo '# Retouch Archives    #'
-echo '#=====================#'
+echo "\n===> stash pop."
 git stash pop
 
-echo ''
-echo '        __'
-echo '   ____/ /___  ____  ___'
-echo '  / __  / __ \/ __ \/ _ \'
-echo ' / /_/ / /_/ / / / /  __/'
-echo ' \__,_/\____/_/ /_/\___/'
-echo ''
+echo "\n===> done."
