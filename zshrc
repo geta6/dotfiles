@@ -250,6 +250,15 @@ if is-at-least 4.3.11; then
   }
 fi
 
+case ${OSTYPE} in
+  darwin*)
+    IPADDR=`ifconfig en0 | grep 'inet ' -m 1 | cut -d ' ' -f 2`
+    ;;
+  linux*)
+    IPADDR=`ifconfig en0 | grep 'inet ' -m 1 | sed -e 's/^  *//g' | cut -d ' ' -f 2 | sed -e 's/addr://g'`
+    ;;
+esac
+
 function _update_vcs_info_msg() {
   local -a messages
   local prompt
@@ -262,7 +271,7 @@ function _update_vcs_info_msg() {
     [[ -n "$vcs_info_msg_2_" ]] && messages+=("%F{red}${vcs_info_msg_2_}%f")
     prompt="${(j: :)messages}"
   fi
-  RPROMPT="$prompt %{${fg[blue]}%}[`pwd | sed "s:$HOME:~:"`]%{${reset_color}%}"
+  RPROMPT="$prompt %{${fg[blue]}%}[`pwd | sed "s:$HOME:~:"` | ${IPADDR}]%{${reset_color}%}"
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
