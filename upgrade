@@ -6,7 +6,7 @@ echo "\n===> stash and sync changes."
 git stash clear && git stash && git pull --rebase
 
 echo "\n===> replace rcfiles."
-for FILE in agignore gitconfig gitignore tmux.conf vim vimrc zsh zshenv zshrc; do
+for FILE in agignore gemrc gitconfig gitignore tmux.conf vim vimrc zsh zshenv zshrc; do
   rm -rf ~/.$FILE
   ln -sfv $CWD/$FILE ~/.$FILE
 done
