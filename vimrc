@@ -60,6 +60,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'marijnh/tern_for_vim', {'build': {'others': 'npm install'}}
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
@@ -92,13 +94,16 @@ elseif neobundle#is_installed('neocomplcache')
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 endif
 
-let s:bundle = neobundle#get('syntastic')
-function! s:bundle.hooks.on_source(bundle)
+if neobundle#is_installed('syntastic')
   let g:syntastic_check_on_open = 0
   let g:syntastic_check_on_wq = 0
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_loc_list_height = 5
-endfunction
+endif
+
+if neobundle#is_installed('nerdtree')
+  nnoremap <silent><C-e> :NERDTreeToggle<CR>
+endif
 
 syntax enable
 set background=dark
