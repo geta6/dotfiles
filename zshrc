@@ -168,6 +168,7 @@ alias zmv='noglob zmv'
 [[ -x `which htop` ]]   && alias top="htop"
 [[ -x `which hub` ]]    && alias git="hub"
 [[ -x `which ag` ]]     || alias ag="GREP_COLOR='43;30' grep -irGEn --color=auto $@ *"
+[[ -x `which direnv` ]] && eval "$(direnv hook zsh)"
 
 
 function chkey() {

@@ -63,7 +63,6 @@ NeoBundle 'sgur/vim-gitgutter'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'marijnh/tern_for_vim', {'build': {'others': 'npm install'}}
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 NeoBundle 'scrooloose/syntastic'
 call neobundle#end()
