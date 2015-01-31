@@ -57,15 +57,24 @@ endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'sgur/vim-gitgutter'
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'yuratomo/w3m.vim'
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 NeoBundle 'scrooloose/syntastic'
 call neobundle#end()
+
+if neobundle#is_installed('syntastic')
+  let g:syntastic_coffee_coffeelint_args = '--csv --file '.$HOME.'/.coffeelintrc'
+endif
 
 if neobundle#is_installed('neocomplete')
   " Disable AutoComplPop.
@@ -229,8 +238,24 @@ if neobundle#is_installed('syntastic')
   let g:syntastic_loc_list_height = 5
 endif
 
-if neobundle#is_installed('nerdtree')
-  nnoremap <silent><C-e> :NERDTreeToggle<CR>
+if neobundle#is_installed('indentLine')
+  let g:indentLine_faster = 1
+  let g:indentLine_color_term = 239
+  nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+endif
+
+if neobundle#is_installed('unite.vim')
+  let g:unite_enable_start_insert=1
+  let g:unite_source_history_yank_enable =1
+  let g:unite_source_file_mru_limit = 200
+  nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+  nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+  nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+  nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+  nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+  if neobundle#is_installed('vimfiler')
+    nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit<Cr>
+  endif
 endif
 
 syntax enable

@@ -199,6 +199,7 @@ function psx() {
 
 function chpwd(){
   ls
+  [[ $SHLVL = 1 ]] || tmux rename-window $(basename `pwd`)
 }
 
 
@@ -296,5 +297,7 @@ if [ ! -z "`which tmux`" ]; then
   else
     [[ -x `which pbcopy` ]]  && alias pbcopy="ssh 127.0.0.1 `which pbcopy`"
     [[ -x `which pbpaste` ]] && alias pbpaste="ssh 127.0.0.1 `which pbpaste`"
+    tmux rename-window $(basename `pwd`)
   fi
 fi
+
