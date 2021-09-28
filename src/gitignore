@@ -1,0 +1,19 @@
+# system
+.DS_Store
+.Apple*
+*.sw*
+
+# env specific
+.env*
+
+# temporary
+/tmp
+
+# node.js
+node_modules
+npm-shrinkwrap.json
+npm-debug.log*
+package-lock.json
+isolate-*
+yarn-*
+
