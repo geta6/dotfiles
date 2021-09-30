@@ -15,7 +15,7 @@ killall Finder
 
 if [[ -x `which plutil` ]]; then
   if [[ -z "$(plutil -extract 'Default Window Settings' xml1 ~/Library/Preferences/com.apple.Terminal.plist -o - | grep Dracula)" ]]; then
-    open ${BASE_DIR}/lib/dracula/Dracula.terminal
+    open ${BASE_DIR}/lib/Dracula.terminal
   fi
 fi
 

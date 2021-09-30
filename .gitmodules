@@ -1,3 +1,0 @@
-[submodule "lib/dracula"]
-	path = lib/dracula
-	url = git@github.com:dracula/terminal-app.git

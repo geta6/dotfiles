@@ -48,10 +48,11 @@ export SUDO_EDITOR="`which nvim`"
 [[ -x "`which nvim`" ]] && alias vi=nvim
 [[ -x "`which nvim`" ]] && alias vim=nvim
 
-# Prompt: Activate starship
-if [ -x "`which starship`" ]; then
-  eval "$(starship init zsh)"
+# Prompt: Powerlevel10k
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Plugins
 zinit light zinit-zsh/z-a-submods
@@ -79,3 +80,5 @@ zinit snippet PZTM::ruby
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:utility' safe-ops 'yes'
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
