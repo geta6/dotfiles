@@ -1,0 +1,128 @@
+#!/bin/zsh
+
+BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
+
+
+echo "--> setup macOS settings"
+[[ ! -d ~/Developer ]] && mkdir ~/Developer
+[[ ! -d ~/Sites ]] && mkdir ~/Sites
+
+cp -f ${BASE_DIR}/lib/com.apple.dock.plist ~/Library/Preferences/com.apple.dock.plist
+killall Dock
+
+cp -f ${BASE_DIR}/lib/com.apple.finder.plist ~/Library/Preferences/com.apple.finder.plist
+killall Finder
+
+if [[ -x `which plutil` ]]; then
+  if [[ -z "$(plutil -extract 'Default Window Settings' xml1 ~/Library/Preferences/com.apple.Terminal.plist -o - | grep Dracula)" ]]; then
+    open ${BASE_DIR}/lib/dracula/Dracula.terminal
+  fi
+fi
+
+
+echo "--> setup homebrew"
+[[ ! -x "`which brew`" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install \
+  binutils \
+  coreutils \
+  diffutils \
+  direnv \
+  ffmpeg \
+  findutils \
+  gifsicle \
+  git \
+  grep \
+  handbrake \
+  htop \
+  hub \
+  imagemagick \
+  moreutils \
+  neovim \
+  openssl \
+  readline \
+  redis \
+  the_silver_searcher \
+  tig \
+  tmux \
+  unar \
+  yarn \
+  z
+brew tap homebrew/cask-fonts
+brew install --cask \
+  authy \
+  appcleaner \
+  bitwarden \
+  discord \
+  dropbox \
+  figma \
+  fliqlo \
+  font-hack-nerd-font \
+  google-chrome \
+  gyazo \
+  launchbar \
+  ngrok \
+  notion \
+  skitch \
+  slack \
+  spotify \
+  the-unarchiver \
+  transmission \
+  visual-studio-code
+
+
+echo "--> setup run commands"
+for runcoms in ${BASE_DIR}/src/*; do
+  if [[ "$runcoms" =~ "nvim$" ]]; then
+    # Neovim
+    [[ ! -d "${HOME}/.config" ]] && mkdir -p ~/.config
+    ln -sfv "$runcoms" "${HOME}/.config/nvim"
+  elif [[ "$rcfile" =~ "ssh$" ]]; then
+    # SSH
+    [[ ! -d ~/.ssh ]] && mkdir -p ~/.ssh && chmod 600 ~/.ssh
+    ln -sfv "${rcfile}/config" "${HOME}"/.ssh/config
+  else
+    # Others
+    ln -sfv "$runcoms" "${HOME}/.${runcoms:t}"
+  fi
+done
+
+
+echo "--> setup dein vim plugin"
+if [[ ! -d ~/.cache/dein/repos/github.com/Shougo/dein.vim ]]; then
+  mkdir -p ~/.cache/dein/repos/github.com/Shougo/dein.vim
+  git clone --depth=1 https://github.com/Shougo/dein.vim ~/.cache/dein/repos/github.com/Shougo/dein.vim 
+else
+  pushd ~/.cache/dein/repos/github.com/Shougo/dein.vim
+  git pull
+  popd
+fi
+
+
+echo "--> setup tmux"
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+  git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+else
+  pushd ~/.tmux/plugins/tpm
+  git pull
+  popd
+fi
+
+
+echo "--> setup anyenv"
+CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
+[[ ! -d ~/.anyenv ]] && git clone https://github.com/anyenv/anyenv ~/.anyenv
+[[ ! -d ~/.config/anyenv/anyenv-install ]] && mkdir -p ~/.config/anyenv && git clone https://github.com/anyenv/anyenv-install.git ~/.config/anyenv/anyenv-install
+[[ ! -d "$(anyenv root)/plugins" ]] && mkdir -p $(anyenv root)/plugins && git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+if [[ ! -x "`which anyenv`" ]]; then
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  eval "$(anyenv init -)"
+fi
+yes N | anyenv install rbenv
+yes N | anyenv install pyenv
+yes N | anyenv install nodenv
+
+anyenv update
+VER_NODE="$(nodenv install -l | grep '^16.' | tail -1)"
+
+echo $VER_NODE
+
