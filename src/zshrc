@@ -13,8 +13,9 @@ autoload -Uz _zinit
 ### End of Zinit's installer chunk
 
 # Aliases
-alias q=exit
+alias q="exit"
 alias ls="ls --group-directories-first --color=auto"
+[[ -x "`which htop`" ]] && alias top="htop"
 
 # Functions
 function psx() {  
