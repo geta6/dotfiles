@@ -1,0 +1,72 @@
+#!/bin/zsh
+
+BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
+
+
+echo "--> setup macOS settings"
+[[ ! -d ~/Developer ]] && mkdir ~/Developer
+[[ ! -d ~/Sites ]] && mkdir ~/Sites
+
+cp -f ${BASE_DIR}/lib/com.apple.dock.plist ~/Library/Preferences/com.apple.dock.plist
+killall Dock
+
+cp -f ${BASE_DIR}/lib/com.apple.finder.plist ~/Library/Preferences/com.apple.finder.plist
+killall Finder
+
+if [[ -x `which plutil` ]]; then
+  if [[ -z "$(plutil -extract 'Default Window Settings' xml1 ~/Library/Preferences/com.apple.Terminal.plist -o - | grep Dracula)" ]]; then
+    open ${BASE_DIR}/lib/Dracula.terminal
+  fi
+fi
+
+
+echo "--> setup homebrew"
+[[ ! -x "`which brew`" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install \
+  anyenv \
+  binutils \
+  coreutils \
+  diffutils \
+  direnv \
+  ffmpeg \
+  findutils \
+  gifsicle \
+  git \
+  grep \
+  handbrake \
+  htop \
+  hub \
+  imagemagick \
+  moreutils \
+  neovim \
+  openssl \
+  readline \
+  redis \
+  the_silver_searcher \
+  tig \
+  tmux \
+  unar \
+  yarn \
+  z
+brew tap homebrew/cask-fonts
+brew install --cask \
+  authy \
+  appcleaner \
+  bitwarden \
+  discord \
+  dropbox \
+  figma \
+  fliqlo \
+  font-hack-nerd-font \
+  google-chrome \
+  gyazo \
+  launchbar \
+  ngrok \
+  notion \
+  skitch \
+  slack \
+  spotify \
+  the-unarchiver \
+  transmission \
+  visual-studio-code \
+  webcatalog
