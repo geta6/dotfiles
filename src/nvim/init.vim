@@ -64,10 +64,10 @@ endif
 
 " https://yu8mada.com/2018/08/03/how-to-install-neovim-on-macos-using-homebrew-and-set-it-up-to-make-it-able-to-be-used/
 " :checkhealth to check status
-let g:ruby_host_prog = expand('~/.rbenv/shims/neovim-ruby-host')
+let g:ruby_host_prog = expand('~/.anyenv/envs/rbenv/shims/neovim-ruby-host')
 "let g:node_host_prog
 "let g:python_host_prog
-let g:python3_host_prog = expand('~/.pyenv/shims/python')
+let g:python3_host_prog = expand('~/.anyenv/envs/pyenv/shims/python')
 
 
 " dein
