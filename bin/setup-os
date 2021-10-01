@@ -67,6 +67,6 @@ brew install --cask \
   slack \
   spotify \
   the-unarchiver \
-  transmission \
+  transmit \
   visual-studio-code \
   webcatalog
