@@ -9,7 +9,7 @@
   editor       = nvim
   pager        = less -FXRS -x2
   excludesfile = ~/.gitignore
-  quotepath = false
+  quotepath    = false
 
 [alias]
   a            = add
@@ -67,53 +67,52 @@
   ui           = auto
 
 [color "branch"]
-  current = green bold
-  local = green
-  remote = red bold
+  current      = green bold
+  local        = green
+  remote       = red bold
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
+  meta         = yellow bold
+  frag         = magenta bold
 
 [color "status"]
-  added = green bold
-  changed = yellow bold
-  untracked = red
+  added        = green bold
+  changed      = yellow bold
+  untracked    = red
 
 [color "sh"]
-  branch = yellow
+  branch       = yellow
 
 [apply]
-  whitespace = nowarn
+  whitespace   = nowarn
 
 [status]
-  submodule = 1
+  submodule    = 1
 
 [push]
-  default = current
+  default      = current
 
 [pack]
-  threads = 0
+  threads      = 0
 
 [pull]
-  default = current
+  default      = current
 
 [push]
-  default = current
+  default      = current
 
 [http]
-  sslVerify = false
-  postBuffer = 104857600
+  sslVerify    = false
+  postBuffer   = 104857600
 
 [grep]
-  lineNumber = true
+  lineNumber   = true
 
 [filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+  clean        = git-lfs clean -- %f
+  smudge       = git-lfs smudge -- %f
+  process      = git-lfs filter-process
+  required     = true
 
 [init]
   defaultBranch = main
-
