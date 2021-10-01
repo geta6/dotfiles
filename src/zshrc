@@ -77,10 +77,6 @@ zinit snippet PZTM::gnu-utility
 zinit ice submods'zsh-users/zsh-autosuggestions -> external'
 zinit snippet PZTM::autosuggestions
 
-zinit snippet PZTM::ssh
-zinit snippet PZTM::node
-zinit snippet PZTM::ruby
-
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:utility' safe-ops 'yes'
 
