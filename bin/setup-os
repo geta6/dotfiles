@@ -38,7 +38,6 @@ brew install \
   imagemagick \
   moreutils \
   neovim \
-  openssl \
   readline \
   redis \
   the_silver_searcher \
