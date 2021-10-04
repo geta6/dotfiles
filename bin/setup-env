@@ -4,18 +4,18 @@ BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
 
 echo "--> setup run commands"
-for runcoms in ${BASE_DIR}/src/*; do
-  if [[ "$runcoms" =~ "nvim$" ]]; then
+for runcom in ${BASE_DIR}/src/*; do
+  if [[ "$runcom" =~ "nvim$" ]]; then
     # Neovim
     [[ ! -d "${HOME}/.config/nvim" ]] && mkdir -p ~/.config/nvim
-    ln -sfv "$runcoms/init.vim" "${HOME}/.config/nvim/init.vim"
-  elif [[ "$rcfile" =~ "ssh$" ]]; then
+    ln -sfv "$runcom/init.vim" "${HOME}/.config/nvim/init.vim"
+  elif [[ "$runcom" =~ "ssh$" ]]; then
     # SSH
-    [[ ! -d "${HOME}/.ssh" ]] && mkdir -p ~/.ssh && chmod 600 ~/.ssh
-    ln -sfv "${rcfile}/config" "${HOME}"/.ssh/config
+    [[ ! -d "${HOME}/.ssh/conf.d" ]] && mkdir -p ~/.ssh/conf.d && chmod 600 ~/.ssh
+    ln -sfv "${runcom}/config" "${HOME}"/.ssh/config
   else
     # Others
-    ln -sfv "$runcoms" "${HOME}/.${runcoms:t}"
+    ln -sfv "$runcom" "${HOME}/.${runcom:t}"
   fi
 done
 
@@ -56,11 +56,11 @@ fi
 if [[ ! -x "`which anyenv`" ]]; then
   export PATH="$HOME/.anyenv/bin:$PATH"
 fi
+anyenv update
 yes N | anyenv install nodenv
 yes N | anyenv install rbenv
 yes N | anyenv install pyenv
 
-anyenv update
 
 echo "--> setup node.js"
 VER_NODE="$(nodenv install -l | grep '^16.' | tail -1)"
@@ -90,3 +90,4 @@ if [ -z "$(pip list | grep neovim)" ]; then
   pip install neovim
   pyenv rehash
 fi
+
