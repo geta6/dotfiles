@@ -50,8 +50,8 @@ brew install \
   z
 brew tap homebrew/cask-fonts
 brew install --cask \
-  authy \
   appcleaner \
+  authy \
   bitwarden \
   discord \
   dropbox \
@@ -70,3 +70,4 @@ brew install --cask \
   transmit \
   visual-studio-code \
   webcatalog
+
