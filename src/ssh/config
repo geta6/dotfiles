@@ -1,4 +1,8 @@
+Include conf.d/*
+
 Host *
-  UseKeychain yes
-  AddKeysToAgent yes
   StrictHostKeyChecking no
+  IgnoreUnknown UseKeychain
+  AddKeysToAgent yes
+  UseKeychain yes
+
