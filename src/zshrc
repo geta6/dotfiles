@@ -18,6 +18,11 @@ alias q="exit"
 alias ls="ls --group-directories-first --color=auto"
 [[ -x "`which htop`" ]] && alias top="htop"
 
+# Paths
+if [[ -d "$HOME/Dropbox/geta6/Applications" ]]; then
+  export PATH="$HOME/Dropbox/geta6/Applications:$PATH"
+fi
+
 # Functions
 function psx() {  
   ps ax | grep -v grep | grep -i $1
@@ -25,9 +30,6 @@ function psx() {
 function count() {
   echo $(( `ls -l | wc -l`-1 )) `du -sh $@`
 }                 
-function killgrep() {
-  for p in `ps -ef | grep -v grep | grep "$1" | awk '{ print $2 }'`; kill -s KILL "$p"
-}       
 
 # Chpwd: Show file list after change directory.
 function chpwd {
@@ -67,6 +69,7 @@ zinit light zdharma/history-search-multi-word
 
 # Prezto
 zinit snippet PZTM::helper
+zinit snippet PZTM::history
 zinit snippet PZTM::utility
 zinit snippet PZTM::completion
 zinit snippet PZTM::directory
