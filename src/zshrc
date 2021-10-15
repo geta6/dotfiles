@@ -31,6 +31,18 @@ function count() {
   echo $(( `ls -l | wc -l`-1 )) `du -sh $@`
 }                 
 
+function killgrep() {
+  for p in `ps -ef | grep -v grep | grep "$1" | awk 'NR>1' | awk '{ print $2 }'`; do
+    echo -n "kill: `ps $p | tail -1` [Y/n]:"
+    if read -q; then
+      kill -s KILL "$p"
+      echo ' Kill'
+    else
+      echo ' Abort'
+    fi
+  done
+}       
+
 # Chpwd: Show file list after change directory.
 function chpwd {
   ls -F --group-directories-first --color=auto
