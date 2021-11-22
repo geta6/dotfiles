@@ -21,7 +21,10 @@ fi
 
 
 echo "--> setup homebrew"
-[[ ! -x "`which brew`" ]] && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [[ ! -x "`which brew`" ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+brew tap homebrew/cask-fonts
 brew install \
   anyenv \
   binutils \
@@ -46,13 +49,12 @@ brew install \
   unar \
   yarn \
   z
-brew tap homebrew/cask-fonts
 brew install --cask \
   appcleaner \
   authy \
   bitwarden \
   discord \
-  dropbox \
+  # dropbox \
   figma \
   fliqlo \
   font-hack-nerd-font \
@@ -63,7 +65,7 @@ brew install --cask \
   notion \
   skitch \
   slack \
-  spotify \
+  # spotify \
   the-unarchiver \
   transmit \
   visual-studio-code \

@@ -83,7 +83,7 @@ fi
 
 
 echo "--> setup python"
-VER_PYTN="$(pyenv install --list | tr -d ' ' | grep '^3' | grep -v dev | grep -v b | grep -v rc | tail -1)"
+VER_PYTN="$(pyenv install --list | tr -d ' ' | grep '^3' | grep -v dev | grep -v a | grep -v b | grep -v rc | tail -1)"
 pyenv install -s $VER_PYTN
 pyenv global $VER_PYTN
 if [ -z "$(pip list | grep neovim)" ]; then
