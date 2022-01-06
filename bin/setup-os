@@ -1,7 +1,7 @@
 #!/bin/zsh
 
+set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
-
 
 echo "--> setup macOS settings"
 [[ ! -d ~/Developer ]] && mkdir ~/Developer
@@ -23,8 +23,11 @@ fi
 echo "--> setup homebrew"
 if [[ ! -x "`which brew`" ]]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
 brew tap homebrew/cask-fonts
+
 brew install \
   anyenv \
   binutils \
@@ -39,6 +42,7 @@ brew install \
   htop \
   hub \
   imagemagick \
+  mas \
   moreutils \
   neovim \
   readline \
@@ -49,12 +53,11 @@ brew install \
   unar \
   yarn \
   z
+
 brew install --cask \
   appcleaner \
   authy \
-  bitwarden \
   discord \
-  # dropbox \
   figma \
   fliqlo \
   font-hack-nerd-font \
@@ -65,9 +68,22 @@ brew install --cask \
   notion \
   skitch \
   slack \
-  # spotify \
+  spotify \
   the-unarchiver \
   transmit \
   visual-studio-code \
   webcatalog
+
+echo "--> setup AppStore"
+mas install \
+  441258766  $(: 'Magnet' \ )\
+  955848755  $(: 'Theine' \ )\
+  549083868  $(: 'Display Menu' \ )\
+  1532419400 $(: 'MeetingBar' \ )\
+  539883307  $(: 'LINE' \ )\
+  1352778147 $(: 'Bitwarden' \ )\
+  409183694  $(: 'Keynote' \ )\
+  409201541  $(: 'Pages' \ )\
+  409203825  $(: 'Numbers' \ )\
+  497799835  $(: 'Xcode' \ )
 
