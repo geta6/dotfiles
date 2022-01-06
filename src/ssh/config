@@ -2,7 +2,7 @@ Include conf.d/*
 
 Host *
   StrictHostKeyChecking no
-  IgnoreUnknown UseKeychain
+  IgnoreUnknown UseKeychain,AddKeysToAgent
   AddKeysToAgent yes
   UseKeychain yes
 

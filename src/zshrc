@@ -1,8 +1,8 @@
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -54,10 +54,11 @@ function chpwd {
 # Direnv: Hook envrc file to load custom env.
 [[ -x `which direnv` ]] && eval "$(direnv hook zsh)"
 
+# Homebrew
+[[ -d "/opt/homebrew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Anyenv
-if [[ -x "`which anyenv`" ]]; then
-  eval "$(anyenv init -)"
-fi
+[[ -x "`which anyenv`" ]] && eval "$(anyenv init -)"
 
 # Editor: Use neovim
 export VISUAL="`which nvim`"
@@ -74,24 +75,24 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Plugins
-zinit light zinit-zsh/z-a-submods
+zinit light zdharma-zmirror/z-a-submods
 zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma/fast-syntax-highlighting
-zinit light zdharma/history-search-multi-word
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zdharma-continuum/history-search-multi-word
 
 # Prezto
-zinit snippet PZTM::helper
-zinit snippet PZTM::history
-zinit snippet PZTM::utility
-zinit snippet PZTM::completion
-zinit snippet PZTM::directory
-
 zinit snippet PZTM::osx
 zinit snippet PZTM::homebrew
 zinit snippet PZTM::gnu-utility
 
-zinit ice submods'zsh-users/zsh-autosuggestions -> external'
-zinit snippet PZTM::autosuggestions
+zinit snippet PZTM::helper
+zinit snippet PZTM::utility
+zinit snippet PZTM::history
+zinit snippet PZTM::completion
+zinit snippet PZTM::directory
+
+#zinit ice submods'zsh-users/zsh-autosuggestions -> external'
+#zinit snippet PZTM::autosuggestions
 
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:utility' safe-ops 'yes'
