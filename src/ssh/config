@@ -5,4 +5,3 @@ Host *
   IgnoreUnknown UseKeychain,AddKeysToAgent
   AddKeysToAgent yes
   UseKeychain yes
-

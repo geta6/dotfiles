@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
 
@@ -74,7 +73,7 @@ fi
 
 
 echo "--> setup ruby"
-VER_RUBY="$(rbenv install --list-all | grep '^2.' | grep -v dev | tail -1)"
+VER_RUBY="$(rbenv install --list-all | grep '^3.' | grep -v dev | grep -v preview | tail -1)"
 rbenv install -s $VER_RUBY
 rbenv global $VER_RUBY
 if [ -z "$(gem list | grep neovim)" ]; then
