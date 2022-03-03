@@ -3,6 +3,6 @@
 set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
+
 ${BASE_DIR}/bin/setup-os
 ${BASE_DIR}/bin/setup-env
-

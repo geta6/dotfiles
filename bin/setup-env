@@ -1,9 +1,12 @@
 #!/bin/zsh
 
+set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
 
+#==============================#
 echo "--> setup run commands"
+#==============================#
 for runcom in ${BASE_DIR}/src/*; do
   if [[ "$runcom" =~ "nvim$" ]]; then
     # Neovim
@@ -20,7 +23,9 @@ for runcom in ${BASE_DIR}/src/*; do
 done
 
 
+#==============================#
 echo "--> setup dein vim plugin"
+#==============================#
 if [[ ! -d ~/.cache/dein/repos/github.com/Shougo/dein.vim ]]; then
   mkdir -p ~/.cache/dein/repos/github.com/Shougo/dein.vim
   git clone --depth=1 https://github.com/Shougo/dein.vim ~/.cache/dein/repos/github.com/Shougo/dein.vim 
@@ -31,7 +36,9 @@ else
 fi
 
 
+#==============================#
 echo "--> setup tmux"
+#==============================#
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 else
@@ -41,53 +48,44 @@ else
 fi
 
 
-echo "--> setup anyenv"
-if [[ -x `which anyenv` ]]; then
-  eval "$(anyenv init -)"
-  if [[ ! -d ~/.config/anyenv ]]; then
-    anyenv install --init
+#==============================#
+echo "--> setup asdf plugins"
+#==============================#
+if [[ -x `which asdf` ]]; then
+  if [[ -z "$(asdf plugin list | grep nodejs)" ]]; then
+    asdf plugin-add nodejs
   fi
-  if [[ ! -d "$(anyenv root)/plugins" ]]; then
-    mkdir -p $(anyenv root)/plugins
-    git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
+  if [[ -z "$(asdf plugin list | grep ruby)" ]]; then
+    asdf plugin-add ruby
+  fi
+  if [[ -z "$(asdf plugin list | grep python)" ]]; then
+    asdf plugin-add python
   fi
 fi
 
-if [[ ! -x "`which anyenv`" ]]; then
-  export PATH="$HOME/.anyenv/bin:$PATH"
-fi
-anyenv update
-yes N | anyenv install nodenv
-yes N | anyenv install rbenv
-yes N | anyenv install pyenv
+
+#==============================#
+echo "--> setup asdf plugin nodejs"
+#==============================#
+VER_NODE="$(asdf list all nodejs | grep '^16.' | tail -1)"
+[[ -z "$(asdf list nodejs | grep $VER_NODE)" ]] && asdf install nodejs $VER_NODE
+asdf global nodejs $VER_NODE
+[[ -z "$(npm -g list | grep neovim)" ]] && npm install --global neovim
 
 
-echo "--> setup node.js"
-VER_NODE="$(nodenv install -l | grep '^16.' | tail -1)"
-nodenv install -s $VER_NODE
-nodenv global $VER_NODE
-if [ -z "$(npm -g list | grep neovim)" ]; then
-  npm install --global neovim
-  nodenv rehash
-fi
+#==============================#
+echo "--> setup asdf plugin ruby"
+#==============================#
+VER_RUBY="$(asdf list all ruby | grep '^3.' | grep -v dev | grep -v preview | tail -1)"
+[[ -z "$(asdf list ruby | grep $VER_RUBY)" ]] && asdf install ruby $VER_RUBY
+asdf global ruby $VER_RUBY
+[[ -z "$(gem list | grep neovim)" ]] && gem install neovim
 
 
-echo "--> setup ruby"
-VER_RUBY="$(rbenv install --list-all | grep '^3.' | grep -v dev | grep -v preview | tail -1)"
-rbenv install -s $VER_RUBY
-rbenv global $VER_RUBY
-if [ -z "$(gem list | grep neovim)" ]; then
-  gem install neovim
-  rbenv rehash
-fi
-
-
-echo "--> setup python"
-VER_PYTN="$(pyenv install --list | tr -d ' ' | grep '^3' | grep -v dev | grep -v a | grep -v b | grep -v rc | tail -1)"
-pyenv install -s $VER_PYTN
-pyenv global $VER_PYTN
-if [ -z "$(pip list | grep neovim)" ]; then
-  pip install neovim
-  pyenv rehash
-fi
-
+#==============================#
+echo "--> setup asdf plugin python"
+#==============================#
+VER_PYTN="$(asdf list all python | tr -d ' ' | grep '^3' | grep -v dev | grep -v a | grep -v b | grep -v rc | tail -1)"
+[[ -z "$(asdf list python | grep $VER_PYTN)" ]] && asdf install python $VER_PYTN
+asdf global python $VER_PYTN
+[[ -z "$(pip list | grep neovim)" ]] && pip install neovim
