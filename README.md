@@ -27,12 +27,3 @@ configuration for zsh.
     - `./bin/setup-env` -> setup cli and dev env
     - `./bin/setup` -> short hand of exec both
 
-## Formulas
-
-- anyenv
-  - node.js
-  - ruby
-  - python3
-- neovim
-- tmux
-
