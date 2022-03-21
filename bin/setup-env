@@ -27,8 +27,8 @@ done
 echo "--> setup dein vim plugin"
 #==============================#
 if [[ ! -d ~/.cache/dein/repos/github.com/Shougo/dein.vim ]]; then
-  mkdir -p ~/.cache/dein/repos/github.com/Shougo/dein.vim
-  git clone --depth=1 https://github.com/Shougo/dein.vim ~/.cache/dein/repos/github.com/Shougo/dein.vim 
+  mkdir -p ~/.cache/dein/repos/github.com/Shougo
+  git clone https://github.com/Shougo/dein.vim ~/.cache/dein/repos/github.com/Shougo/dein.vim
 else
   pushd ~/.cache/dein/repos/github.com/Shougo/dein.vim
   git pull

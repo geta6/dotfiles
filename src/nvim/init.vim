@@ -64,10 +64,9 @@ endif
 
 " https://yu8mada.com/2018/08/03/how-to-install-neovim-on-macos-using-homebrew-and-set-it-up-to-make-it-able-to-be-used/
 " :checkhealth to check status
-let g:ruby_host_prog = expand('~/.anyenv/envs/rbenv/shims/neovim-ruby-host')
-"let g:node_host_prog
-"let g:python_host_prog
-let g:python3_host_prog = expand('~/.anyenv/envs/pyenv/shims/python')
+let g:ruby_host_prog = expand('~/.asdf/shims/neovim-ruby-host')
+let g:node_host_prog = expand('~/.asdf/shims/neovim-node-host')
+let g:python3_host_prog = expand('~/.asdf/shims/python')
 
 
 " dein
@@ -77,14 +76,14 @@ if &compatible
   set nocompatible
 endif
 " Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
 
   " https://rcmdnk.com/blog/2017/11/16/computer-vim/
   if ((has('nvim') || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
-    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+    call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim')
   elseif has('lua')
     call dein#add('Shougo/neocomplete.vim')
