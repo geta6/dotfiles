@@ -116,3 +116,13 @@
 
 [init]
   defaultBranch = main
+[protocol "https+iap"]
+	allow = always
+[iap "https://gitlab.tanuking.dev"]
+	helperID = 478993588652-e06ahmlm41j77dff5ra9v4s59n639dg2.apps.googleusercontent.com
+	helperSecret = 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
+	clientID = 478993588652-clavir34gc1oi63rqussmt66mh5kos1n.apps.googleusercontent.com
+[url "https+iap://gitlab.tanuking.dev"]
+	insteadOf = https://gitlab.tanuking.dev
+[http "https://gitlab.tanuking.dev"]
+	cookieFile = ~/.config/gcp-iap/gitlab-tanuking-dev.cookie

@@ -20,13 +20,6 @@ alias ls="ls --group-directories-first --color=auto"
 [[ -x "`which htop`" ]] && alias top="htop"
 
 #==============================#
-# Paths
-#==============================#
-if [[ -d "$HOME/Documents/bin" ]]; then
-  export PATH="$HOME/Documents/bin:$PATH"
-fi
-
-#==============================#
 # Functions
 #==============================#
 function chpwd { # Show file list after change directory (chpwd = native assign).
@@ -51,9 +44,25 @@ function killgrep() { # Kill process by name
 }
 
 #==============================#
+# Paths
+#==============================#
+if [[ -d "$HOME/Documents/bin" ]]; then
+  export PATH="$HOME/Documents/bin:$PATH"
+fi
+
+if [[ -d "$HOME/Library/Android/sdk/platform-tools" ]]; then
+  export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+fi
+
+if [[ -f "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ]]; then
+  source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+fi
+
+#==============================#
 # Z: Tracks your most used directories, based on 'frecency'.
 #==============================#
 [[ -f /usr/local/etc/profile.d/z.sh ]] && . /usr/local/etc/profile.d/z.sh
+[[ -f /opt/homebrew/etc/profile.d/z.sh ]] && . /opt/homebrew/etc/profile.d/z.sh
 
 #==============================#
 # Direnv: Hook envrc file to load custom env.
