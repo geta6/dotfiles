@@ -54,8 +54,12 @@ if [[ -d "$HOME/Library/Android/sdk/platform-tools" ]]; then
   export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
 fi
 
-if [[ -f "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ]]; then
-  source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+if [[ -f "/opt/homebrew/share/google-cloud-sdk/path.zsh.inc" ]]; then
+  source "/opt/homebrew/share/google-cloud-sdk/path.zsh.inc"
+fi
+
+if [[ -f "/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc" ]]; then
+  source "/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
 #==============================#
@@ -67,12 +71,17 @@ fi
 #==============================#
 # Direnv: Hook envrc file to load custom env.
 #==============================#
-[[ -x `which direnv` ]] && eval "$(direnv hook zsh)"
+[[ -x "$(which direnv)" ]] && eval "$(direnv hook zsh)"
 
 #==============================#
 # Homebrew: Setup environment.
 #==============================#
 [[ -d "/opt/homebrew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+#==============================#
+# GCloud: Optimize bandwidth with NumPy.
+#==============================#
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
 
 #==============================#
 # Editor: Use neovim

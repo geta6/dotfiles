@@ -50,8 +50,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     mas \
     moreutils \
     neovim \
-    readline \
-    redis \
     the_silver_searcher \
     tig \
     tmux \
@@ -65,14 +63,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     authy \
     discord \
     figma \
-    fliqlo \
     font-hack-nerd-font \
     google-chrome \
-    gyazo \
     launchbar \
     ngrok \
     notion \
     rectangle-pro \
+    resolutionator \
     skitch \
     slack \
     spotify \
@@ -86,16 +83,17 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "--> setup AppStore"
   #==============================#
   mas install \
-    955848755  $(: 'Theine' \ )\
-    549083868  $(: 'Display Menu' \ )\
-    1532419400 $(: 'MeetingBar' \ )\
-    539883307  $(: 'LINE' \ )\
-    1352778147 $(: 'Bitwarden' \ )\
-    409183694  $(: 'Keynote' \ )\
-    409201541  $(: 'Pages' \ )\
-    409203825  $(: 'Numbers' \ )\
-    497799835  $(: 'Xcode' \ )
-else if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    409183694  $(: 'Keynote' \ ) \
+    409201541  $(: 'Pages' \ ) \
+    409203825  $(: 'Numbers' \ ) \
+    497799835  $(: 'Xcode' \ ) \
+    539883307  $(: 'LINE' \ ) \
+    955848755  $(: 'Theine' \ ) \
+    1352778147 $(: 'Bitwarden' \ ) \
+    1532419400 $(: 'MeetingBar' \ )
+
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+
   #==============================#
   echo "--> setup linux settings"
   #==============================#
@@ -110,6 +108,7 @@ else if [[ "$OSTYPE" == "linux-gnu" ]]; then
     tig \
     tmux \
     yarn
+
 else
   echo 'Not compatible'
   exit 1
