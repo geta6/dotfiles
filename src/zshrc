@@ -13,41 +13,10 @@ autoload -Uz _zinit
 ### End of Zinit's installer chunk
 
 #==============================#
-# Aliases
-#==============================#
-alias q="exit"
-alias ls="ls --group-directories-first --color=auto"
-[[ -x "`which htop`" ]] && alias top="htop"
-
-#==============================#
-# Functions
-#==============================#
-function chpwd { # Show file list after change directory (chpwd = native assign).
-  ls -F --group-directories-first --color=auto
-}
-function psx() { # Grep process by name
-  ps ax | grep -v grep | grep -i $1
-}
-function count() { # Count size in current directory
-  echo $(( `ls -l | wc -l`-1 )) `du -sh $@`
-}
-function killgrep() { # Kill process by name
-  for p in `ps -ef | grep -v grep | grep "$1" | awk 'NR>1' | awk '{ print $2 }'`; do
-    echo -n "kill: `ps $p | tail -1` [Y/n]:"
-    if read -q; then
-      kill -s KILL "$p"
-      echo ' Kill'
-    else
-      echo ' Abort'
-    fi
-  done
-}
-
-#==============================#
 # Paths
 #==============================#
-if [[ -d "$HOME/Documents/bin" ]]; then
-  export PATH="$HOME/Documents/bin:$PATH"
+if [[ -d "$HOME/Documents/Applications" ]]; then
+  export PATH="$HOME/Documents/Applications:$PATH"
 fi
 
 if [[ -d "$HOME/Library/Android/sdk/platform-tools" ]]; then
@@ -69,11 +38,6 @@ fi
 [[ -f /opt/homebrew/etc/profile.d/z.sh ]] && . /opt/homebrew/etc/profile.d/z.sh
 
 #==============================#
-# Direnv: Hook envrc file to load custom env.
-#==============================#
-[[ -x "$(which direnv)" ]] && eval "$(direnv hook zsh)"
-
-#==============================#
 # Homebrew: Setup environment.
 #==============================#
 [[ -d "/opt/homebrew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -91,6 +55,11 @@ export EDITOR="`which nvim`"
 export SUDO_EDITOR="`which nvim`"
 [[ -x "`which nvim`" ]] && alias vi=nvim
 [[ -x "`which nvim`" ]] && alias vim=nvim
+
+#==============================#
+# Direnv: Hook envrc file to load custom env.
+#==============================#
+[[ -x "$(which direnv)" ]] && eval "$(direnv hook zsh)"
 
 #==============================#
 # Prompt: Powerlevel10k
@@ -127,3 +96,42 @@ zinit snippet PZTM::completion
 zinit snippet PZTM::directory
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:utility' safe-ops 'yes'
+
+#==============================#
+# Aliases
+#==============================#
+alias q="exit"
+alias ls="ls --group-directories-first --color=auto"
+[[ -x "`which htop`" ]] && alias top="htop"
+[[ -x "`which trash`" ]] && alias rm="trash"
+
+#==============================#
+# Functions
+#==============================#
+function chpwd { # Show file list after change directory (chpwd = native assign).
+  ls -F --group-directories-first --color=auto
+}
+function psx() { # Grep process by name
+  ps ax | grep -v grep | grep -i $1
+}
+function count() { # Count size in current directory
+  echo $(( `ls -l | wc -l`-1 )) `du -sh $@`
+}
+function killgrep() { # Kill process by name
+  for p in `ps -ef | grep -v grep | grep "$1" | awk 'NR>1' | awk '{ print $2 }'`; do
+    echo -n "kill: `ps $p | tail -1` [Y/n]:"
+    if read -q; then
+      kill -s KILL "$p"
+      echo ' Kill'
+    else
+      echo ' Abort'
+    fi
+  done
+}
+
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/geta6/.dart-cli-completion/zsh-config.zsh ]] && . /Users/geta6/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

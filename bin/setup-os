@@ -50,10 +50,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     mas \
     moreutils \
     neovim \
+    redis \
+    svgo \
     the_silver_searcher \
     tig \
     tmux \
+    trash \
     unar \
+    wget \
     yarn \
     z
 
