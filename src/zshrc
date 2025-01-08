@@ -59,11 +59,17 @@ export CLOUDSDK_PYTHON_SITEPACKAGES=1
 # ----------------------------
 # Editor
 # ----------------------------
-export VISUAL="`which nvim`"
-export EDITOR="`which nvim`"
-export SUDO_EDITOR="`which nvim`"
-[[ -x "`which nvim`" ]] && alias vi=nvim
-[[ -x "`which nvim`" ]] && alias vim=nvim
+if [[ -x "`which nvim`" ]]; then
+  export VISUAL="`which nvim`"
+  export EDITOR="`which nvim`"
+  export SUDO_EDITOR="`which nvim`"
+  alias vi=nvim
+  alias vim=nvim
+else
+  export VISUAL="`which vi`"
+  export EDITOR="`which vi`"
+  export SUDO_EDITOR="`which vi`"
+fi
 
 # ----------------------------
 # Paths
