@@ -80,6 +80,8 @@ fi
 # Aliases
 # ----------------------------
 alias q="exit"
+alias ll="ls -l"
+alias la="ls -la"
 [[ -x "`which gls`" ]] && alias ls="gls --group-directories-first --color=auto"
 [[ -x "`which htop`" ]] && alias top="htop"
 [[ -x "`which trash`" ]] && alias rm="trash"
