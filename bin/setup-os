@@ -11,4 +11,3 @@ else
   echo 'Not compatible'
   exit 1
 fi
-

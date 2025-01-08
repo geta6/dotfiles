@@ -11,6 +11,10 @@ if [[ ! -x `which asdf` ]]; then
 fi
 
 VER_NODE="$(asdf list all nodejs | grep -v lts | tail -1)"
-[[ -z "$(asdf list nodejs | grep $VER_NODE)" ]] && asdf install nodejs $VER_NODE
+if [[ -z "$(asdf list nodejs | grep $VER_NODE)" ]]; then
+  TMPDIR=$(mktemp -d)
+  npx -p @nodenv/node-build-update-defs nodenv-update-version-defs -f -d $TMPDIR
+  NODE_BUILD_DEFINITIONS=$TMPDIR asdf install nodejs $VER_NODE
+fi
 asdf global nodejs $VER_NODE
 [[ -z "$(npm -g list | grep neovim)" ]] && npm install --global neovim
