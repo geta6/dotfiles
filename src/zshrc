@@ -36,9 +36,11 @@ zinit light zdharma/history-search-multi-word
 zinit light zdharma-zmirror/z-a-submods
 zinit light asdf-vm/asdf
 
-# zinit light zsh-users/zsh-autosuggestions
-# zinit light zdharma-continuum/fast-syntax-highlighting
-# zinit light zdharma-continuum/history-search-multi-word
+# ----------------------------
+# Paths
+# ----------------------------
+[[ -d "$HOME/Documents/Applications" ]] && export PATH="$HOME/Documents/Applications:$PATH"
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 
 # ----------------------------
 # Packages
@@ -71,12 +73,6 @@ else
   export EDITOR="`which vi`"
   export SUDO_EDITOR="`which vi`"
 fi
-
-# ----------------------------
-# Paths
-# ----------------------------
-[[ -d "$HOME/Documents/Applications" ]] && export PATH="$HOME/Documents/Applications:$PATH"
-[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 
 # ----------------------------
 # Aliases
