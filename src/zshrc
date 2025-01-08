@@ -83,7 +83,12 @@ fi
 alias q="exit"
 alias ll="ls -l"
 alias la="ls -la"
-[[ -x "`which gls`" ]] && alias ls="gls --group-directories-first --color=auto"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  [[ -x "`which gls`" ]] && alias ls="gls --group-directories-first --color=auto"
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias ls="gls --group-directories-first --color=auto"
+fi
+
 [[ -x "`which htop`" ]] && alias top="htop"
 [[ -x "`which trash`" ]] && alias rm="trash"
 
