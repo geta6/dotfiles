@@ -17,8 +17,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   killall Finder
 
   if [[ -x `which plutil` ]]; then
-    if [[ -z "$(plutil -extract 'Default Window Settings' xml1 ~/Library/Preferences/com.apple.Terminal.plist -o - | grep Dracula)" ]]; then
-      open ${BASE_DIR}/lib/Dracula.terminal
+    if [[ -z "$(plutil -extract 'Default Window Settings' xml1 ~/Library/Preferences/com.apple.Terminal.plist -o - | grep Iceberg)" ]]; then
+      open ${BASE_DIR}/lib/Iceberg.terminal
     fi
   fi
 

@@ -10,8 +10,8 @@ echo "--> setup run commands"
 for runcom in ${BASE_DIR}/src/*; do
   if [[ "$runcom" =~ "nvim$" ]]; then
     # Neovim
-    [[ ! -d "${HOME}/.config/nvim" ]] && mkdir -p ~/.config/nvim
-    ln -sfv "$runcom/init.vim" "${HOME}/.config/nvim/init.vim"
+    [[ -d "${HOME}/.config/nvim" ]] && rm -rf  ~/.config/nvim
+    ln -sfv "$runcom" "${HOME}/.config/nvim"
   elif [[ "$runcom" =~ "ssh$" ]]; then
     # SSH
     [[ ! -d "${HOME}/.ssh/conf.d" ]] && mkdir -p ~/.ssh/conf.d && chmod 700 ~/.ssh
@@ -21,31 +21,6 @@ for runcom in ${BASE_DIR}/src/*; do
     ln -sfv "$runcom" "${HOME}/.${runcom:t}"
   fi
 done
-
-
-#==============================#
-echo "--> setup dein vim plugin"
-#==============================#
-if [[ ! -d ~/.cache/dein/repos/github.com/Shougo/dein.vim ]]; then
-  mkdir -p ~/.cache/dein/repos/github.com/Shougo
-  git clone https://github.com/Shougo/dein.vim ~/.cache/dein/repos/github.com/Shougo/dein.vim
-else
-  pushd ~/.cache/dein/repos/github.com/Shougo/dein.vim
-  git pull
-  popd
-fi
-
-
-#==============================#
-echo "--> setup tmux"
-#==============================#
-if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-  git clone --depth=1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-else
-  pushd ~/.tmux/plugins/tpm
-  git pull
-  popd
-fi
 
 
 #==============================#
