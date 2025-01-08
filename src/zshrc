@@ -76,6 +76,7 @@ fi
 # Paths
 # ----------------------------
 [[ -d "$HOME/Documents/Applications" ]] && export PATH="$HOME/Documents/Applications:$PATH"
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 
 # ----------------------------
 # Aliases
