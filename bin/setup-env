@@ -3,7 +3,6 @@
 set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
-
 #==============================#
 echo "--> setup run commands"
 #==============================#
@@ -14,53 +13,13 @@ for runcom in ${BASE_DIR}/src/*; do
     ln -sfv "$runcom" "${HOME}/.config/nvim"
   elif [[ "$runcom" =~ "ssh$" ]]; then
     # SSH
-    [[ ! -d "${HOME}/.ssh/conf.d" ]] && mkdir -p ~/.ssh/conf.d && chmod 700 ~/.ssh
+    [[ ! -d "${HOME}/.ssh/conf.d" ]] && mkdir -p ~/.ssh/conf.d
     ln -sfv "${runcom}/config" "${HOME}"/.ssh/config
+    chmod 700 ~/.ssh
+    chmod 700 ~/.ssh/conf.d
+    chmod 600 ~/.ssh/config
   else
     # Others
     ln -sfv "$runcom" "${HOME}/.${runcom:t}"
   fi
 done
-
-
-#==============================#
-echo "--> setup asdf plugins"
-#==============================#
-if [[ -x `which asdf` ]]; then
-  if [[ -z "$(asdf plugin list | grep nodejs)" ]]; then
-    asdf plugin-add nodejs
-  fi
-  if [[ -z "$(asdf plugin list | grep ruby)" ]]; then
-    asdf plugin-add ruby
-  fi
-  if [[ -z "$(asdf plugin list | grep python)" ]]; then
-    asdf plugin-add python
-  fi
-fi
-
-
-#==============================#
-echo "--> setup asdf plugin nodejs"
-#==============================#
-VER_NODE="$(asdf list all nodejs | grep '^16.' | tail -1)"
-[[ -z "$(asdf list nodejs | grep $VER_NODE)" ]] && asdf install nodejs $VER_NODE
-asdf global nodejs $VER_NODE
-[[ -z "$(npm -g list | grep neovim)" ]] && npm install --global neovim
-
-
-#==============================#
-echo "--> setup asdf plugin ruby"
-#==============================#
-VER_RUBY="$(asdf list all ruby | grep '^3.' | grep -v dev | grep -v preview | tail -1)"
-[[ -z "$(asdf list ruby | grep $VER_RUBY)" ]] && asdf install ruby $VER_RUBY
-asdf global ruby $VER_RUBY
-[[ -z "$(gem list | grep neovim)" ]] && gem install neovim
-
-
-#==============================#
-echo "--> setup asdf plugin python"
-#==============================#
-VER_PYTN="$(asdf list all python | tr -d ' ' | grep '^3' | grep -v dev | grep -v a | grep -v b | grep -v rc | tail -1)"
-[[ -z "$(asdf list python | grep $VER_PYTN)" ]] && asdf install python $VER_PYTN
-asdf global python $VER_PYTN
-[[ -z "$(pip list | grep neovim)" ]] && pip install neovim

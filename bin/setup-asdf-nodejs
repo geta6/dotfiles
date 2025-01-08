@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+set -eu
+
+#==============================#
+echo "--> setup asdf plugin nodejs"
+#==============================#
+if [[ ! -x `which asdf` ]]; then
+  echo 'asdf not installed'
+  exit 1
+fi
+
+VER_NODE="$(asdf list all nodejs | grep -v lts | tail -1)"
+[[ -z "$(asdf list nodejs | grep $VER_NODE)" ]] && asdf install nodejs $VER_NODE
+asdf global nodejs $VER_NODE
+[[ -z "$(npm -g list | grep neovim)" ]] && npm install --global neovim

@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+set -eu
+BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
+
+#==============================#
+echo "--> setup asdf plugins"
+#==============================#
+if [[ -x `which asdf` ]]; then
+  if [[ -z "$(asdf plugin list | grep nodejs)" ]]; then
+    asdf plugin-add nodejs
+  fi
+  if [[ -z "$(asdf plugin list | grep ruby)" ]]; then
+    asdf plugin-add ruby
+  fi
+  if [[ -z "$(asdf plugin list | grep python)" ]]; then
+    asdf plugin-add python
+  fi
+fi
+
+${BASE_DIR}/bin/setup-asdf-nodejs
+${BASE_DIR}/bin/setup-asdf-python
+${BASE_DIR}/bin/setup-asdf-ruby

@@ -1,0 +1,100 @@
+#!/bin/zsh
+
+set -eu
+BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
+
+#==============================#
+echo "--> setup macOS settings"
+#==============================#
+[[ ! -d ~/Developer ]] && mkdir ~/Developer
+[[ ! -d ~/Sites ]] && mkdir ~/Sites
+
+cp -f ${BASE_DIR}/lib/com.apple.dock.plist ~/Library/Preferences/com.apple.dock.plist
+killall Dock
+
+cp -f ${BASE_DIR}/lib/com.apple.finder.plist ~/Library/Preferences/com.apple.finder.plist
+killall Finder
+
+if [[ -x `which plutil` ]]; then
+  if [[ -z "$(plutil -extract 'Default Window Settings' xml1 ~/Library/Preferences/com.apple.Terminal.plist -o - | grep Iceberg)" ]]; then
+    open ${BASE_DIR}/lib/Iceberg.terminal
+  fi
+fi
+
+#==============================#
+echo "--> setup homebrew"
+#==============================#
+if [[ ! -x "`which brew`" ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+brew install \
+  binutils \
+  coreutils \
+  diffutils \
+  direnv \
+  ffmpeg \
+  findutils \
+  gifsicle \
+  git \
+  grep \
+  handbrake \
+  htop \
+  hub \
+  imagemagick \
+  mas \
+  moreutils \
+  neovim \
+  redis \
+  svgo \
+  the_silver_searcher \
+  tig \
+  tmux \
+  trash \
+  unar \
+  wget \
+  yarn \
+  z
+
+brew install --cask \
+  ankerwork \
+  appcleaner \
+  discord \
+  figma \
+  fliqlo \
+  font-hack-nerd-font \
+  google-chrome \
+  google-cloud-sdk \
+  google-drive \
+  kindle \
+  launchbar \
+  loopback \
+  macmediakeyforwarder \
+  monitorcontrol \
+  notion \
+  rectangle-pro \
+  resolutionator \
+  skitch \
+  slack \
+  spotify \
+  the-unarchiver \
+  transmission \
+  transmit \
+  visual-studio-code \
+  webcatalog
+
+
+#==============================#
+echo "--> setup AppStore"
+#==============================#
+mas install \
+  409183694  $(: 'Keynote' \ ) \
+  409201541  $(: 'Pages' \ ) \
+  409203825  $(: 'Numbers' \ ) \
+  497799835  $(: 'Xcode' \ ) \
+  539883307  $(: 'LINE' \ ) \
+  955848755  $(: 'Theine' \ ) \
+  1295203466 $(: 'Windows App ' \ ) \
+  1463298887 $(: 'Userscripts' \ ) \
+  1532419400 $(: 'MeetingBar' \ )

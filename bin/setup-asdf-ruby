@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+set -eu
+
+#==============================#
+echo "--> setup asdf plugin ruby"
+#==============================#
+if [[ ! -x `which asdf` ]]; then
+  echo 'asdf not installed'
+  exit 1
+fi
+
+VER_RUBY="$(asdf list all ruby | grep '^3.' | grep -v dev | grep -v preview | tail -1)"
+[[ -z "$(asdf list ruby | grep $VER_RUBY)" ]] && asdf install ruby $VER_RUBY
+asdf global ruby $VER_RUBY
+[[ -z "$(gem list | grep neovim)" ]] && gem install neovim

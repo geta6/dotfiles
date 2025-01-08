@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+set -eu
+
+#==============================#
+echo "--> setup asdf plugin python"
+#==============================#
+if [[ ! -x `which asdf` ]]; then
+  echo 'asdf not installed'
+  exit 1
+fi
+
+VER_PYTN="$(asdf list all python | tr -d ' ' | grep '^3' | grep -v dev | grep -v t | grep -v a | grep -v b | grep -v rc | tail -1)"
+[[ -z "$(asdf list python | grep $VER_PYTN)" ]] && asdf install python $VER_PYTN
+asdf global python $VER_PYTN
+[[ -z "$(pip list | grep neovim)" ]] && pip install neovim
