@@ -33,10 +33,10 @@ require("lazy").setup({
       end,
     },
     {
-      'vim-airline/vim-airline',               -- vim-airline のリポジトリ
-      dependencies = { 'gkeep/iceberg-dark' }, -- オプションでテーマも追加
+      'vim-airline/vim-airline',                           -- vim-airline のリポジトリ
+      dependencies = { 'vim-airline/vim-airline-themes' }, -- オプションでテーマも追加
       config = function()
-        vim.g.airline_theme = 'icebergDark'
+        vim.g.airline_theme = 'iceberg'
       end,
     },
     {
@@ -83,9 +83,6 @@ require("lazy").setup({
         require('lspconfig').ts_ls.setup({}) -- TypeScript用LSP
       end,
     },
-    -- { 'vim-syntastic/syntastic' },
-    -- { 'editorconfig/editorconfig-vim' },
-    -- { 'leafgarland/typescript-vim' },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
