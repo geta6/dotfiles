@@ -41,6 +41,8 @@ zinit light asdf-vm/asdf
 # ----------------------------
 [[ -d "$HOME/Documents/Applications" ]] && export PATH="$HOME/Documents/Applications:$PATH"
 [[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
+[[ -d "$HOME/opt/nvim-linux64/bin" ]] && export PATH="$HOME/opt/nvim-linux64/bin:$PATH"
+[[ -d "/opt/nvim-linux64/bin" ]] && export PATH="/opt/nvim-linux64/bin:$PATH"
 
 # ----------------------------
 # Packages
