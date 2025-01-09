@@ -39,6 +39,53 @@ require("lazy").setup({
         vim.g.airline_theme = 'icebergDark'
       end,
     },
+    {
+      'airblade/vim-gitgutter',
+      config = function()
+        vim.opt.updatetime = 250
+        vim.cmd('hi GitGutterAdd ctermfg=darkgreen')
+        vim.cmd('hi GitGutterChange ctermfg=yellow')
+        vim.cmd('hi GitGutterDelete ctermfg=darkred')
+      end
+    },
+    {
+      'hrsh7th/nvim-cmp',
+      dependencies = {
+        'hrsh7th/cmp-nvim-lsp', -- LSP ソース
+        'hrsh7th/cmp-path',     -- ファイルパス補完
+        'hrsh7th/cmp-buffer',   -- バッファ補完
+        'hrsh7th/cmp-vsnip',    -- スニペット補完
+        'hrsh7th/vim-vsnip',    -- スニペットエンジン
+      },
+      config = function()
+        local cmp = require('cmp')
+        cmp.setup({
+          snippet = {
+            expand = function(args)
+              vim.fn["vsnip#anonymous"](args.body) -- スニペット設定
+            end,
+          },
+          mapping = cmp.mapping.preset.insert({
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Enterで補完確定
+          }),
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' }, -- LSPを使った補完
+            { name = 'path' },     -- ファイルパス補完
+            { name = 'buffer' },   -- バッファ補完
+          }),
+        })
+      end,
+    },
+    {
+      'neovim/nvim-lspconfig',
+      config = function()
+        require('lspconfig').ts_ls.setup({}) -- TypeScript用LSP
+      end,
+    },
+    -- { 'vim-syntastic/syntastic' },
+    -- { 'editorconfig/editorconfig-vim' },
+    -- { 'leafgarland/typescript-vim' },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.

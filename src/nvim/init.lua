@@ -1,11 +1,11 @@
 --
 -- Basics
 --
-vim.scriptencoding = "utf-8"
-vim.opt.fileencodings = "utf-8"
-vim.opt.fileformats = { "unix", "dos" }
-vim.opt.encoding = "utf-8"
-vim.opt.fileformat = "unix"
+vim.scriptencoding = 'utf-8'
+vim.opt.fileencodings = 'utf-8'
+vim.opt.fileformats = { 'unix', 'dos' }
+vim.opt.encoding = 'utf-8'
+vim.opt.fileformat = 'unix'
 
 vim.opt.backup = false
 vim.opt.swapfile = false
@@ -16,16 +16,16 @@ vim.opt.showcmd = true
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
-vim.opt.virtualedit = "onemore"
+vim.opt.virtualedit = 'onemore'
 vim.opt.smartindent = true
 vim.opt.visualbell = true
 vim.opt.showmatch = true
 vim.opt.laststatus = 2
-vim.opt.wildmode = "list:longest"
+vim.opt.wildmode = 'list:longest'
 vim.opt.title = true
 
 vim.opt.list = true
-vim.opt.listchars = "tab:> ,"
+vim.opt.listchars = 'tab:> ,'
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -37,7 +37,7 @@ vim.opt.wrapscan = true
 vim.opt.hlsearch = true
 vim.opt.autoindent = false
 
-vim.opt.ambiwidth = "double"
+vim.opt.ambiwidth = 'double'
 vim.opt.matchtime = 1
 vim.opt.ruler = true
 vim.opt.number = true
@@ -47,28 +47,37 @@ vim.opt.history = 1000
 vim.opt.wrap = false
 vim.opt.wildmenu = true
 vim.opt.wildchar = ('\t'):byte()
-vim.opt.complete:append("k")
+vim.opt.complete:append('k')
 vim.opt.lazyredraw = true
-vim.opt.backspace = { "indent", "eol", "start" }
+vim.opt.backspace = { 'indent', 'eol', 'start' }
 
 vim.keymap.set('n', ';', ':')
 vim.api.nvim_set_keymap('n', '<ESC><ESC>', ':nohlsearch<CR><ESC>', { noremap = true, silent = true })
 
-vim.cmd("filetype plugin indent on")
-vim.cmd("syntax enable")
+vim.cmd('filetype plugin indent on')
+vim.cmd('syntax enable')
 
-if not vim.fn.has("gui_running") then
+if not vim.fn.has('gui_running') then
   vim.opt.t_Co = 256
+end
+
+if vim.fn.has('persistent_undo') then
+  vim.opt.undofile = true
+  vim.opt.undodir = vim.fn.expand("$HOME/.vim/undo")
+end
+
+if vim.opt.compatible then
+  vim.opt.compatible = false
 end
 
 --
 -- Paths
 --
-vim.g.ruby_host_prog = vim.fn.expand("~/.asdf/shims/neovim-ruby-host")
-vim.g.node_host_prog = vim.fn.expand("~/.asdf/shims/neovim-node-host")
+vim.g.ruby_host_prog = vim.fn.expand('~/.asdf/shims/neovim-ruby-host')
+vim.g.node_host_prog = vim.fn.expand('~/.asdf/shims/neovim-node-host')
 vim.g.python3_host_prog = vim.fn.expand('~/.asdf/shims/python')
 
 --
 -- Lazy Plugin Manager
 --
-require("config.lazy")
+require('config.lazy')
