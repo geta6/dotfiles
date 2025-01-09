@@ -1,6 +1,0 @@
-{
-  "iceberg-dark": { "branch": "master", "commit": "22c19b73e226d9eaafb088f464331fae54dfeda5" },
-  "iceberg.vim": { "branch": "master", "commit": "23835d5ed696436f716cbfdb56a93a7850fe3b18" },
-  "lazy.nvim": { "branch": "main", "commit": "d8f26efd456190241afd1b0f5235fe6fdba13d4a" },
-  "vim-airline": { "branch": "master", "commit": "7a552f415c48aed33bf7eaa3c50e78504d417913" }
-}
