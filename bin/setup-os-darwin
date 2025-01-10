@@ -40,7 +40,6 @@ brew install \
   direnv \
   ffmpeg \
   findutils \
-  fzf \
   gifsicle \
   git \
   grep \

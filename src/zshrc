@@ -4,19 +4,20 @@
 HISTFILE=~/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=10000
-zstyle ':completion:*:default' menu select=1
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# zstyle ':completion:*:default' menu select=1
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
 setopt AUTO_CD
 
 # ----------------------------
 # Added by Zinit's installer
 # ----------------------------
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
+  print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+  command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+  command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+    print -P "%F{33} %F{34}Installation successful.%f%b" || \
+    print -P "%F{160} The clone has failed.%f%b"
 fi
 
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
@@ -32,10 +33,12 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zdharma/history-search-multi-word
-zinit light Aloxaf/fzf-tab
-
 zinit light zdharma-zmirror/z-a-submods
 zinit light asdf-vm/asdf
+
+zinit ice from"gh-r" as"program" atclone"./install --all --no-bash --no-zsh --no-fish" atpull"%atclone" pick"bin/fzf"
+zinit load junegunn/fzf
+zinit light Aloxaf/fzf-tab
 
 # ----------------------------
 # Paths
