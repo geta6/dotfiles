@@ -21,25 +21,17 @@ if [[ "$OSTYPE" != "linux-gnu" ]]; then
 fi
 
 #==============================#
-echo "--> setup nvim"
+echo "--> setup homebrew"
 #==============================#
-
-NVIM_RELEASE_URL="https://api.github.com/repos/neovim/neovim/releases/latest"
-NVIM_LATEST_VERSION=$(curl -s "$NVIM_RELEASE_URL" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | tr -d 'v')
-NVIM_INSTALLED_VERSION=$(command -v nvim >/dev/null 2>&1 && nvim --version | head -n 1 | awk '{print $2}' | tr -d 'v' || echo "none")
-
-echo "Installed version: $NVIM_INSTALLED_VERSION"
-echo "Latest version: $NVIM_LATEST_VERSION"
-
-if [[ "$NVIM_INSTALLED_VERSION" == "none" || "$NVIM_INSTALLED_VERSION" != "$NVIM_LATEST_VERSION" ]]; then
-  NVIM_LATEST_URL=$(curl -s "$NVIM_RELEASE_URL" | grep "browser_download_url" | grep "linux64.tar.gz" | grep -v ".sha256sum" | cut -d '"' -f 4)
-  if [[ -z "$NVIM_LATEST_URL" ]]; then
-    echo "Failed to fetch the latest release URL."
-    return 1
-  fi
-  [[ ! -d "$HOME/opt" ]] && mkdir "$HOME/opt"
-  curl -L "$NVIM_LATEST_URL" -o "$HOME/opt/nvim.tar.gz"
-  tar -xzf "$HOME/opt/nvim.tar.gz" -C "$HOME/opt/"
-else
-  echo "Neovim is already up-to-date."
+if [[ ! -x "`which brew`" ]]; then
+  git clone https://github.com/Homebrew/brew.git ~/.linuxbrew/
+  eval "$(~/.linuxbrew/bin/brew shellenv)"
 fi
+
+brew install \
+  direnv \
+  fzf \
+  htop \
+  neovim \
+  yarn \
+  z

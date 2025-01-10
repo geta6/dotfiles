@@ -36,9 +36,6 @@ zinit light zsh-users/zsh-completions
 zinit light zdharma/history-search-multi-word
 zinit light zdharma-zmirror/z-a-submods
 zinit light asdf-vm/asdf
-
-zinit ice from"gh-r" as"program" atclone"./install --all --no-bash --no-zsh --no-fish" atpull"%atclone" pick"bin/fzf"
-zinit load junegunn/fzf
 zinit light Aloxaf/fzf-tab
 
 # ----------------------------
