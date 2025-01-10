@@ -32,6 +32,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zdharma/history-search-multi-word
+zinit light Aloxaf/fzf-tab
 
 zinit light zdharma-zmirror/z-a-submods
 zinit light asdf-vm/asdf

@@ -1,13 +1,32 @@
 #!/bin/zsh
 
-set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   ${BASE_DIR}/bin/setup-os-darwin
-elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-  ${BASE_DIR}/bin/setup-os-linux
+
+elif [[ "$OSTYPE" == "linux"* ]]; then
+  if command -v lsb_release >/dev/null 2>&1; then
+    DISTRO=$(lsb_release -si)
+  elif [[ -f /etc/os-release ]]; then
+    DISTRO=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d '"')
+  else
+    echo "Could not determine the Linux distribution."
+    return 1
+  fi
+
+  if [[ "$DISTRO" == "Ubuntu" || "$DISTRO" == "Debian" ]]; then
+    if sudo -n -v 2>/dev/null; then
+      ${BASE_DIR}/bin/setup-os-debian
+    else
+      ${BASE_DIR}/bin/setup-os-debian-local
+    fi
+  else
+    echo "This script only supports Debian-based systems (Debian, Ubuntu)."
+    return 1
+  fi
+
 else
-  echo 'Not compatible'
-  exit 1
+  echo "This script does not support the operating system: $OSTYPE"
+  return 1
 fi

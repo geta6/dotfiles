@@ -1,11 +1,15 @@
 #!/bin/zsh
 
-set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
 #==============================#
 echo "--> setup macOS settings"
 #==============================#
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  echo 'This script only supports macOS.'
+  return 0
+fi
+
 [[ ! -d ~/Developer ]] && mkdir ~/Developer
 [[ ! -d ~/Sites ]] && mkdir ~/Sites
 
@@ -36,6 +40,7 @@ brew install \
   direnv \
   ffmpeg \
   findutils \
+  fzf \
   gifsicle \
   git \
   grep \

@@ -1,0 +1,45 @@
+#!/bin/zsh
+
+BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
+
+#==============================#
+echo "--> setup linux settings"
+#==============================#
+if [[ "$OSTYPE" != "linux-gnu" ]]; then
+  if command -v lsb_release >/dev/null 2>&1; then
+    DISTRO=$(lsb_release -si)
+  elif [[ -f /etc/os-release ]]; then
+    DISTRO=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d '"')
+  else
+    echo 'This script only supports Linux.'
+    return 1
+  fi
+  if [[ "$DISTRO" != "Debian" && "$DISTRO" != "Ubuntu" ]]; then
+    echo 'This script only supports Debian or Ubuntu.'
+    return 1
+  fi
+fi
+
+#==============================#
+echo "--> setup nvim"
+#==============================#
+
+NVIM_RELEASE_URL="https://api.github.com/repos/neovim/neovim/releases/latest"
+NVIM_LATEST_VERSION=$(curl -s "$NVIM_RELEASE_URL" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | tr -d 'v')
+NVIM_INSTALLED_VERSION=$(command -v nvim >/dev/null 2>&1 && nvim --version | head -n 1 | awk '{print $2}' | tr -d 'v' || echo "none")
+
+echo "Installed version: $NVIM_INSTALLED_VERSION"
+echo "Latest version: $NVIM_LATEST_VERSION"
+
+if [[ "$NVIM_INSTALLED_VERSION" == "none" || "$NVIM_INSTALLED_VERSION" != "$NVIM_LATEST_VERSION" ]]; then
+  NVIM_LATEST_URL=$(curl -s "$NVIM_RELEASE_URL" | grep "browser_download_url" | grep "linux64.tar.gz" | cut -d '"' -f 4)
+  if [[ -z "$NVIM_LATEST_URL" ]]; then
+    echo "Failed to fetch the latest release URL."
+    return 1
+  fi
+  [[ ! -d "$HOME/opt" ]] && mkdir "$HOME/opt"
+  curl -L "$NVIM_LATEST_URL" -o "$HOME/opt/nvim.tar.gz"
+  tar -xzf "$HOME/opt/nvim.tar.gz" -C "$HOME/opt/"
+else
+  echo "Neovim is already up-to-date."
+fi

@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-set -eu
 BASE_DIR=$(dirname $(cd $(dirname $0); pwd))
 
 #==============================#
