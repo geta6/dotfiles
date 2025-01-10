@@ -32,7 +32,7 @@ echo "Installed version: $NVIM_INSTALLED_VERSION"
 echo "Latest version: $NVIM_LATEST_VERSION"
 
 if [[ "$NVIM_INSTALLED_VERSION" == "none" || "$NVIM_INSTALLED_VERSION" != "$NVIM_LATEST_VERSION" ]]; then
-  NVIM_LATEST_URL=$(curl -s "$NVIM_RELEASE_URL" | grep "browser_download_url" | grep "linux64.tar.gz" | cut -d '"' -f 4)
+  NVIM_LATEST_URL=$(curl -s "$NVIM_RELEASE_URL" | grep "browser_download_url" | grep "linux64.tar.gz" | grep -v ".sha256sum" | cut -d '"' -f 4)
   if [[ -z "$NVIM_LATEST_URL" ]]; then
     echo "Failed to fetch the latest release URL."
     return 1
