@@ -51,9 +51,9 @@ zinit light Aloxaf/fzf-tab
 # ----------------------------
 # Packages
 # ----------------------------
-  # Homebrew
-[[ -d "/opt/homebrew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-[[ -d "~/.linuxbrew" ]] && eval "$(~/.linuxbrew/bin/brew shellenv)"
+# Homebrew
+[[ -d /opt/homebrew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[[ -d ~/.linuxbrew ]] && eval "$(~/.linuxbrew/bin/brew shellenv)"
 
 if command -v brew >/dev/null 2>&1; then
   BREWPREFIX=$(brew --prefix)
