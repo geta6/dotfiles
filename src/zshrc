@@ -102,7 +102,7 @@ fi
 # Functions
 # ----------------------------
 function chpwd { # Show file list after change directory (chpwd = native assign).
-  ls -F --group-directories-first --color=auto
+  ls
 }
 function psx() { # Grep process by name
   ps ax | grep -v grep | grep -i $1
